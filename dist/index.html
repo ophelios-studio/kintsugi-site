@@ -180,7 +180,8 @@ tailwind.config = {
                     <span class="hero-brand-text">Kintsugi</span>
                 </div>
                 <h1 class="hero-tagline">
-                    Mend the wallet. <span class="accent">Keep the gold.</span>
+                    Mend the wallet.<br>
+                    <span class="accent">Keep the gold.</span>
                 </h1>
                 <p class="hero-sub">
                     Atomic, sweeper-proof wallet rescue using EIP-7702.
@@ -193,9 +194,10 @@ tailwind.config = {
                         <button type="button" class="copy-btn" aria-label="Copy install command" onclick="
                             navigator.clipboard.writeText('npm install -g @kintsugi/cli');
                             this.classList.add('copied');
-                            setTimeout(() => this.classList.remove('copied'), 1400);
+                            setTimeout(() => this.classList.remove('copied'), 1600);
                         ">
-                            <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"></path></svg>
+                            <svg class="copy-icon" width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"></path></svg>
+                            <svg class="copy-check" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"></path></svg>
                         </button>
                     </div>
                     <a href="/getting-started/install/" class="btn-secondary">
@@ -387,9 +389,10 @@ tailwind.config = {
                     <button type="button" class="copy-btn" aria-label="Copy install command" onclick="
                         navigator.clipboard.writeText('npx skills add ophelios-studio/skills --skill kintsugi');
                         this.classList.add('copied');
-                        setTimeout(() => this.classList.remove('copied'), 1400);
+                        setTimeout(() => this.classList.remove('copied'), 1600);
                     ">
-                        <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"></path></svg>
+                        <svg class="copy-icon" width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"></path></svg>
+                        <svg class="copy-check" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"></path></svg>
                     </button>
                 </div>
                 <a href="/getting-started/with-an-agent/" class="btn-secondary">
