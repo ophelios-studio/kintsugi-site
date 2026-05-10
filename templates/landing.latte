@@ -80,5 +80,37 @@
             </div>
         </div>
     </section>
+
+    {* ─── 3. What sweepers ignore ─── *}
+    <section class="landing-section">
+        <span class="section-eyebrow">The recovery gap</span>
+        <h2 class="section-title">They take what's liquid. They leave what's yours.</h2>
+        <p class="section-lede">
+            Drainer bots optimize for fast liquidation. They sweep ETH and the most liquid ERC-20s, ignore everything that takes effort to fence, and move on. The leftovers are often the most personally valuable holdings, but a working sweeper still blocks any normal recovery attempt.
+        </p>
+        <div class="cards-row">
+            <div class="feature-card">
+                <div class="feature-card-icon" aria-hidden="true">字</div>
+                <h3>ENS names</h3>
+                <p>
+                    Your dot-eth identity, the one you've used everywhere for years, is rarely auto-drained. It's also typically the hardest to move once a sweeper is watching. Kintsugi handles unwrapped 2LDs, wrapped names, and subdomains in a single batch.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card-icon" aria-hidden="true">画</div>
+                <h3>Illiquid NFTs</h3>
+                <p>
+                    Long-tail collections, art, in-game items, memberships. Bots usually skip ERC-721 and ERC-1155 because the resale path is slow. They stay on the compromised wallet, visible to everyone, recoverable by no one.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card-icon" aria-hidden="true">小</div>
+                <h3>Low-cap tokens</h3>
+                <p>
+                    Reward tokens, governance positions, vested allocations, anything without a liquid pool. Drainers ignore them, but you still cannot reach them through a wallet the sweeper is gating.
+                </p>
+            </div>
+        </div>
+    </section>
 </main>
 {/block}
