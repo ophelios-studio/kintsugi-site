@@ -59,7 +59,7 @@ tailwind.config = {
     <title>With an agent · Kintsugi</title>
 </head>
 <body class="bg-deep text-body antialiased font-body">
-<header class="site-nav">
+<header class="site-nav" data-big-mode="false">
     <div class="nav-container">
         <div class="nav-left">
             <button class="nav-toggle" onclick="toggleNav()" type="button" aria-label="Toggle menu">
@@ -85,6 +85,25 @@ tailwind.config = {
         </nav>
     </div>
 </header>
+
+<script>
+(function(){
+  var nav = document.querySelector('.site-nav--big');
+  if (!nav) return;
+  var threshold = 80;
+  var ticking = false;
+  function update(){
+    if (window.scrollY > threshold) nav.classList.add('is-scrolled');
+    else nav.classList.remove('is-scrolled');
+    ticking = false;
+  }
+  function onScroll(){
+    if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  update();
+})();
+</script>
 
     <div class="docs-layout">
         <div class="sidebar-overlay" onclick="closeSidebar()"></div>

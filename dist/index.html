@@ -56,7 +56,7 @@ tailwind.config = {
     <title>Kintsugi · Kintsugi</title>
 </head>
 <body class="bg-deep text-body antialiased font-body">
-<header class="site-nav">
+<header class="site-nav site-nav--big" data-big-mode="true">
     <div class="nav-container">
         <div class="nav-left">
             <button class="nav-toggle" onclick="toggleNav()" type="button" aria-label="Toggle menu">
@@ -78,15 +78,33 @@ tailwind.config = {
         </nav>
     </div>
 </header>
+
+<script>
+(function(){
+  var nav = document.querySelector('.site-nav--big');
+  if (!nav) return;
+  var threshold = 80;
+  var ticking = false;
+  function update(){
+    if (window.scrollY > threshold) nav.classList.add('is-scrolled');
+    else nav.classList.remove('is-scrolled');
+    ticking = false;
+  }
+  function onScroll(){
+    if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  update();
+})();
+</script>
 <main class="landing">
     <section class="hero">
         <div class="hero-grid">
-            <div>
+            <div class="hero-content">
                 <span class="hero-pill">v0.1.0 · pre-alpha</span>
-                <h1 class="hero-wordmark">Kintsugi</h1>
-                <p class="hero-tagline">
+                <h1 class="hero-tagline">
                     Mend the wallet. <span class="accent">Keep the gold.</span>
-                </p>
+                </h1>
                 <p class="hero-sub">
                     Atomic, sweeper-proof wallet rescue using EIP-7702.
                     Open source. Runs locally. No fees, ever.
@@ -108,56 +126,6 @@ tailwind.config = {
                         <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </a>
                 </div>
-            </div>
-            <div class="hero-illustration">
-<svg class="kintsugi-bowl" viewBox="0 0 480 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mended tea bowl with a gold kintsugi seam">
-    <defs>
-        <radialGradient id="bowl-inside" cx="50%" cy="22%" r="58%">
-            <stop offset="0%" stop-color="oklch(0.30 0.012 60)" stop-opacity="0.85"></stop>
-            <stop offset="100%" stop-color="oklch(0.20 0.012 60)" stop-opacity="0.95"></stop>
-        </radialGradient>
-    </defs>
-
-    <text class="kanji-bg" x="240" y="280">金</text>
-
-    <ellipse class="bowl-shadow" cx="240" cy="370" rx="170" ry="14"></ellipse>
-
-    <path class="bowl-stroke"
-          d="M 76 142
-             C 76 250, 130 332, 240 332
-             C 350 332, 404 250, 404 142"
-          stroke-width="6"></path>
-
-    <path class="bowl-stroke"
-          d="M 76 142
-             C 76 122, 150 110, 240 110
-             C 330 110, 404 122, 404 142
-             C 404 162, 330 174, 240 174
-             C 150 174, 76 162, 76 142 Z"
-          fill="url(#bowl-inside)"
-          fill-opacity="0.92"></path>
-
-    <path class="bowl-stroke"
-          d="M 110 192
-             Q 240 222, 370 192"
-          stroke-width="2"
-          stroke-opacity="0.35"></path>
-
-    <path class="seam"
-          d="M 188 122
-             L 196 152
-             L 184 184
-             L 208 220
-             L 198 252
-             L 226 286
-             L 218 318"></path>
-
-    <path class="seam"
-          d="M 208 220
-             L 244 232
-             L 256 250"
-          style="stroke-dasharray: 200; stroke-dashoffset: 200; animation: seam-draw 1100ms ease-out 1900ms forwards;"></path>
-</svg>
             </div>
         </div>
     </section>

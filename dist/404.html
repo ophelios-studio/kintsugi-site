@@ -67,7 +67,7 @@ tailwind.config = {
 </style>
 </head>
 <body class="bg-deep text-body antialiased font-body">
-<header class="site-nav">
+<header class="site-nav site-nav--big" data-big-mode="true">
     <div class="nav-container">
         <div class="nav-left">
             <button class="nav-toggle" onclick="toggleNav()" type="button" aria-label="Toggle menu">
@@ -89,6 +89,25 @@ tailwind.config = {
         </nav>
     </div>
 </header>
+
+<script>
+(function(){
+  var nav = document.querySelector('.site-nav--big');
+  if (!nav) return;
+  var threshold = 80;
+  var ticking = false;
+  function update(){
+    if (window.scrollY > threshold) nav.classList.add('is-scrolled');
+    else nav.classList.remove('is-scrolled');
+    ticking = false;
+  }
+  function onScroll(){
+    if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  update();
+})();
+</script>
 <div class="error-container">
     <div class="text-center">
         <div class="error-code">404</div>
