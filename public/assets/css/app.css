@@ -541,7 +541,9 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
 /* ──────────── Landing sections ──────────── */
 
 .landing {
-    padding-top: var(--nav-height);
+    /* No top padding: the hero painting starts at y=0 and the fixed nav
+       floats over it transparently. The hero's own top padding clears the nav. */
+    padding-top: 0;
 }
 
 .landing-section {
