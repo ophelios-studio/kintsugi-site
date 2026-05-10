@@ -1,0 +1,61 @@
+{*
+    The kintsugi seam, drawn on load. Sumi-e bowl in two ink strokes,
+    a gold seam running from the upper rim down through the belly, and a
+    faint 金 kanji watermark behind. Animation respects reduced-motion.
+*}
+<svg class="kintsugi-bowl" viewBox="0 0 480 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mended tea bowl with a gold kintsugi seam">
+    <defs>
+        <radialGradient id="bowl-inside" cx="50%" cy="22%" r="58%">
+            <stop offset="0%" stop-color="oklch(0.30 0.012 60)" stop-opacity="0.85"/>
+            <stop offset="100%" stop-color="oklch(0.20 0.012 60)" stop-opacity="0.95"/>
+        </radialGradient>
+    </defs>
+
+    {* Faint kanji watermark behind *}
+    <text class="kanji-bg" x="240" y="280">金</text>
+
+    {* Soft shadow underneath the bowl *}
+    <ellipse class="bowl-shadow" cx="240" cy="370" rx="170" ry="14" />
+
+    {* Bowl body: a generous ellipse-to-arc form. Two strokes suggest brushwork. *}
+    {* Outer body arc *}
+    <path class="bowl-stroke"
+          d="M 76 142
+             C 76 250, 130 332, 240 332
+             C 350 332, 404 250, 404 142"
+          stroke-width="6" />
+
+    {* Rim ellipse stroke (the opening of the bowl) *}
+    <path class="bowl-stroke"
+          d="M 76 142
+             C 76 122, 150 110, 240 110
+             C 330 110, 404 122, 404 142
+             C 404 162, 330 174, 240 174
+             C 150 174, 76 162, 76 142 Z"
+          fill="url(#bowl-inside)"
+          fill-opacity="0.92" />
+
+    {* Brushy texture line just below the rim, suggesting glaze depth *}
+    <path class="bowl-stroke"
+          d="M 110 192
+             Q 240 222, 370 192"
+          stroke-width="2"
+          stroke-opacity="0.35" />
+
+    {* The kintsugi seam: jagged, brush-tipped, draws on load *}
+    <path class="seam"
+          d="M 188 122
+             L 196 152
+             L 184 184
+             L 208 220
+             L 198 252
+             L 226 286
+             L 218 318" />
+
+    {* A short branching seam fragment for organic feel *}
+    <path class="seam"
+          d="M 208 220
+             L 244 232
+             L 256 250"
+          style="stroke-dasharray: 200; stroke-dashoffset: 200; animation: seam-draw 1100ms ease-out 1900ms forwards;" />
+</svg>
