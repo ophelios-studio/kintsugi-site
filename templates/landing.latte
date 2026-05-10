@@ -3,10 +3,13 @@
 {block content}
 <main class="landing">
     {* ─── 1. Hero ─── *}
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="hero-grid">
             <div class="hero-content">
-                <span class="hero-pill">v{$leafVersion ?? '0.1.0'} · pre-alpha</span>
+                <div class="hero-brand">
+                    <span class="hero-brand-mark" aria-hidden="true">金</span>
+                    <span class="hero-brand-text">Kintsugi</span>
+                </div>
                 <h1 class="hero-tagline">
                     Mend the wallet. <span class="accent">Keep the gold.</span>
                 </h1>
@@ -35,10 +38,8 @@
         </div>
     </section>
 
-    <div class="divider-rule"></div>
-
     {* ─── 2. The hostage problem ─── *}
-    <section class="problem-section">
+    <section class="problem-section" id="problem">
         <div class="problem-grid">
             <div>
                 <span class="section-eyebrow">The problem</span>
@@ -78,7 +79,7 @@
     </section>
 
     {* ─── 3. What sweepers ignore ─── *}
-    <section class="landing-section">
+    <section class="landing-section" id="coverage">
         <span class="section-eyebrow">The recovery gap</span>
         <h2 class="section-title">They take what's liquid. They leave what's yours.</h2>
         <p class="section-lede">
@@ -112,7 +113,7 @@
     <div class="divider-rule"></div>
 
     {* ─── 4. How Kintsugi works ─── *}
-    <section class="landing-section landing-section-narrow">
+    <section class="landing-section landing-section-narrow" id="how">
         <span class="section-eyebrow">How it works</span>
         <h2 class="section-title">One transaction. No gas from you. Nothing left behind.</h2>
         <p class="section-lede">
@@ -147,7 +148,7 @@
     </section>
 
     {* ─── 5. UI / CLI showcase ─── *}
-    <section class="landing-section">
+    <section class="landing-section" id="try">
         <span class="section-eyebrow">Two ways in</span>
         <h2 class="section-title">A guided UI for panic. A pure CLI for power.</h2>
         <p class="section-lede">
@@ -192,16 +193,30 @@
     </section>
 
     {* ─── 5.5 Agent skill banner ─── *}
-    <section class="landing-section landing-section-narrow agent-banner">
+    <section class="landing-section landing-section-narrow agent-banner" id="agent">
         <div class="agent-banner-grid">
             <div>
                 <span class="section-eyebrow">Or just ask your agent</span>
                 <h2 class="section-title agent-banner-title">In panic? Don't read. <span class="accent">Ask.</span></h2>
                 <p class="section-lede agent-banner-lede">
-                    Kintsugi ships a free agent skill following the <a href="https://agentskills.io" target="_blank" rel="noopener">agentskills.io</a> spec. Install it once and Claude Code, Cursor, Codex, Cline, Gemini CLI, or any compatible agent can drive the entire flow for you in plain English. The ordering rules and gotchas are baked in so you don't have to memorize them.
+                    Kintsugi ships a free agent skill following the <a href="https://agentskills.io" target="_blank" rel="noopener">agentskills.io</a> spec. Install it once and Claude Code, Cursor, Codex, Cline, Gemini CLI, or any compatible agent will drive the entire flow for you in plain English.
                 </p>
+                <p class="agent-banner-prompt-label">Then just paste this and let it walk you through:</p>
+                <div class="agent-prompt code-block-wrapper">
+                    <span class="agent-prompt-quote" aria-hidden="true">"</span>
+                    <p class="agent-prompt-text" id="agent-prompt-text">My wallet got drained but I have hostage assets there. Help me rescue them with Kintsugi.</p>
+                    <button type="button" class="copy-btn agent-prompt-copy" aria-label="Copy prompt" onclick="
+                        navigator.clipboard.writeText('My wallet got drained but I have hostage assets there. Help me rescue them with Kintsugi.');
+                        this.classList.add('copied');
+                        setTimeout(() => this.classList.remove('copied'), 1400);
+                    ">
+                        <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"/></svg>
+                        <span class="copy-btn-label">Copy</span>
+                    </button>
+                </div>
             </div>
             <div class="agent-banner-actions">
+                <p class="agent-banner-install-label">Install the skill once:</p>
                 <div class="install-box code-block-wrapper">
                     <span class="prompt">$</span>
                     <code id="install-skill-cmd">npx skills add ophelios-studio/skills --skill kintsugi</code>
@@ -214,7 +229,7 @@
                     </button>
                 </div>
                 <a href="{$leafBaseUrl}/getting-started/with-an-agent/" class="btn-secondary">
-                    See what to ask
+                    See what else to ask
                     <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
                 </a>
             </div>
@@ -224,7 +239,7 @@
     <div class="divider-rule"></div>
 
     {* ─── 6. Open source manifesto ─── *}
-    <section class="landing-section landing-section-narrow">
+    <section class="landing-section landing-section-narrow" id="open">
         <div class="manifesto">
             <span class="section-eyebrow">Our stance</span>
             <h2>
@@ -258,7 +273,7 @@
     </section>
 
     {* ─── 7. Get started lanes ─── *}
-    <section class="landing-section">
+    <section class="landing-section" id="start">
         <span class="section-eyebrow">Three ways forward</span>
         <h2 class="section-title">Where do you want to start?</h2>
         <div class="lanes-row">
