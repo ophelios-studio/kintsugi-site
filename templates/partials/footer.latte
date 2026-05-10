@@ -1,0 +1,17 @@
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <span class="name" aria-hidden="true">Kintsugi</span>
+            <span>v{$leafVersion ?? '0.1.0'} pre-alpha</span>
+        </div>
+        <div class="footer-meta">
+            <span n:if="($leafAuthor ?? '') !== ''">
+                Built by
+                <a n:tag-if="($leafAuthorUrl ?? '') !== ''" href="{$leafAuthorUrl}" target="_blank" rel="noopener">{$leafAuthor}</a>
+            </span>
+            <a n:if="($leafGithubUrl ?? '') !== ''" href="{$leafGithubUrl}" target="_blank" rel="noopener">GitHub</a>
+            <a href="{$leafBaseUrl}/security/threat-model/">Security</a>
+            <span n:if="($leafLicense ?? '') !== ''">{$leafLicense}</span>
+        </div>
+    </div>
+</footer>
