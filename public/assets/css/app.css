@@ -944,37 +944,197 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
 }
 .problem-section .section-title { color: var(--text-bright); }
 
-.tx-graph {
+/* Soft second paragraph in the problem section: same size as the lede, slightly
+   lighter colour so it reads as continuation rather than a new beat. */
+.problem-aside {
+    color: var(--text);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    margin: 0;
+    opacity: 0.78;
+}
+
+/* ── The attack story (dark card) ── */
+.attack-story {
     background: var(--bg-inset);
     color: var(--text-on-inset);
-    border-radius: 0.75rem;
-    padding: 1.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    line-height: 1.7;
+    border-radius: 1rem;
+    padding: 1.5rem 1.5rem 1.25rem;
     border: 1px solid oklch(0.25 0.012 60);
+    box-shadow: 0 12px 40px -22px oklch(0.20 0.01 60 / 0.45);
+    margin: 0;
 }
-.tx-graph .row {
-    display: grid;
-    grid-template-columns: 80px 1fr auto;
-    gap: 0.75rem;
-    padding: 0.5rem 0;
-    align-items: baseline;
-}
-.tx-graph .row + .row {
-    border-top: 1px dashed oklch(0.30 0.012 60);
-}
-.tx-graph .label {
-    color: oklch(0.65 0.012 60);
-    font-size: 0.72rem;
+.attack-story-eyebrow {
+    margin: 0 0 1.25rem;
+    font-size: 0.7rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.16em;
+    color: oklch(0.62 0.012 60);
 }
-.tx-graph .actor-victim { color: oklch(0.85 0.04 80); }
-.tx-graph .actor-sweeper { color: var(--danger); font-weight: 600; }
-.tx-graph .amount-drained { color: var(--danger); font-weight: 600; }
-.tx-graph .amount-left { color: var(--seam-bright); font-weight: 600; }
-.tx-graph .arrow { color: oklch(0.55 0.012 60); }
+
+.attack-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+/* Vertical connector track behind the index badges. */
+.attack-steps::before {
+    content: "";
+    position: absolute;
+    left: 17px;
+    top: 1.25rem;
+    bottom: 1.25rem;
+    width: 2px;
+    background: linear-gradient(
+        180deg,
+        oklch(0.78 0.13 75 / 0.6) 0%,
+        var(--danger) 60%,
+        oklch(0.55 0.18 28 / 0.4) 100%
+    );
+    border-radius: 2px;
+}
+
+.attack-step {
+    display: grid;
+    grid-template-columns: 36px 28px 1fr;
+    align-items: start;
+    gap: 0.85rem;
+    padding: 0.85rem 0;
+    position: relative;
+}
+.attack-step + .attack-step { border-top: 1px dashed oklch(0.26 0.012 60); }
+
+.attack-step-index {
+    display: inline-grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: oklch(0.22 0.012 60);
+    border: 1px solid oklch(0.34 0.012 60);
+    color: oklch(0.92 0.005 80);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1;
+    z-index: 1;
+    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    animation: attack-pulse 6s var(--step-delay, 0s) infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+.attack-step-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    color: oklch(0.85 0.005 80);
+    margin-top: 4px;
+    transition: color 0.4s ease, transform 0.4s ease;
+    animation: attack-icon-pulse 6s var(--step-delay, 0s) infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+.attack-step-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+}
+.attack-step-title {
+    margin: 0;
+    color: oklch(0.96 0.005 80);
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.3;
+    transition: color 0.4s ease, transform 0.4s ease;
+    animation: attack-title-nudge 6s var(--step-delay, 0s) infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+.attack-step-sub {
+    margin: 0;
+    color: oklch(0.66 0.008 60);
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+/* Attacker beats (steps 2 and 3) — red tint everywhere visual cues land. */
+.attack-step.is-attack .attack-step-index {
+    border-color: oklch(0.55 0.18 28 / 0.55);
+    color: oklch(0.96 0.005 80);
+    background: oklch(0.30 0.05 28 / 0.5);
+}
+.attack-step.is-attack .attack-step-icon { color: oklch(0.78 0.16 28); }
+
+/* Result row: separated, gold accent so the cost lands. */
+.attack-result {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 0.85rem;
+    align-items: start;
+    margin-top: 1rem;
+    padding: 1rem 0 0.25rem;
+    border-top: 1px solid oklch(0.30 0.012 60);
+}
+.attack-result-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    color: var(--seam-bright);
+    margin-top: 2px;
+    filter: drop-shadow(0 0 8px oklch(0.78 0.13 75 / 0.45));
+}
+.attack-result-title {
+    margin: 0 0 0.2rem;
+    color: var(--seam-bright);
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+}
+.attack-result-sub {
+    margin: 0;
+    color: oklch(0.74 0.006 60);
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+
+/* Pulse animations: each step lights up in turn, 6s loop with --step-delay
+   staggered (0s / 2s / 4s) per the inline style. */
+@keyframes attack-pulse {
+    0%   { box-shadow: 0 0 0 0 transparent; transform: scale(1); }
+    4%   { box-shadow: 0 0 0 6px oklch(0.78 0.13 75 / 0.18); transform: scale(1.08); }
+    10%  { box-shadow: 0 0 0 12px oklch(0.78 0.13 75 / 0); transform: scale(1); }
+    100% { box-shadow: 0 0 0 0 transparent; transform: scale(1); }
+}
+@keyframes attack-icon-pulse {
+    0%   { transform: translateX(0); }
+    4%   { transform: translateX(2px); }
+    10%  { transform: translateX(0); }
+    100% { transform: translateX(0); }
+}
+@keyframes attack-title-nudge {
+    0%   { transform: translateX(0); }
+    4%   { transform: translateX(2px); }
+    10%  { transform: translateX(0); }
+    100% { transform: translateX(0); }
+}
+.attack-step.is-attack .attack-step-index {
+    animation-name: attack-pulse-attack;
+}
+@keyframes attack-pulse-attack {
+    0%   { box-shadow: 0 0 0 0 transparent; transform: scale(1); }
+    4%   { box-shadow: 0 0 0 6px oklch(0.55 0.18 28 / 0.22); transform: scale(1.08); }
+    10%  { box-shadow: 0 0 0 12px oklch(0.55 0.18 28 / 0); transform: scale(1); }
+    100% { box-shadow: 0 0 0 0 transparent; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .attack-step-index,
+    .attack-step-icon,
+    .attack-step-title {
+        animation: none !important;
+    }
+}
 
 /* ── Section 3: what sweepers ignore (3 cards) ── */
 .cards-row {
