@@ -1,0 +1,84 @@
+{layout 'layouts/landing.latte'}
+
+{block content}
+<main class="landing">
+    {* ─── 1. Hero ─── *}
+    <section class="hero">
+        <div class="hero-grid">
+            <div>
+                <span class="hero-pill">v{$leafVersion ?? '0.1.0'} · pre-alpha</span>
+                <h1 class="hero-wordmark">Kintsugi</h1>
+                <p class="hero-tagline">
+                    Mend the wallet. <span class="accent">Keep the gold.</span>
+                </p>
+                <p class="hero-sub">
+                    {$leafDescription ?? 'Atomic, sweeper-proof wallet rescue using EIP-7702.'}
+                    Open source. Runs locally. No fees, ever.
+                </p>
+                <div class="hero-cta-row">
+                    <div class="install-box code-block-wrapper">
+                        <span class="prompt">$</span>
+                        <code id="install-cmd">npm install -g @kintsugi/cli</code>
+                        <button type="button" class="copy-btn" aria-label="Copy install command" onclick="
+                            navigator.clipboard.writeText('npm install -g @kintsugi/cli');
+                            this.classList.add('copied');
+                            setTimeout(() => this.classList.remove('copied'), 1400);
+                        ">
+                            <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"/></svg>
+                        </button>
+                    </div>
+                    <a href="{$leafBaseUrl}/getting-started/install/" class="btn-secondary">
+                        Read the docs
+                        <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-illustration">
+                {include 'partials/hero-svg.latte'}
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-rule"></div>
+
+    {* ─── 2. The hostage problem ─── *}
+    <section class="problem-section">
+        <div class="problem-grid">
+            <div>
+                <span class="section-eyebrow">The problem</span>
+                <h2 class="section-title">Your keys are leaked. Your wallet is being watched.</h2>
+                <p class="section-lede">
+                    A sweeper bot now monitors the compromised address around the clock. The moment any ETH lands there to pay gas for a recovery transaction, the bot front-runs you and drains it in the same block. Tokens, NFTs, and ENS names sit visible but unreachable. Most rescues fail before they start.
+                </p>
+                <p style="color: var(--text-muted); font-size: 0.9375rem; line-height: 1.65;">
+                    Kintsugi removes the gas dependency entirely. The victim wallet never holds ETH at any point. A separate rescuer wallet pays for and submits the recovery in one atomic Type-4 transaction, transferring every selected asset out before the sweeper sees an opening.
+                </p>
+            </div>
+            <div>
+                <div class="tx-graph" aria-label="Sweeper bot drains incoming gas">
+                    <div class="row">
+                        <span class="label">Block N</span>
+                        <span><span class="actor-victim">victim ←</span> 0.01 ETH <span class="arrow">from your wallet</span></span>
+                        <span style="color: oklch(0.6 0.012 60);">+10⁻²</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Block N</span>
+                        <span><span class="actor-sweeper">sweeper →</span> 0.01 ETH <span class="arrow">to attacker</span></span>
+                        <span class="amount-drained">drained</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Block N+1</span>
+                        <span>your rescue tx <span class="arrow">→ reverted</span></span>
+                        <span class="amount-drained">no gas</span>
+                    </div>
+                    <div class="row" style="border-top: 1px solid oklch(0.35 0.012 60); margin-top: 0.5rem; padding-top: 0.75rem;">
+                        <span class="label">Result</span>
+                        <span>tokens, NFTs, ENS still on the compromised wallet</span>
+                        <span class="amount-left">stranded</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{/block}
