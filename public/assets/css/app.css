@@ -1065,11 +1065,13 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
     line-height: 1.5;
 }
 
-/* Attacker beats (steps 2 and 3) — red tint everywhere visual cues land. */
+/* Attacker beats (steps 2 and 3) — red tint everywhere visual cues land.
+   The badge bg must be fully opaque so the gradient track behind doesn't
+   bleed through the circle. */
 .attack-step.is-attack .attack-step-index {
     border-color: oklch(0.55 0.18 28 / 0.55);
     color: oklch(0.96 0.005 80);
-    background: oklch(0.30 0.05 28 / 0.5);
+    background: oklch(0.24 0.05 28);
 }
 .attack-step.is-attack .attack-step-icon { color: oklch(0.78 0.16 28); }
 
