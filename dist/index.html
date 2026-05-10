@@ -56,52 +56,129 @@ tailwind.config = {
     <title>Kintsugi · Kintsugi</title>
 </head>
 <body class="bg-deep text-body antialiased font-body">
+
 <header class="site-nav site-nav--big" data-big-mode="true">
-    <div class="nav-container">
-        <div class="nav-left">
-            <button class="nav-toggle" onclick="toggleNav()" type="button" aria-label="Toggle menu">
-                <svg class="nav-toggle-open" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-                <svg class="nav-toggle-close" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="display:none"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+    <div class="site-nav-inner">
+        <div class="nav-side nav-side--left">
+            <button class="nav-mobile-toggle" type="button" aria-label="Open menu" onclick="window.kintsugiToggleDrawer && window.kintsugiToggleDrawer()">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
             </button>
-            <a href="/" class="nav-logo" aria-label="Kintsugi home">
-                <span class="nav-logo-mark" aria-hidden="true">金</span>
-                <span class="nav-logo-text">Kintsugi</span>
+            <a href="/" class="nav-brand" aria-label="Kintsugi home">
+                <span class="nav-brand-mark" aria-hidden="true">金</span>
+                <span class="nav-brand-text">Kintsugi</span>
             </a>
         </div>
-        <nav class="nav-links">
-            <a href="/getting-started/install/" class="nav-link">Docs</a>
-            <a href="https://github.com/ophelios-studio/kintsugi" class="nav-link" target="_blank" rel="noopener">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-                GitHub
-            </a>
-            <span class="version-badge">v0.1.0</span>
+
+        <nav class="nav-menu" aria-label="Sections">
+            <a href="#problem" data-section="problem" class="nav-menu-link">Problem</a>
+            <a href="#how" data-section="how" class="nav-menu-link">How</a>
+            <a href="#try" data-section="try" class="nav-menu-link">Use it</a>
+            <a href="#agent" data-section="agent" class="nav-menu-link">With agent</a>
+            <a href="#open" data-section="open" class="nav-menu-link">Open source</a>
         </nav>
+
+        <div class="nav-side nav-side--right">
+            <a href="/getting-started/install/" class="nav-link nav-link--docs">Docs</a>
+            <a href="https://github.com/ophelios-studio/kintsugi" class="nav-link" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                <span class="nav-link-text">GitHub</span>
+            </a>
+        </div>
     </div>
 </header>
 
+<div class="nav-drawer" id="nav-drawer" aria-hidden="true">
+    <div class="nav-drawer-overlay" onclick="window.kintsugiToggleDrawer && window.kintsugiToggleDrawer(false)"></div>
+    <aside class="nav-drawer-panel" role="dialog" aria-label="Site navigation">
+        <button type="button" class="nav-drawer-close" aria-label="Close menu" onclick="window.kintsugiToggleDrawer && window.kintsugiToggleDrawer(false)">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+        <a href="/" class="nav-drawer-brand" onclick="window.kintsugiToggleDrawer && window.kintsugiToggleDrawer(false)">
+            <span class="nav-brand-mark" aria-hidden="true">金</span>
+            <span class="nav-brand-text">Kintsugi</span>
+        </a>
+        <nav class="nav-drawer-links" aria-label="Sections">
+            <a href="#problem" data-section="problem" class="nav-drawer-link" onclick="window.kintsugiToggleDrawer && window.kintsugiToggleDrawer(false)">Problem</a>
+            <a href="#how" data-section="how" class="nav-drawer-link" onclick="window.kintsugiToggleDrawer && window.kintsugiToggleDrawer(false)">How</a>
+            <a href="#try" data-section="try" class="nav-drawer-link" onclick="window.kintsugiToggleDrawer && window.kintsugiToggleDrawer(false)">Use it</a>
+            <a href="#agent" data-section="agent" class="nav-drawer-link" onclick="window.kintsugiToggleDrawer && window.kintsugiToggleDrawer(false)">With agent</a>
+            <a href="#open" data-section="open" class="nav-drawer-link" onclick="window.kintsugiToggleDrawer && window.kintsugiToggleDrawer(false)">Open source</a>
+            <div class="nav-drawer-divider"></div>
+            <a href="/getting-started/install/" class="nav-drawer-link">Docs</a>
+            <a href="https://github.com/ophelios-studio/kintsugi" target="_blank" rel="noopener" class="nav-drawer-link">GitHub</a>
+        </nav>
+    </aside>
+</div>
+
 <script>
 (function(){
-  var nav = document.querySelector('.site-nav--big');
-  if (!nav) return;
-  var threshold = 80;
-  var ticking = false;
-  function update(){
-    if (window.scrollY > threshold) nav.classList.add('is-scrolled');
-    else nav.classList.remove('is-scrolled');
-    ticking = false;
+  function init(){
+    var nav = document.querySelector('.site-nav--big');
+    if (!nav) return;
+
+    /* ── Island toggle on scroll ── */
+    var threshold = 80;
+    var ticking = false;
+    function update(){
+      if (window.scrollY > threshold) nav.classList.add('is-scrolled');
+      else nav.classList.remove('is-scrolled');
+      ticking = false;
+    }
+    function onScroll(){
+      if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+
+    /* ── Scrollspy via IntersectionObserver ── */
+    var sections = Array.from(document.querySelectorAll('main.landing > section[id]'));
+    if (sections.length && 'IntersectionObserver' in window) {
+      var visible = new Map();
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting) visible.set(e.target.id, e.intersectionRatio);
+          else visible.delete(e.target.id);
+        });
+        var best = '';
+        var bestRatio = -1;
+        visible.forEach(function(r, id){
+          if (r > bestRatio) { bestRatio = r; best = id; }
+        });
+        if (best) document.body.dataset.activeSection = best;
+      }, {
+        /* Active strip is the middle 30% of the viewport. A section becomes
+           "active" when it crosses that band. */
+        rootMargin: '-35% 0px -35% 0px',
+        threshold: [0, 0.001, 0.25, 0.5, 0.75, 1],
+      });
+      sections.forEach(function(s){ io.observe(s); });
+    }
+
+    /* ── Mobile drawer ── */
+    var drawer = document.getElementById('nav-drawer');
+    window.kintsugiToggleDrawer = function(force){
+      if (!drawer) return;
+      var open = (typeof force === 'boolean') ? force : !drawer.classList.contains('is-open');
+      drawer.classList.toggle('is-open', open);
+      drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
   }
-  function onScroll(){
-    if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  update();
 })();
 </script>
 <main class="landing">
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="hero-grid">
             <div class="hero-content">
-                <span class="hero-pill">v0.1.0 · pre-alpha</span>
+                <div class="hero-brand">
+                    <span class="hero-brand-mark" aria-hidden="true">金</span>
+                    <span class="hero-brand-text">Kintsugi</span>
+                </div>
                 <h1 class="hero-tagline">
                     Mend the wallet. <span class="accent">Keep the gold.</span>
                 </h1>
@@ -130,9 +207,7 @@ tailwind.config = {
         </div>
     </section>
 
-    <div class="divider-rule"></div>
-
-    <section class="problem-section">
+    <section class="problem-section" id="problem">
         <div class="problem-grid">
             <div>
                 <span class="section-eyebrow">The problem</span>
@@ -171,7 +246,7 @@ tailwind.config = {
         </div>
     </section>
 
-    <section class="landing-section">
+    <section class="landing-section" id="coverage">
         <span class="section-eyebrow">The recovery gap</span>
         <h2 class="section-title">They take what's liquid. They leave what's yours.</h2>
         <p class="section-lede">
@@ -204,7 +279,7 @@ tailwind.config = {
 
     <div class="divider-rule"></div>
 
-    <section class="landing-section landing-section-narrow">
+    <section class="landing-section landing-section-narrow" id="how">
         <span class="section-eyebrow">How it works</span>
         <h2 class="section-title">One transaction. No gas from you. Nothing left behind.</h2>
         <p class="section-lede">
@@ -238,7 +313,7 @@ tailwind.config = {
         </div>
     </section>
 
-    <section class="landing-section">
+    <section class="landing-section" id="try">
         <span class="section-eyebrow">Two ways in</span>
         <h2 class="section-title">A guided UI for panic. A pure CLI for power.</h2>
         <p class="section-lede">
@@ -282,16 +357,30 @@ tailwind.config = {
         </div>
     </section>
 
-    <section class="landing-section landing-section-narrow agent-banner">
+    <section class="landing-section landing-section-narrow agent-banner" id="agent">
         <div class="agent-banner-grid">
             <div>
                 <span class="section-eyebrow">Or just ask your agent</span>
                 <h2 class="section-title agent-banner-title">In panic? Don't read. <span class="accent">Ask.</span></h2>
                 <p class="section-lede agent-banner-lede">
-                    Kintsugi ships a free agent skill following the <a href="https://agentskills.io" target="_blank" rel="noopener">agentskills.io</a> spec. Install it once and Claude Code, Cursor, Codex, Cline, Gemini CLI, or any compatible agent can drive the entire flow for you in plain English. The ordering rules and gotchas are baked in so you don't have to memorize them.
+                    Kintsugi ships a free agent skill following the <a href="https://agentskills.io" target="_blank" rel="noopener">agentskills.io</a> spec. Install it once and Claude Code, Cursor, Codex, Cline, Gemini CLI, or any compatible agent will drive the entire flow for you in plain English.
                 </p>
+                <p class="agent-banner-prompt-label">Then just paste this and let it walk you through:</p>
+                <div class="agent-prompt code-block-wrapper">
+                    <span class="agent-prompt-quote" aria-hidden="true">"</span>
+                    <p class="agent-prompt-text" id="agent-prompt-text">My wallet got drained but I have hostage assets there. Help me rescue them with Kintsugi.</p>
+                    <button type="button" class="copy-btn agent-prompt-copy" aria-label="Copy prompt" onclick="
+                        navigator.clipboard.writeText('My wallet got drained but I have hostage assets there. Help me rescue them with Kintsugi.');
+                        this.classList.add('copied');
+                        setTimeout(() => this.classList.remove('copied'), 1400);
+                    ">
+                        <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"></path></svg>
+                        <span class="copy-btn-label">Copy</span>
+                    </button>
+                </div>
             </div>
             <div class="agent-banner-actions">
+                <p class="agent-banner-install-label">Install the skill once:</p>
                 <div class="install-box code-block-wrapper">
                     <span class="prompt">$</span>
                     <code id="install-skill-cmd">npx skills add ophelios-studio/skills --skill kintsugi</code>
@@ -304,7 +393,7 @@ tailwind.config = {
                     </button>
                 </div>
                 <a href="/getting-started/with-an-agent/" class="btn-secondary">
-                    See what to ask
+                    See what else to ask
                     <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 </a>
             </div>
@@ -313,7 +402,7 @@ tailwind.config = {
 
     <div class="divider-rule"></div>
 
-    <section class="landing-section landing-section-narrow">
+    <section class="landing-section landing-section-narrow" id="open">
         <div class="manifesto">
             <span class="section-eyebrow">Our stance</span>
             <h2>
@@ -346,7 +435,7 @@ tailwind.config = {
         </div>
     </section>
 
-    <section class="landing-section">
+    <section class="landing-section" id="start">
         <span class="section-eyebrow">Three ways forward</span>
         <h2 class="section-title">Where do you want to start?</h2>
         <div class="lanes-row">

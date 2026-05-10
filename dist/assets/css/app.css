@@ -152,104 +152,105 @@ pre:not(.prose pre) code {
 .font-brand { font-family: var(--font-brand); letter-spacing: 0.01em; }
 .font-mono-token { font-family: var(--font-mono); }
 
-/* Navigation */
+/* ──────── Navigation ──────────────────────────────────────── */
+
+/* Outer header: always fixed top-edge full-width. Only animates `top`.
+   The morphing happens entirely inside `.site-nav-inner`. */
 .site-nav {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 50;
-    height: var(--nav-height);
-    background: var(--nav-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    transition:
-        height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-        background 0.3s ease,
-        border-color 0.3s ease,
-        max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-        border-radius 0.3s ease,
-        box-shadow 0.3s ease,
-        margin-top 0.3s ease;
-}
-
-/* Big mode: transparent nav floating over the hero, large wordmark, no border. */
-.site-nav--big:not(.is-scrolled) {
     background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border-bottom-color: transparent;
-    height: 7rem;
-}
-.site-nav--big:not(.is-scrolled) .nav-logo-text {
-    font-size: 2.6rem;
-    line-height: 1;
-}
-.site-nav--big:not(.is-scrolled) .nav-logo-mark {
-    width: 44px;
-    height: 44px;
-    font-size: 1.5rem;
-    border-radius: 10px;
-}
-.site-nav--big:not(.is-scrolled) .nav-link {
-    color: var(--text);
-    font-size: 0.95rem;
-}
-.site-nav--big:not(.is-scrolled) .nav-link:hover {
-    color: var(--text-bright);
-}
-.site-nav--big:not(.is-scrolled) .version-badge {
-    background: oklch(1 0 0 / 0.6);
-    border-color: oklch(0.62 0.14 70 / 0.5);
+    transition: top 0.32s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Island mode (after scroll): pill-shaped, centered, smaller, blurred surface. */
-.site-nav--big.is-scrolled {
-    top: 14px;
-    max-width: 760px;
-    margin: 0 auto;
-    border-radius: 9999px;
-    border: 1px solid var(--border);
-    background: oklch(1 0 0 / 0.78);
-    box-shadow: 0 8px 24px -10px oklch(0.20 0.01 60 / 0.16);
-    height: 3.5rem;
-}
-.site-nav--big.is-scrolled .nav-container {
-    padding: 0 1.25rem;
-}
-
-.nav-container {
+/* Inner container: in docs mode this is a full-width bar with backdrop blur.
+   In big mode (landing) we override the bg/border to transparent at top, then
+   morph into a centered pill on scroll. */
+.site-nav-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100%;
-    max-width: 90rem;
+    gap: 1rem;
+    height: 4rem;
+    max-width: 100%;
     margin: 0 auto;
     padding: 0 1.5rem;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid transparent;
+    border-bottom-color: var(--border);
+    border-radius: 0;
+    box-shadow: none;
+    transition:
+        max-width 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+        background-color 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+        backdrop-filter 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+        -webkit-backdrop-filter 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+        border-radius 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+        height 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+        padding 0.32s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.nav-left {
+/* Big mode (landing) at top: fully transparent — the painting shows through. */
+.site-nav--big:not(.is-scrolled) .site-nav-inner {
+    height: 4.5rem;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    padding: 0 2rem;
+}
+
+/* Big mode → island. Outer top-offset; inner shrinks to pill. */
+.site-nav--big.is-scrolled {
+    top: 14px;
+}
+.site-nav--big.is-scrolled .site-nav-inner {
+    max-width: 820px;
+    height: 3.4rem;
+    padding: 0 0.75rem 0 1rem;
+    background: oklch(1 0 0 / 0.82);
+    backdrop-filter: blur(14px) saturate(180%);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    box-shadow: 0 12px 28px -16px oklch(0.20 0.01 60 / 0.30);
+}
+
+/* Sides */
+.nav-side {
     display: flex;
     align-items: center;
     gap: 0.75rem;
     flex-shrink: 0;
+    min-width: 0;
+}
+.nav-side--right {
+    gap: 1rem;
 }
 
-.nav-logo {
-    display: flex;
+/* Brand block (used in nav AND in the mobile drawer; sized for the small form) */
+.nav-brand {
+    display: inline-flex;
     align-items: center;
+    gap: 0.55rem;
     text-decoration: none;
-    flex-shrink: 0;
-    gap: 0.6rem;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-.nav-logo-mark {
+.nav-brand-mark {
     display: inline-grid;
     place-items: center;
     width: 28px;
     height: 28px;
-    border-radius: 6px;
+    border-radius: 7px;
     background: oklch(0.95 0.01 70);
     color: var(--seam);
     font-family: var(--font-display);
@@ -257,21 +258,233 @@ pre:not(.prose pre) code {
     font-size: 1rem;
     line-height: 1;
     border: 1px solid var(--border);
+    flex-shrink: 0;
 }
-
-.nav-logo-text {
+.nav-brand-text {
     color: var(--text-bright);
     font-family: var(--font-brand);
     font-weight: 400;
-    font-size: 1.65rem;
+    font-size: 1.5rem;
     line-height: 1;
     letter-spacing: 0.01em;
 }
 
-.nav-links {
+/* In big mode at top, the hero owns the brand. Hide the nav brand. */
+.site-nav--big:not(.is-scrolled) .nav-brand {
+    opacity: 0;
+    transform: translateX(-8px);
+    pointer-events: none;
+}
+.site-nav--big.is-scrolled .nav-brand {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+/* Centered scrollspy menu (big mode only) */
+.nav-menu {
     display: flex;
     align-items: center;
+    gap: 1.5rem;
+    flex: 1 1 auto;
+    justify-content: center;
+    transition: gap 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.site-nav--big.is-scrolled .nav-menu {
+    gap: 1rem;
+}
+.nav-menu-link {
+    color: var(--text);
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.5rem;
+    transition:
+        color 0.18s ease,
+        background-color 0.18s ease,
+        font-size 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    position: relative;
+}
+.nav-menu-link:hover {
+    color: var(--text-bright);
+}
+.site-nav--big.is-scrolled .nav-menu-link {
+    font-size: 0.85rem;
+    padding: 0.35rem 0.5rem;
+}
+.nav-menu-link.is-active,
+body[data-active-section="problem"] .nav-menu-link[data-section="problem"],
+body[data-active-section="how"] .nav-menu-link[data-section="how"],
+body[data-active-section="try"] .nav-menu-link[data-section="try"],
+body[data-active-section="agent"] .nav-menu-link[data-section="agent"],
+body[data-active-section="open"] .nav-menu-link[data-section="open"] {
+    color: var(--accent);
+}
+.nav-menu-link[data-section]::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.2s ease, left 0.2s ease;
+}
+body[data-active-section="problem"] .nav-menu-link[data-section="problem"]::after,
+body[data-active-section="how"] .nav-menu-link[data-section="how"]::after,
+body[data-active-section="try"] .nav-menu-link[data-section="try"]::after,
+body[data-active-section="agent"] .nav-menu-link[data-section="agent"]::after,
+body[data-active-section="open"] .nav-menu-link[data-section="open"]::after {
+    width: 60%;
+    left: 20%;
+}
+
+/* Right-side links (Docs, GitHub icon) */
+.nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--text);
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.5rem;
+    transition:
+        color 0.15s ease,
+        font-size 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+        background-color 0.15s ease;
+    white-space: nowrap;
+}
+.nav-link:hover {
+    color: var(--accent);
+}
+.site-nav--big.is-scrolled .nav-link {
+    font-size: 0.85rem;
+}
+.nav-link-text { display: inline; }
+.site-nav--big.is-scrolled .nav-link-text { display: none; }
+
+/* Hide mobile-only toggle on desktop in big mode */
+.nav-mobile-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: oklch(1 0 0 / 0.7);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    color: var(--text-bright);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+.nav-mobile-toggle:hover { background: oklch(1 0 0 / 0.9); }
+
+/* Mobile drawer */
+.nav-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+}
+.nav-drawer.is-open {
+    pointer-events: auto;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.25s ease;
+}
+.nav-drawer-overlay {
+    position: absolute;
+    inset: 0;
+    background: oklch(0.20 0.01 60 / 0.45);
+    backdrop-filter: blur(2px);
+}
+.nav-drawer-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 84vw;
+    max-width: 22rem;
+    background: var(--bg-deep);
+    border-left: 1px solid var(--border);
+    box-shadow: -16px 0 40px -20px oklch(0.20 0.01 60 / 0.40);
+    padding: 1.25rem 1rem;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
     gap: 1.25rem;
+}
+.nav-drawer.is-open .nav-drawer-panel {
+    transform: translateX(0);
+}
+.nav-drawer-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid var(--border);
+    background: var(--bg-surface);
+    border-radius: 0.5rem;
+    color: var(--text);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+}
+.nav-drawer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    text-decoration: none;
+    margin-top: 0.25rem;
+    padding: 0.25rem 0.4rem;
+}
+.nav-drawer-brand .nav-brand-text { font-size: 1.75rem; }
+.nav-drawer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+.nav-drawer-link {
+    display: block;
+    padding: 0.7rem 0.65rem;
+    color: var(--text-bright);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+.nav-drawer-link:hover { background: var(--bg-elevated); color: var(--accent); }
+body[data-active-section="problem"] .nav-drawer-link[data-section="problem"],
+body[data-active-section="how"] .nav-drawer-link[data-section="how"],
+body[data-active-section="try"] .nav-drawer-link[data-section="try"],
+body[data-active-section="agent"] .nav-drawer-link[data-section="agent"],
+body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
+    color: var(--accent);
+    background: var(--accent-glow);
+}
+.nav-drawer-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0.5rem 0;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .site-nav, .site-nav-inner, .nav-brand, .nav-menu, .nav-menu-link,
+    .nav-link, .nav-link-text, .nav-drawer, .nav-drawer-panel {
+        transition-duration: 0.001s !important;
+    }
 }
 
 .nav-toggle {
@@ -393,32 +606,51 @@ pre:not(.prose pre) code {
 .hero {
     position: relative;
     overflow: hidden;
-    padding: 9rem 1.5rem 6rem;
-    min-height: 82vh;
+    /* Flush with the very top edge: the nav floats over the painting, no whitespace. */
+    padding: 7.5rem 1.5rem 6rem;
+    min-height: 100vh;
     margin: 0;
-    /* The sumi-e painting sits behind the content. background-position keeps the
-       bowl on the right visible while the upper-left ink wash gives text contrast. */
     background-image: url("/assets/images/hero-bg.webp");
     background-size: cover;
     background-position: center right;
     background-repeat: no-repeat;
 }
 
-/* Soft white fade at the bottom of the hero so the painting blends into the page
-   (mirrors the leaf.ophelios.com pattern). The top edge stays sharp on the painting. */
-.hero::after {
+/* Layered overlays:
+   1) Soft white wash on the LEFT side so the text always reads cleanly over
+      whatever the painting puts there (mountain, water, or bridge).
+   2) Bottom-right radial vignette as belt-and-suspenders for any residual
+      watermark.
+   3) Slight gold glow upper-left for atmospheric depth.
+   4) Paper noise via SVG turbulence at very low opacity. */
+.hero::before {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
     background:
-        linear-gradient(
-            180deg,
-            transparent 0%,
-            transparent 55%,
-            oklch(0.98 0.005 80 / 0.55) 80%,
-            var(--bg-deep) 100%
-        );
+        linear-gradient(95deg,
+            oklch(1 0 0 / 0.55) 0%,
+            oklch(1 0 0 / 0.40) 22%,
+            oklch(1 0 0 / 0.10) 45%,
+            transparent 65%),
+        radial-gradient(circle at 96% 94%, oklch(1 0 0 / 0.95) 0%, transparent 18%),
+        radial-gradient(circle at 12% 18%, oklch(0.62 0.14 70 / 0.06) 0%, transparent 35%);
+}
+
+/* Soft fade-to-pure-white at the bottom; matches the next section's pure-white bg. */
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        transparent 50%,
+        oklch(1 0 0 / 0.55) 78%,
+        oklch(1 0 0) 100%
+    );
 }
 
 .hero-grid {
@@ -428,53 +660,62 @@ pre:not(.prose pre) code {
     margin: 0 auto;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 3rem;
-    align-items: center;
+    gap: 1.5rem;
+    align-items: flex-start;
 }
 
 .hero-content {
-    max-width: 38rem;
+    max-width: 44rem;
+}
+
+/* Huge brand block. Kanji stands on its own (no box), stacked vertically
+   above the wordmark so the brand reads as one composed mark. */
+.hero-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    margin: 0 0 1.5rem;
+    line-height: 1;
+}
+.hero-brand-mark {
+    display: inline-block;
+    color: var(--seam);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3.5rem, 5.5vw, 5rem);
+    line-height: 1;
+    /* Glow that subtly lifts the kanji off the painting without a box. */
+    text-shadow:
+        0 0 18px oklch(1 0 0 / 0.55),
+        0 0 4px oklch(1 0 0 / 0.7);
+    margin-left: -0.05em;
+}
+.hero-brand-text {
+    font-family: var(--font-brand);
+    font-weight: 400;
+    font-size: clamp(4.5rem, 10vw, 7.5rem);
+    color: var(--text-bright);
+    letter-spacing: 0.005em;
+    line-height: 0.92;
+    text-shadow: 0 0 14px oklch(1 0 0 / 0.4);
 }
 
 @media (max-width: 900px) {
-    .hero { padding: 7rem 1rem 5rem; min-height: 80vh; background-position: center; }
-    .hero-grid { gap: 2rem; }
-}
-
-.hero-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 0.3rem 0.75rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--accent);
-    background: var(--accent-glow);
-    border: 1px solid var(--border-accent);
-    border-radius: 9999px;
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.02em;
-}
-
-.hero-wordmark {
-    font-family: var(--font-brand);
-    font-weight: 400;
-    font-size: clamp(4rem, 11vw, 8rem);
-    line-height: 0.95;
-    color: var(--text-bright);
-    margin: 0 0 0.75rem;
-    letter-spacing: 0.005em;
+    .hero { padding: 5.5rem 1rem 4rem; min-height: 92vh; background-position: center; }
+    .hero-grid { gap: 1rem; min-height: auto; }
+    .hero-brand { gap: 0.15rem; margin-bottom: 1.25rem; }
 }
 
 .hero-tagline {
     font-family: var(--font-display);
-    font-size: clamp(2.25rem, 4.2vw, 3.6rem);
+    font-size: clamp(2rem, 3.6vw, 3.2rem);
     font-weight: 600;
     color: var(--text-bright);
     line-height: 1.1;
     margin: 0 0 1rem;
     letter-spacing: -0.022em;
-    text-shadow: 0 1px 12px oklch(0.98 0.005 80 / 0.45);
+    text-shadow: 0 1px 12px oklch(0.98 0.005 80 / 0.5);
 }
 
 .hero-tagline .accent {
@@ -487,7 +728,6 @@ pre:not(.prose pre) code {
     line-height: 1.65;
     max-width: 32rem;
     margin: 0 0 2rem;
-    /* Subtle paper-color glow so the body text stays legible over any region of the painting */
     text-shadow: 0 1px 8px oklch(0.98 0.005 80 / 0.7);
 }
 
@@ -649,10 +889,10 @@ pre:not(.prose pre) code {
     }
 }
 
-/* ── Section 2: hostage problem (heavier visual) ── */
+/* ── Section 2: hostage problem (heavier visual via typography + dark inset, not bg) ── */
 .problem-section {
-    background: var(--bg-elevated);
-    border-top: 1px solid var(--border);
+    background: oklch(1 0 0);
+    border-top: none;
     border-bottom: 1px solid var(--border);
     padding: 5rem 1.5rem;
 }
@@ -870,6 +1110,65 @@ pre:not(.prose pre) code {
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
+.agent-banner-prompt-label,
+.agent-banner-install-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    margin: 0 0 0.6rem;
+}
+.agent-banner-install-label { margin-bottom: 0.5rem; }
+.agent-prompt {
+    position: relative;
+    background: oklch(1 0 0);
+    border: 1px solid var(--seam);
+    border-radius: 0.75rem;
+    padding: 1rem 3.25rem 1rem 2.25rem;
+    box-shadow: 0 6px 24px -14px oklch(0.62 0.14 70 / 0.35);
+}
+.agent-prompt-quote {
+    position: absolute;
+    top: 0.25rem;
+    left: 0.55rem;
+    font-family: var(--font-display);
+    font-size: 3.25rem;
+    line-height: 1;
+    color: var(--seam);
+    opacity: 0.35;
+    user-select: none;
+}
+.agent-prompt-text {
+    margin: 0;
+    color: var(--text-bright);
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    line-height: 1.5;
+    font-style: italic;
+}
+.agent-prompt-copy {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.55rem;
+    width: auto;
+    height: auto;
+    padding: 0.35rem 0.6rem;
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    color: var(--text);
+    border-radius: 0.4rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.agent-prompt-copy:hover { color: var(--accent); border-color: var(--accent); }
+.agent-prompt-copy.copied { color: oklch(0.62 0.16 145); border-color: oklch(0.62 0.16 145 / 0.6); }
+.copy-btn-label { display: inline; }
 .agent-banner-grid {
     display: grid;
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
@@ -1486,23 +1785,22 @@ pre[class*="language-"], code[class*="language-"] {
 }
 
 /* ── Mobile adjustments ── */
+@media (max-width: 900px) {
+    /* Big-mode nav: hide center menu and right "Docs" link, show hamburger.
+       Brand stays hidden at top, fades in on scroll same as desktop. */
+    .site-nav--big .nav-menu { display: none; }
+    .site-nav--big .nav-link--docs { display: none; }
+    .site-nav--big .nav-mobile-toggle { display: inline-flex; }
+    .site-nav--big.is-scrolled .site-nav-inner {
+        max-width: calc(100% - 2rem);
+    }
+}
+
 @media (max-width: 768px) {
     :root { --toc-width: 0; }
 
-    .nav-container { position: relative; }
+    /* Docs-mode nav: original mobile sidebar drawer behaviour */
     .nav-toggle { display: flex; }
-    .nav-left { position: static; }
-    .nav-logo {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    .nav-links { gap: 0.75rem; }
-    .nav-links .search-trigger span,
-    .nav-links .search-trigger kbd { display: none; }
-    .nav-links .search-trigger { padding: 0.375rem; }
-    .nav-links .version-badge,
-    .nav-links .nav-link { display: none; }
 
     .sidebar-mobile-links {
         display: block;
@@ -1531,7 +1829,6 @@ pre[class*="language-"], code[class*="language-"] {
     .docs-main { padding: 1.5rem 1rem 3rem; }
     .docs-pagination { grid-template-columns: 1fr; }
 
-    .hero { padding: 5rem 1rem 3rem; }
     .landing-section { padding: 3.5rem 1rem; }
     .install-box {
         font-size: 0.75rem;
