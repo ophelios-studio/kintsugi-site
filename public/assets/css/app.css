@@ -164,6 +164,59 @@ pre:not(.prose pre) code {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
+    transition:
+        height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        background 0.3s ease,
+        border-color 0.3s ease,
+        max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        border-radius 0.3s ease,
+        box-shadow 0.3s ease,
+        margin-top 0.3s ease;
+}
+
+/* Big mode: transparent nav floating over the hero, large wordmark, no border. */
+.site-nav--big:not(.is-scrolled) {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom-color: transparent;
+    height: 7rem;
+}
+.site-nav--big:not(.is-scrolled) .nav-logo-text {
+    font-size: 2.6rem;
+    line-height: 1;
+}
+.site-nav--big:not(.is-scrolled) .nav-logo-mark {
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem;
+    border-radius: 10px;
+}
+.site-nav--big:not(.is-scrolled) .nav-link {
+    color: var(--text);
+    font-size: 0.95rem;
+}
+.site-nav--big:not(.is-scrolled) .nav-link:hover {
+    color: var(--text-bright);
+}
+.site-nav--big:not(.is-scrolled) .version-badge {
+    background: oklch(1 0 0 / 0.6);
+    border-color: oklch(0.62 0.14 70 / 0.5);
+}
+
+/* Island mode (after scroll): pill-shaped, centered, smaller, blurred surface. */
+.site-nav--big.is-scrolled {
+    top: 14px;
+    max-width: 760px;
+    margin: 0 auto;
+    border-radius: 9999px;
+    border: 1px solid var(--border);
+    background: oklch(1 0 0 / 0.78);
+    box-shadow: 0 8px 24px -10px oklch(0.20 0.01 60 / 0.16);
+    height: 3.5rem;
+}
+.site-nav--big.is-scrolled .nav-container {
+    padding: 0 1.25rem;
 }
 
 .nav-container {
@@ -340,20 +393,52 @@ pre:not(.prose pre) code {
 .hero {
     position: relative;
     overflow: hidden;
-    padding: 7rem 1.5rem 5rem;
-    max-width: 84rem;
-    margin: 0 auto;
+    padding: 9rem 1.5rem 6rem;
+    min-height: 82vh;
+    margin: 0;
+    /* The sumi-e painting sits behind the content. background-position keeps the
+       bowl on the right visible while the upper-left ink wash gives text contrast. */
+    background-image: url("/assets/images/hero-bg.webp");
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+}
+
+/* Soft white fade at the bottom of the hero so the painting blends into the page
+   (mirrors the leaf.ophelios.com pattern). The top edge stays sharp on the painting. */
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            180deg,
+            transparent 0%,
+            transparent 55%,
+            oklch(0.98 0.005 80 / 0.55) 80%,
+            var(--bg-deep) 100%
+        );
 }
 
 .hero-grid {
+    position: relative;
+    z-index: 1;
+    max-width: 84rem;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     gap: 3rem;
     align-items: center;
 }
 
+.hero-content {
+    max-width: 38rem;
+}
+
 @media (max-width: 900px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .hero { padding: 7rem 1rem 5rem; min-height: 80vh; background-position: center; }
+    .hero-grid { gap: 2rem; }
 }
 
 .hero-pill {
@@ -383,12 +468,13 @@ pre:not(.prose pre) code {
 
 .hero-tagline {
     font-family: var(--font-display);
-    font-size: clamp(1.5rem, 2.6vw, 2rem);
-    font-weight: 500;
+    font-size: clamp(2.25rem, 4.2vw, 3.6rem);
+    font-weight: 600;
     color: var(--text-bright);
-    line-height: 1.25;
-    margin: 0 0 0.75rem;
-    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin: 0 0 1rem;
+    letter-spacing: -0.022em;
+    text-shadow: 0 1px 12px oklch(0.98 0.005 80 / 0.45);
 }
 
 .hero-tagline .accent {
@@ -397,10 +483,12 @@ pre:not(.prose pre) code {
 
 .hero-sub {
     font-size: 1.0625rem;
-    color: var(--text-muted);
+    color: var(--text);
     line-height: 1.65;
     max-width: 32rem;
     margin: 0 0 2rem;
+    /* Subtle paper-color glow so the body text stays legible over any region of the painting */
+    text-shadow: 0 1px 8px oklch(0.98 0.005 80 / 0.7);
 }
 
 .hero-cta-row {

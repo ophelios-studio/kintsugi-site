@@ -1,5 +1,6 @@
 {default bool $docsMode = false}
-<header class="site-nav">
+{var $bigMode = !$docsMode}
+<header class="site-nav{if $bigMode} site-nav--big{/if}" data-big-mode="{$bigMode ? 'true' : 'false'}">
     <div class="nav-container">
         <div class="nav-left">
             <button class="nav-toggle" onclick="toggleNav()" type="button" aria-label="Toggle menu">
@@ -28,3 +29,24 @@
         </nav>
     </div>
 </header>
+
+{* Big-mode → island transition. Toggles `is-scrolled` after the user scrolls past
+   the hero. Only active when nav is in big-mode (landing page, not docs). *}
+<script>
+(function(){
+  var nav = document.querySelector('.site-nav--big');
+  if (!nav) return;
+  var threshold = 80;
+  var ticking = false;
+  function update(){
+    if (window.scrollY > threshold) nav.classList.add('is-scrolled');
+    else nav.classList.remove('is-scrolled');
+    ticking = false;
+  }
+  function onScroll(){
+    if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  update();
+})();
+</script>
