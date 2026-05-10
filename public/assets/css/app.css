@@ -246,19 +246,14 @@ pre:not(.prose pre) code {
     transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .nav-brand-mark {
-    display: inline-grid;
-    place-items: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 7px;
-    background: oklch(0.95 0.01 70);
+    display: inline-block;
     color: var(--seam);
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 1.4rem;
     line-height: 1;
-    border: 1px solid var(--border);
     flex-shrink: 0;
+    text-shadow: 0 0 6px oklch(1 0 0 / 0.5);
 }
 .nav-brand-text {
     color: var(--text-bright);
@@ -606,8 +601,9 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
 .hero {
     position: relative;
     overflow: hidden;
-    /* Flush with the very top edge: the nav floats over the painting, no whitespace. */
-    padding: 7.5rem 1.5rem 6rem;
+    /* Flush at the top — the nav floats over the painting; small top padding so
+       the brand sits high on the page (leaves room for the nav to morph into). */
+    padding: 5.25rem 1.5rem 6rem;
     min-height: 100vh;
     margin: 0;
     background-image: url("/assets/images/hero-bg.webp");
@@ -617,18 +613,21 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
 }
 
 /* Layered overlays:
-   1) Soft white wash on the LEFT side so the text always reads cleanly over
-      whatever the painting puts there (mountain, water, or bridge).
-   2) Bottom-right radial vignette as belt-and-suspenders for any residual
-      watermark.
-   3) Slight gold glow upper-left for atmospheric depth.
-   4) Paper noise via SVG turbulence at very low opacity. */
+   1) Subtle dark ink wash at the very top so the nav text doesn't appear on
+      flat white sky (gives the nav an atmospheric backdrop without a bg colour).
+   2) Soft white wash on the LEFT side so body text always reads cleanly.
+   3) Bottom-right radial vignette as belt-and-suspenders for any residual watermark.
+   4) Gold radial glow upper-left for warm atmospheric depth. */
 .hero::before {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
     background:
+        linear-gradient(180deg,
+            oklch(0.22 0.012 60 / 0.10) 0%,
+            oklch(0.22 0.012 60 / 0.04) 5%,
+            transparent 14%),
         linear-gradient(95deg,
             oklch(1 0 0 / 0.55) 0%,
             oklch(1 0 0 / 0.40) 22%,
@@ -683,18 +682,18 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
     color: var(--seam);
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(3.5rem, 5.5vw, 5rem);
+    font-size: clamp(5rem, 8vw, 7.5rem);
     line-height: 1;
     /* Glow that subtly lifts the kanji off the painting without a box. */
     text-shadow:
-        0 0 18px oklch(1 0 0 / 0.55),
+        0 0 22px oklch(1 0 0 / 0.6),
         0 0 4px oklch(1 0 0 / 0.7);
     margin-left: -0.05em;
 }
 .hero-brand-text {
     font-family: var(--font-brand);
     font-weight: 400;
-    font-size: clamp(4.5rem, 10vw, 7.5rem);
+    font-size: clamp(5.5rem, 12vw, 9.5rem);
     color: var(--text-bright);
     letter-spacing: 0.005em;
     line-height: 0.92;
@@ -762,20 +761,24 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
 .btn-secondary {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
-    background: var(--bg-surface);
+    gap: 0.45rem;
+    padding: 0.75rem 1.1rem;
+    background: transparent;
     color: var(--text-bright);
-    border: 1px solid var(--border);
-    border-radius: 0.5rem;
+    border: 1px solid oklch(0.40 0.01 60 / 0.55);
+    border-radius: 0.6rem;
     font-weight: 500;
-    font-size: 0.9375rem;
-    transition: border-color 0.15s ease, color 0.15s ease;
+    font-size: 0.9rem;
+    transition: border-color 0.18s ease, color 0.18s ease, background-color 0.18s ease;
+    text-decoration: none;
 }
 .btn-secondary:hover {
-    color: var(--text-bright);
+    color: var(--accent);
     border-color: var(--accent);
+    background: oklch(1 0 0 / 0.4);
 }
+.btn-secondary svg { transition: transform 0.18s ease; }
+.btn-secondary:hover svg { transform: translateX(2px); }
 
 /* Install command box (npm install -g ...) */
 .install-box {
@@ -785,16 +788,27 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
     background: var(--bg-inset);
     color: var(--text-on-inset);
     border: 1px solid oklch(0.25 0.012 60);
-    border-radius: 0.5rem;
-    padding: 0.7rem 1rem;
+    border-radius: 0.6rem;
+    padding: 0.75rem 0.85rem 0.75rem 1.05rem;
     font-family: var(--font-mono);
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     position: relative;
 }
 .install-box .prompt {
     color: var(--seam);
     font-weight: 600;
     user-select: none;
+}
+/* Override the global `code:not(pre code)` styling so the inline command sits
+   transparent inside the dark install-box (no nested light pill). */
+.install-box code,
+.install-box code:not(pre code) {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--text-on-inset);
+    font-size: inherit;
+    white-space: nowrap;
 }
 .install-box .copy-btn {
     display: inline-flex;
@@ -803,18 +817,30 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
     width: 1.875rem;
     height: 1.875rem;
     border: none;
-    background: oklch(0.22 0.012 60);
-    color: var(--text-on-inset);
+    background: transparent;
+    color: oklch(0.78 0.005 60);
     border-radius: 0.375rem;
     cursor: pointer;
-    transition: background 0.15s ease;
+    transition: color 0.15s ease, background 0.15s ease;
     flex-shrink: 0;
+    position: relative;
 }
 .install-box .copy-btn:hover {
-    background: oklch(0.30 0.014 60);
+    color: oklch(0.96 0.005 80);
+    background: oklch(0.22 0.012 60);
+}
+.install-box .copy-btn .copy-check {
+    display: none;
 }
 .install-box .copy-btn.copied {
-    color: oklch(0.78 0.16 145);
+    color: oklch(0.75 0.16 145);
+    background: transparent;
+}
+.install-box .copy-btn.copied .copy-icon {
+    display: none;
+}
+.install-box .copy-btn.copied .copy-check {
+    display: inline-block;
 }
 
 /* Hero illustration column */
