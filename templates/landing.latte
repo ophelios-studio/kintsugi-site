@@ -112,5 +112,42 @@
             </div>
         </div>
     </section>
+
+    <div class="divider-rule"></div>
+
+    {* ─── 4. How Kintsugi works ─── *}
+    <section class="landing-section landing-section-narrow">
+        <span class="section-eyebrow">How it works</span>
+        <h2 class="section-title">One transaction. No gas from you. Nothing left behind.</h2>
+        <p class="section-lede">
+            EIP-7702 lets a victim wallet temporarily delegate execution to a battle-tested rescue contract. Combined with EIP-712 batch authorization, every selected asset moves to your safe wallet inside one atomic Type-4 transaction, paid for by a separate rescuer key.
+        </p>
+        <div class="steps-row">
+            <div class="step-card">
+                <span class="step-num">1</span>
+                <h3>You sign locally</h3>
+                <p>
+                    The CLI signs an EIP-7702 authorization plus an EIP-712 batch of transfers (ERC-20, NFTs, ENS). Nothing leaves your machine yet. The victim private key is held in memory only and never written to disk.
+                </p>
+            </div>
+            <div class="step-card">
+                <span class="step-num">2</span>
+                <h3>Rescuer submits</h3>
+                <p>
+                    A separate rescuer wallet you control submits a single Type-4 transaction. It pays the gas, attaches your authorization, and calls the audited rescue contract on your behalf. Your wallet's ETH balance never rises above zero.
+                </p>
+            </div>
+            <div class="step-card">
+                <span class="step-num">3</span>
+                <h3>Assets land safely</h3>
+                <p>
+                    Inside the same transaction, the contract executes every transfer to a fresh safe address you control. The sweeper sees the rescue land, finds nothing to grab, and moves on. The victim wallet is then optionally revoked back to a pure EOA.
+                </p>
+            </div>
+        </div>
+        <div class="callout">
+            The victim wallet's balance never rises above zero. There is no opening for a sweeper to act on, because there is nothing to take.
+        </div>
+    </section>
 </main>
 {/block}
