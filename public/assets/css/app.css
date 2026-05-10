@@ -1004,7 +1004,17 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
     padding: 0.85rem 0;
     position: relative;
 }
-.attack-step + .attack-step { border-top: 1px dashed oklch(0.26 0.012 60); }
+/* Dashed separator only spans from the icon column rightward, so it doesn't
+   visually cross the index circle or the vertical connector track. */
+.attack-step + .attack-step::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: calc(36px + 0.85rem);
+    right: 0;
+    height: 0;
+    border-top: 1px dashed oklch(0.26 0.012 60);
+}
 
 .attack-step-index {
     display: inline-grid;
