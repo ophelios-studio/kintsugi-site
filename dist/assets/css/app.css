@@ -777,6 +777,57 @@ pre:not(.prose pre) code {
     font-weight: 500;
 }
 
+/* ── Section 5.5: agent skill banner ── */
+.agent-banner {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+.agent-banner-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: center;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 2rem 2.25rem;
+    position: relative;
+    overflow: hidden;
+}
+.agent-banner-grid::before {
+    content: "";
+    position: absolute;
+    top: -40%; right: -10%;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, oklch(0.78 0.13 75 / 0.10) 0%, transparent 70%);
+    pointer-events: none;
+}
+.agent-banner-title {
+    font-size: clamp(1.6rem, 2.6vw, 2rem) !important;
+    margin-bottom: 0.75rem !important;
+}
+.agent-banner-lede {
+    font-size: 0.9375rem !important;
+    margin-bottom: 0 !important;
+}
+.agent-banner-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    align-items: flex-start;
+    position: relative;
+    z-index: 1;
+}
+@media (max-width: 900px) {
+    .agent-banner-grid {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+    }
+    .agent-banner-actions {
+        align-items: stretch;
+    }
+}
+
 /* ── Section 6: open source manifesto ── */
 .manifesto {
     text-align: center;

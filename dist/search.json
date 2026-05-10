@@ -290,6 +290,20 @@
         ]
     },
     {
+        "title": "With an agent",
+        "section": "getting-started",
+        "url": "\/getting-started\/with-an-agent",
+        "excerpt": "If you don't want to read the docs, you don't have to. Kintsugi ships a free agent skill following the agentskills.io spec, so any compatible AI coding agent (Claude Code, Cursor, Codex, Cline, Gemini CLI, and others) can drive the entire flow for you in plain English. The skill lives in the public ...",
+        "headings": [
+            "Install the skill",
+            "What you can ask",
+            "What you do NOT need",
+            "Why this exists",
+            "Reading the skill yourself",
+            "Reference"
+        ]
+    },
+    {
         "title": "Known limits",
         "section": "security",
         "url": "\/security\/known-limits",

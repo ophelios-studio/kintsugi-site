@@ -314,6 +314,35 @@ tailwind.config = {
         </div>
     </section>
 
+    <section class="landing-section landing-section-narrow agent-banner">
+        <div class="agent-banner-grid">
+            <div>
+                <span class="section-eyebrow">Or just ask your agent</span>
+                <h2 class="section-title agent-banner-title">In panic? Don't read. <span class="accent">Ask.</span></h2>
+                <p class="section-lede agent-banner-lede">
+                    Kintsugi ships a free agent skill following the <a href="https://agentskills.io" target="_blank" rel="noopener">agentskills.io</a> spec. Install it once and Claude Code, Cursor, Codex, Cline, Gemini CLI, or any compatible agent can drive the entire flow for you in plain English. The ordering rules and gotchas are baked in so you don't have to memorize them.
+                </p>
+            </div>
+            <div class="agent-banner-actions">
+                <div class="install-box code-block-wrapper">
+                    <span class="prompt">$</span>
+                    <code id="install-skill-cmd">npx skills add ophelios-studio/skills --skill kintsugi</code>
+                    <button type="button" class="copy-btn" aria-label="Copy install command" onclick="
+                        navigator.clipboard.writeText('npx skills add ophelios-studio/skills --skill kintsugi');
+                        this.classList.add('copied');
+                        setTimeout(() => this.classList.remove('copied'), 1400);
+                    ">
+                        <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"></path></svg>
+                    </button>
+                </div>
+                <a href="/getting-started/with-an-agent/" class="btn-secondary">
+                    See what to ask
+                    <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <div class="divider-rule"></div>
 
     <section class="landing-section landing-section-narrow">

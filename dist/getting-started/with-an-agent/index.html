@@ -4,20 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="leaf-base-url" content="">
-<meta name="description" content="What set-code transactions are, what they let you do, and why that matters for wallet rescue.">
+<meta name="description" content="Use Kintsugi via an AI coding agent (Claude Code, Cursor, Codex, Cline, Gemini CLI). Install the agent skill once, then ask in plain English.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#f9f7f3">
 <meta property="og:type" content="article">
-<meta property="og:title" content="EIP-7702 in plain English · Kintsugi">
-<meta property="og:description" content="What set-code transactions are, what they let you do, and why that matters for wallet rescue.">
+<meta property="og:title" content="With an agent · Kintsugi">
+<meta property="og:description" content="Use Kintsugi via an AI coding agent (Claude Code, Cursor, Codex, Cline, Gemini CLI). Install the agent skill once, then ask in plain English.">
 <meta property="og:site_name" content="Kintsugi">
 <meta property="og:url" content="https://kintsugi.ophelios.com/">
 <meta property="og:image" content="https://kintsugi.ophelios.com/assets/images/og-default.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="EIP-7702 in plain English · Kintsugi">
-<meta name="twitter:description" content="What set-code transactions are, what they let you do, and why that matters for wallet rescue.">
+<meta name="twitter:title" content="With an agent · Kintsugi">
+<meta name="twitter:description" content="Use Kintsugi via an AI coding agent (Claude Code, Cursor, Codex, Cline, Gemini CLI). Install the agent skill once, then ask in plain English.">
 <meta name="twitter:image" content="https://kintsugi.ophelios.com/assets/images/og-default.png">
 <link rel="canonical" href="https://kintsugi.ophelios.com/">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -56,7 +56,7 @@ tailwind.config = {
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 <link rel="stylesheet" href="/assets/css/app.css">
-    <title>EIP-7702 in plain English · Kintsugi</title>
+    <title>With an agent · Kintsugi</title>
 </head>
 <body class="bg-deep text-body antialiased font-body">
 <header class="site-nav">
@@ -119,7 +119,7 @@ tailwind.config = {
                 </li>
                 <li>
                     <a href="/getting-started/with-an-agent"
-                       class="sidebar-link">
+                       class="sidebar-link active">
                         With an agent
                     </a>
                 </li>
@@ -136,7 +136,7 @@ tailwind.config = {
                 </li>
                 <li>
                     <a href="/concepts/eip-7702-explained"
-                       class="sidebar-link active">
+                       class="sidebar-link">
                         EIP-7702 in plain English
                     </a>
                 </li>
@@ -315,57 +315,69 @@ tailwind.config = {
         <main class="docs-main">
 <article class="docs-content">
     <div class="prose">
-        <p>EIP-7702 introduced a new transaction type to Ethereum (Type-4, <code>SetCodeTransaction</code>) at the Pectra hardfork in May 2025. It lets an externally-owned account (a normal user wallet) temporarily delegate execution to a smart contract.</p>
-<h2 id="what-is-in-a-type-4-transaction"><a href="#what-is-in-a-type-4-transaction" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>What is in a Type-4 transaction</h2>
-<p>A Type-4 transaction looks like a normal one with extra fields. The important new field is the <code>authorization_list</code>. Each entry is a tuple:</p>
-<pre><code class="language-text">(chainId, address, nonce, y_parity, r, s)
-</code></pre>
-<p>Signed by some EOA (call it the <em>authority</em>). The signature commits the authority to delegating to <code>address</code> for one nonce on one chain.</p>
-<p>When the transaction is processed:</p>
-<ol>
-<li>Each authorization in the list is processed sequentially.</li>
-<li>For each one, the protocol verifies the signature, recovers the authority, and sets the authority's code to the delegation pointer <code>0xef0100 || address</code>.</li>
-<li>The authority's nonce is incremented.</li>
-<li>After all authorizations have processed, the transaction body executes normally.</li>
-</ol>
-<p>Once an EOA has the delegation pointer in its code slot, any call to that EOA is routed to the target contract's bytecode, executing in the EOA's storage and balance context.</p>
-<p>The delegation persists until the EOA submits another 7702 authorization (which can point to <code>address(0)</code> to clear it).</p>
-<h2 id="the-piece-that-makes-it-useful-for-rescue"><a href="#the-piece-that-makes-it-useful-for-rescue" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>The piece that makes it useful for rescue</h2>
-<p>The sender of the Type-4 transaction does not have to be the authority.</p>
-<p>Read that again. The transaction's <code>from</code> field, who pays gas, who must have ETH, can be any wallet. The authority just needs to have signed an authorization tuple ahead of time.</p>
-<p>For rescue this is everything. A separate rescuer wallet you control can submit a transaction whose <code>to</code> is the victim address, embed the victim's signed authorization that points to a small audited rescue contract, and embed calldata that calls into that contract. The victim's bytecode now runs the rescue contract's logic, in the victim's storage and balance, paying nothing for gas.</p>
-<h2 id="what-an-eip-7702-authorization-signs"><a href="#what-an-eip-7702-authorization-signs" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>What an EIP-7702 authorization signs</h2>
-<p>The authority signs a hash over <code>(chainId, address, nonce)</code>:</p>
+        <p>If you don't want to read the docs, you don't have to. Kintsugi ships a free agent skill following the <a href="https://agentskills.io">agentskills.io</a> spec, so any compatible AI coding agent (Claude Code, Cursor, Codex, Cline, Gemini CLI, and others) can drive the entire flow for you in plain English.</p>
+<p>The skill lives in the public repo <code>ophelios-studio/skills</code>. It contains:</p>
 <ul>
-<li><code>chainId</code> binds the authorization to one chain. Must match <code>block.chainid</code> at processing time, or the protocol rejects it.</li>
-<li><code>address</code> is the contract to delegate to. The Rescue contract address on that chain.</li>
-<li><code>nonce</code> is the authority's account nonce. Must equal the actual nonce when processed, or the protocol rejects it.</li>
+<li>A <code>SKILL.md</code> that teaches the agent the three-wallet pattern, the atomic-batch model, the ordering rules (unstake before transfer, ENS reclaim before registrant), the discovery scope, the RPC requirements, and every empirical gotcha drawn from the production tool.</li>
+<li>A runnable example (<code>examples/kintsugi/custom-rescue.ts</code>) that demonstrates the developer surface for non-standard assets like staked NFTs, vesting positions, LP tokens.</li>
 </ul>
-<p>The authority's signature is sufficient. No interaction with the authority is needed at submission time.</p>
-<h2 id="what-it-does-not-do"><a href="#what-it-does-not-do" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>What it does not do</h2>
-<p>EIP-7702 does not let the rescuer drain the victim wallet. The rescuer can only submit transactions that the victim has authorized. The victim's authorization in Kintsugi is scoped to one specific batch of transfers (signed via EIP-712, see <a href="/concepts/atomic-batches/">atomic batches</a>) plus the 7702 delegation pointer for one nonce.</p>
-<p>EIP-7702 also does not change ownership. The authority still owns the EOA. The delegation can be revoked at any time by the authority signing a new authorization to <code>address(0)</code>.</p>
-<h2 id="the-trust-shape"><a href="#the-trust-shape" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>The trust shape</h2>
-<p>After an EIP-7702 rescue, the victim address has a delegation pointer to the Rescue contract. That is a single line of code: it does not store any victim assets, it only routes calls. Anyone calling the victim address with <code>executeBatch(...)</code> calldata still needs a valid victim EIP-712 signature for the specific batch they want to run.</p>
-<p>If you don't want to leave the delegation in place, run <code>kintsugi revoke</code> after the rescue. It submits a 7702 authorization pointing the victim back to <code>address(0)</code>, restoring it to a pure EOA.</p>
-<h2 id="further-reading"><a href="#further-reading" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Further reading</h2>
+<h2 id="install-the-skill"><a href="#install-the-skill" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Install the skill</h2>
+<pre><code class="language-bash">npx skills add ophelios-studio/skills --skill kintsugi
+</code></pre>
+<p>That installs to <code>~/.agents/skills/kintsugi/</code> and symlinks into your agent's skill directory (e.g. <code>~/.claude/skills/</code>). The agent will load it automatically when it detects you're working with Kintsugi.</p>
+<p>To install every Ophelios skill in one shot:</p>
+<pre><code class="language-bash">npx skills add ophelios-studio/skills
+</code></pre>
+<h2 id="what-you-can-ask"><a href="#what-you-can-ask" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>What you can ask</h2>
+<p>Once the skill is loaded, talk to your agent like you'd talk to a friend who already knows the tool:</p>
+<blockquote>
+<p>&quot;My MetaMask seed leaked. I have a hardware wallet I trust as the safe destination. Walk me through rescuing the assets.&quot;</p>
+</blockquote>
+<blockquote>
+<p>&quot;I have NFTs staked in a contract at 0xabc... and the staked tokenIds are 12, 13, 14. Write me a custom-rescue script that unstakes them and moves them to my safe address.&quot;</p>
+</blockquote>
+<blockquote>
+<p>&quot;I rescued my wallet last week with kintsugi. Should I revoke the 7702 delegation now?&quot;</p>
+</blockquote>
+<blockquote>
+<p>&quot;Why does the Network step ask for an Alchemy key when I already have a public RPC URL?&quot;</p>
+</blockquote>
+<p>The agent has the ordering rules, the gotchas, and the contract addresses already memorized. It will know to put the unstake op before the transfer ops, to remind you the safe wallet must be from a brand-new seed, to suggest <code>--private-mempool</code> if you suspect a sophisticated sweeper, and so on.</p>
+<h2 id="what-you-do-not-need"><a href="#what-you-do-not-need" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>What you do NOT need</h2>
 <ul>
-<li><a href="https://eips.ethereum.org/EIPS/eip-7702">EIP-7702 spec</a></li>
-<li><a href="/concepts/rescuer-pattern/">The rescuer wallet pattern</a> (how Kintsugi uses 7702 in practice)</li>
-<li><a href="/concepts/atomic-batches/">Atomic batches</a> (what executes inside the delegated call)</li>
+<li>A subscription to anything. The skill is MIT-licensed in the public repo.</li>
+<li>An account with us. Kintsugi has no accounts.</li>
+<li>A different agent. The skill works with anything that follows the agentskills.io spec.</li>
+</ul>
+<h2 id="why-this-exists"><a href="#why-this-exists" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Why this exists</h2>
+<p>Kintsugi is meant to be used in panic. Reading docs in panic is a bad time. An AI agent that already knows the tool well enough to run it for you removes one layer of cognitive load at the worst possible moment.</p>
+<p>It's also useful in calm: developers building custom rescue flows for non-standard assets (staked positions, vesting, governance) get a teammate who already knows the API and the ordering rules, instead of paging through <code>@kintsugi/core</code> source.</p>
+<h2 id="reading-the-skill-yourself"><a href="#reading-the-skill-yourself" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Reading the skill yourself</h2>
+<p>The skill is just a markdown file. If you want to see exactly what your agent has been taught:</p>
+<ul>
+<li>Online: <a href="https://github.com/ophelios-studio/skills/blob/main/skills/kintsugi/SKILL.md">github.com/ophelios-studio/skills/blob/main/skills/kintsugi/SKILL.md</a></li>
+<li>After install: <code>cat ~/.agents/skills/kintsugi/SKILL.md</code></li>
+</ul>
+<p>It's about 250 lines. Short enough to skim in 5 minutes. Honest about what auto-discovery covers and what it doesn't.</p>
+<h2 id="reference"><a href="#reference" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Reference</h2>
+<ul>
+<li>Skills repo: <a href="https://github.com/ophelios-studio/skills">github.com/ophelios-studio/skills</a></li>
+<li>Spec: <a href="https://agentskills.io">agentskills.io</a></li>
+<li>Example: <a href="https://github.com/ophelios-studio/skills/tree/main/examples/kintsugi">examples/kintsugi/</a> in the skills repo</li>
+<li>Custom calls reference: <a href="/asset-support/custom-calls/">Asset support / custom calls</a></li>
 </ul>
 
     </div>
 
     <nav class="docs-pagination">
-        <a href="/concepts/the-sweeper-problem" class="pagination-link pagination-prev">
+        <a href="/getting-started/quickstart-ui" class="pagination-link pagination-prev">
             <span class="pagination-label">&larr; Previous</span>
-            <span class="pagination-title">The sweeper problem</span>
+            <span class="pagination-title">Quickstart (UI)</span>
         </a>
 
-        <a href="/concepts/rescuer-pattern" class="pagination-link pagination-next">
+        <a href="/concepts/the-sweeper-problem" class="pagination-link pagination-next">
             <span class="pagination-label">Next &rarr;</span>
-            <span class="pagination-title">The rescuer wallet pattern</span>
+            <span class="pagination-title">The sweeper problem</span>
         </a>
     </nav>
 </article>
@@ -375,22 +387,22 @@ tailwind.config = {
         <h4 class="toc-title">On this page</h4>
         <ul class="toc-links">
             <li class="toc-item">
-                <a href="#what-is-in-a-type-4-transaction" class="toc-link">What is in a Type-4 transaction</a>
+                <a href="#install-the-skill" class="toc-link">Install the skill</a>
             </li>
             <li class="toc-item">
-                <a href="#the-piece-that-makes-it-useful-for-rescue" class="toc-link">The piece that makes it useful for rescue</a>
+                <a href="#what-you-can-ask" class="toc-link">What you can ask</a>
             </li>
             <li class="toc-item">
-                <a href="#what-an-eip-7702-authorization-signs" class="toc-link">What an EIP-7702 authorization signs</a>
+                <a href="#what-you-do-not-need" class="toc-link">What you do NOT need</a>
             </li>
             <li class="toc-item">
-                <a href="#what-it-does-not-do" class="toc-link">What it does not do</a>
+                <a href="#why-this-exists" class="toc-link">Why this exists</a>
             </li>
             <li class="toc-item">
-                <a href="#the-trust-shape" class="toc-link">The trust shape</a>
+                <a href="#reading-the-skill-yourself" class="toc-link">Reading the skill yourself</a>
             </li>
             <li class="toc-item">
-                <a href="#further-reading" class="toc-link">Further reading</a>
+                <a href="#reference" class="toc-link">Reference</a>
             </li>
         </ul>
     </div>
