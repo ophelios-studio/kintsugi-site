@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="leaf-base-url" content="">
+<meta name="description" content="What Kintsugi defends against, and what it explicitly does not.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#f9f7f3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Threat model · Kintsugi">
+<meta property="og:description" content="What Kintsugi defends against, and what it explicitly does not.">
+<meta property="og:site_name" content="Kintsugi">
+<meta property="og:url" content="https://kintsugi.ophelios.com/">
+<meta property="og:image" content="https://kintsugi.ophelios.com/assets/images/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Threat model · Kintsugi">
+<meta name="twitter:description" content="What Kintsugi defends against, and what it explicitly does not.">
+<meta name="twitter:image" content="https://kintsugi.ophelios.com/assets/images/og-default.png">
+<link rel="canonical" href="https://kintsugi.ophelios.com/">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                deep: 'var(--bg-deep)',
+                surface: 'var(--bg-surface)',
+                elevated: 'var(--bg-elevated)',
+                border: 'var(--border)',
+                'border-accent': 'var(--border-accent)',
+                body: 'var(--text)',
+                bright: 'var(--text-bright)',
+                muted: 'var(--text-muted)',
+                accent: 'var(--accent)',
+                'accent-light': 'var(--accent-light)',
+                'accent-glow': 'var(--accent-glow)',
+                seam: 'var(--seam)',
+                danger: 'var(--danger)',
+            },
+            fontFamily: {
+                body: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                display: ['Shippori Mincho', 'Noto Serif JP', 'Georgia', 'serif'],
+                brand: ['Kashima Brush', 'Shippori Mincho', 'serif'],
+                mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+            },
+        },
+    },
+}
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+<link rel="stylesheet" href="/assets/css/app.css">
+    <title>Threat model · Kintsugi</title>
+</head>
+<body class="bg-deep text-body antialiased font-body">
+<header class="site-nav">
+    <div class="nav-container">
+        <div class="nav-left">
+            <button class="nav-toggle" onclick="toggleNav()" type="button" aria-label="Toggle menu">
+                <svg class="nav-toggle-open" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                <svg class="nav-toggle-close" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="display:none"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+            <a href="/" class="nav-logo" aria-label="Kintsugi home">
+                <span class="nav-logo-mark" aria-hidden="true">金</span>
+                <span class="nav-logo-text">Kintsugi</span>
+            </a>
+        </div>
+        <nav class="nav-links">
+            <button class="search-trigger" onclick="openSearch()" type="button">
+                <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                <span>Search</span>
+                <kbd>Ctrl K</kbd>
+            </button>
+            <a href="https://github.com/ophelios-studio/kintsugi" class="nav-link" target="_blank" rel="noopener">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                GitHub
+            </a>
+            <span class="version-badge">v0.1.0</span>
+        </nav>
+    </div>
+</header>
+
+    <div class="docs-layout">
+        <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+<aside class="docs-sidebar">
+    <nav class="sidebar-nav">
+        <div class="sidebar-group">
+            <h3 class="sidebar-group-title">Getting Started</h3>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="/getting-started/install"
+                       class="sidebar-link">
+                        Install
+                    </a>
+                </li>
+                <li>
+                    <a href="/getting-started/prerequisites"
+                       class="sidebar-link">
+                        Prerequisites
+                    </a>
+                </li>
+                <li>
+                    <a href="/getting-started/quickstart-cli"
+                       class="sidebar-link">
+                        Quickstart (CLI)
+                    </a>
+                </li>
+                <li>
+                    <a href="/getting-started/quickstart-ui"
+                       class="sidebar-link">
+                        Quickstart (UI)
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar-group">
+            <h3 class="sidebar-group-title">Concepts</h3>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="/concepts/the-sweeper-problem"
+                       class="sidebar-link">
+                        The sweeper problem
+                    </a>
+                </li>
+                <li>
+                    <a href="/concepts/eip-7702-explained"
+                       class="sidebar-link">
+                        EIP-7702 in plain English
+                    </a>
+                </li>
+                <li>
+                    <a href="/concepts/rescuer-pattern"
+                       class="sidebar-link">
+                        The rescuer wallet pattern
+                    </a>
+                </li>
+                <li>
+                    <a href="/concepts/nonce-tracker"
+                       class="sidebar-link">
+                        The NonceTracker
+                    </a>
+                </li>
+                <li>
+                    <a href="/concepts/atomic-batches"
+                       class="sidebar-link">
+                        Atomic batches and ordering
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar-group">
+            <h3 class="sidebar-group-title">CLI Reference</h3>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="/cli-reference/rescue"
+                       class="sidebar-link">
+                        kintsugi rescue
+                    </a>
+                </li>
+                <li>
+                    <a href="/cli-reference/ui"
+                       class="sidebar-link">
+                        kintsugi ui
+                    </a>
+                </li>
+                <li>
+                    <a href="/cli-reference/status"
+                       class="sidebar-link">
+                        kintsugi status
+                    </a>
+                </li>
+                <li>
+                    <a href="/cli-reference/revoke"
+                       class="sidebar-link">
+                        kintsugi revoke
+                    </a>
+                </li>
+                <li>
+                    <a href="/cli-reference/env-vars"
+                       class="sidebar-link">
+                        Environment variables
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar-group">
+            <h3 class="sidebar-group-title">UI Walkthrough</h3>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="/ui-walkthrough/network"
+                       class="sidebar-link">
+                        Network
+                    </a>
+                </li>
+                <li>
+                    <a href="/ui-walkthrough/wallets"
+                       class="sidebar-link">
+                        Wallets
+                    </a>
+                </li>
+                <li>
+                    <a href="/ui-walkthrough/discover"
+                       class="sidebar-link">
+                        Discover
+                    </a>
+                </li>
+                <li>
+                    <a href="/ui-walkthrough/plan"
+                       class="sidebar-link">
+                        Plan
+                    </a>
+                </li>
+                <li>
+                    <a href="/ui-walkthrough/submit"
+                       class="sidebar-link">
+                        Submit
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar-group">
+            <h3 class="sidebar-group-title">Asset Support</h3>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="/asset-support/eth-erc20"
+                       class="sidebar-link">
+                        ETH and ERC-20
+                    </a>
+                </li>
+                <li>
+                    <a href="/asset-support/nfts"
+                       class="sidebar-link">
+                        NFTs (ERC-721 and ERC-1155)
+                    </a>
+                </li>
+                <li>
+                    <a href="/asset-support/ens"
+                       class="sidebar-link">
+                        ENS names
+                    </a>
+                </li>
+                <li>
+                    <a href="/asset-support/custom-calls"
+                       class="sidebar-link">
+                        Custom calls
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar-group">
+            <h3 class="sidebar-group-title">Security</h3>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="/security/threat-model"
+                       class="sidebar-link active">
+                        Threat model
+                    </a>
+                </li>
+                <li>
+                    <a href="/security/trust-assumptions"
+                       class="sidebar-link">
+                        Trust assumptions
+                    </a>
+                </li>
+                <li>
+                    <a href="/security/known-limits"
+                       class="sidebar-link">
+                        Known limits
+                    </a>
+                </li>
+                <li>
+                    <a href="/security/reporting"
+                       class="sidebar-link">
+                        Reporting a vulnerability
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar-group">
+            <h3 class="sidebar-group-title">FAQ</h3>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="/faq/index"
+                       class="sidebar-link">
+                        FAQ
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="sidebar-mobile-links">
+            <a href="https://github.com/ophelios-studio/kintsugi" class="sidebar-footer-link" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="sidebar-copyright">
+            &copy; 2026 Ophelios Studio
+        </div>
+        <div class="sidebar-powered">
+            Powered by <a href="https://leaf.ophelios.com" target="_blank" rel="noopener">Zephyrus Leaf</a>
+        </div>
+    </div>
+</aside>
+        <main class="docs-main">
+<article class="docs-content">
+    <div class="prose">
+        <p>Kintsugi solves one problem: moving assets out of an EVM wallet whose private key is compromised, when a sweeper bot is watching that wallet for any incoming gas.</p>
+<h2 id="in-scope"><a href="#in-scope" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>In scope</h2>
+<p>The attacker has the victim's private key. They can sign any transaction the victim could. They have a sweeper bot pointed at the victim address that drains any ETH that lands there in the next block.</p>
+<p>Kintsugi assumes the victim is running the rescue from a clean machine they trust, with a freshly-generated safe wallet they trust, and a separate rescuer wallet they control.</p>
+<p>Under these assumptions, Kintsugi guarantees:</p>
+<ul>
+<li>Every selected asset transfers to the safe wallet in one Type-4 transaction.</li>
+<li>The victim wallet's ETH balance never rises above zero during the rescue.</li>
+<li>The sweeper has no observable opening between batch start and batch end.</li>
+<li>The signature scope is bound to a specific batch on a specific chain with a deadline; it cannot be reused or replayed.</li>
+</ul>
+<h2 id="what-it-does-not-defend-against"><a href="#what-it-does-not-defend-against" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>What it does NOT defend against</h2>
+<ul>
+<li><strong>A compromised victim machine that signs an attacker-controlled batch.</strong> If the rescue itself is signed on the same machine the attacker controls, all bets are off. Use a clean machine.</li>
+<li><strong>A compromised safe wallet.</strong> If you derive the safe from the compromised seed (or any seed the attacker has access to), recovered assets land back in the attacker's hands. Generate the safe from a new seed.</li>
+<li><strong>A compromised rescuer wallet.</strong> The rescuer pays gas. If its key is compromised, the attacker can use the rescuer's gas, but the rescue still succeeds for the victim's assets (the rescuer is not authorized to sign the inner batch).</li>
+<li><strong>An attacker who somehow obtains both the EIP-712 batch signature AND the EIP-7702 authorization tuple before they are submitted.</strong> With both, they could front-run the rescue. Mitigation: use Flashbots Protect (<code>--private-mempool</code> flag) when paranoia is warranted.</li>
+<li><strong>Malicious resolver / record cleanup on rescued ENS names.</strong> Kintsugi transfers ownership; it does not automatically wipe records the attacker may have set. Audit the resolver after the rescue and run <code>setResolver</code> to clear or reattach. See <a href="/asset-support/ens/">Asset support: ENS</a>.</li>
+</ul>
+<h2 id="trust-assumptions"><a href="#trust-assumptions" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Trust assumptions</h2>
+<p>Running Kintsugi requires trusting:</p>
+<ul>
+<li>The Solidity source of <code>Rescue.sol</code> and <code>NonceTracker.sol</code> (auditable, MIT, ~150 lines combined).</li>
+<li>The deployed bytecode at the published addresses on each chain (verifiable on Etherscan).</li>
+<li>The <code>viem</code> library, OpenZeppelin Contracts, and the Ethereum execution layer.</li>
+</ul>
+<p>No other parties are trusted at runtime. The CLI runs locally, never sends private keys anywhere, never depends on any Kintsugi-operated server. There is no central API, no telemetry, no analytics, no signup.</p>
+<h2 id="network-exposure"><a href="#network-exposure" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Network exposure</h2>
+<p>When you run <code>kintsugi ui</code>, Kintsugi binds an HTTP server to <code>127.0.0.1</code> only. Other machines on your LAN cannot reach it. The browser tab uses a session token (UUID) in the URL fragment as bearer authentication on every API call. Without that token, all API routes return 401.</p>
+<p>When you run <code>kintsugi rescue</code> (CLI mode), there is no server at all. Just the local Node process talking to your RPC.</p>
+<p>The RPC URL you provide is the only outbound connection. Kintsugi makes no other network calls.</p>
+<h2 id="atomicity"><a href="#atomicity" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Atomicity</h2>
+<p>A batch is atomic at the EVM transaction level: every op succeeds or the entire transaction reverts. If any op reverts, the rescue's state changes are rolled back AND the nonce stays unconsumed (so the same signature can be re-used after fixing the failing op).</p>
+<h2 id="reporting-a-vulnerability"><a href="#reporting-a-vulnerability" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Reporting a vulnerability</h2>
+<p>See <a href="/security/reporting/">Reporting a vulnerability</a>.</p>
+
+    </div>
+
+    <nav class="docs-pagination">
+        <a href="/asset-support/custom-calls" class="pagination-link pagination-prev">
+            <span class="pagination-label">&larr; Previous</span>
+            <span class="pagination-title">Custom calls</span>
+        </a>
+
+        <a href="/security/trust-assumptions" class="pagination-link pagination-next">
+            <span class="pagination-label">Next &rarr;</span>
+            <span class="pagination-title">Trust assumptions</span>
+        </a>
+    </nav>
+</article>
+        </main>
+<aside class="docs-toc">
+    <div class="toc-wrapper">
+        <h4 class="toc-title">On this page</h4>
+        <ul class="toc-links">
+            <li class="toc-item">
+                <a href="#in-scope" class="toc-link">In scope</a>
+            </li>
+            <li class="toc-item">
+                <a href="#what-it-does-not-defend-against" class="toc-link">What it does NOT defend against</a>
+            </li>
+            <li class="toc-item">
+                <a href="#trust-assumptions" class="toc-link">Trust assumptions</a>
+            </li>
+            <li class="toc-item">
+                <a href="#network-exposure" class="toc-link">Network exposure</a>
+            </li>
+            <li class="toc-item">
+                <a href="#atomicity" class="toc-link">Atomicity</a>
+            </li>
+            <li class="toc-item">
+                <a href="#reporting-a-vulnerability" class="toc-link">Reporting a vulnerability</a>
+            </li>
+        </ul>
+    </div>
+</aside>
+    </div>
+
+<div class="search-overlay" id="search-overlay">
+    <div class="search-dialog" role="dialog" aria-label="Search documentation">
+        <div class="search-input-wrapper">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+            </svg>
+            <input type="text" class="search-input" id="search-input" placeholder="Search documentation..." autocomplete="off" autofocus>
+            <kbd style="font-size: 0.625rem; padding: 0.125rem 0.375rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 0.25rem; color: var(--text-muted); font-family: var(--font-mono); cursor: pointer;" onclick="closeSearch()">Esc</kbd>
+        </div>
+        <div class="search-results" id="search-results">
+            <div class="search-empty">Type to search the documentation...</div>
+        </div>
+        <div class="search-footer">
+            <span>Navigate with <kbd>&uarr;</kbd> <kbd>&darr;</kbd> keys</span>
+            <span>Press <kbd>Enter</kbd> to select</span>
+        </div>
+    </div>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup-templating.min.js"></script>
+    <script src="/assets/js/copy-code.js"></script>
+    <script src="/assets/js/sidebar.js"></script>
+    <script src="/assets/js/search.js"></script>
+</body>
+</html>

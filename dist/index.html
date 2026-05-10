@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="leaf-base-url" content="">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#f9f7f3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kintsugi · Kintsugi">
+<meta property="og:site_name" content="Kintsugi">
+<meta property="og:url" content="https://kintsugi.ophelios.com/">
+<meta property="og:image" content="https://kintsugi.ophelios.com/assets/images/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kintsugi · Kintsugi">
+<meta name="twitter:image" content="https://kintsugi.ophelios.com/assets/images/og-default.png">
+<link rel="canonical" href="https://kintsugi.ophelios.com/">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                deep: 'var(--bg-deep)',
+                surface: 'var(--bg-surface)',
+                elevated: 'var(--bg-elevated)',
+                border: 'var(--border)',
+                'border-accent': 'var(--border-accent)',
+                body: 'var(--text)',
+                bright: 'var(--text-bright)',
+                muted: 'var(--text-muted)',
+                accent: 'var(--accent)',
+                'accent-light': 'var(--accent-light)',
+                'accent-glow': 'var(--accent-glow)',
+                seam: 'var(--seam)',
+                danger: 'var(--danger)',
+            },
+            fontFamily: {
+                body: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                display: ['Shippori Mincho', 'Noto Serif JP', 'Georgia', 'serif'],
+                brand: ['Kashima Brush', 'Shippori Mincho', 'serif'],
+                mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+            },
+        },
+    },
+}
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+<link rel="stylesheet" href="/assets/css/app.css">
+    <title>Kintsugi · Kintsugi</title>
+</head>
+<body class="bg-deep text-body antialiased font-body">
+<header class="site-nav">
+    <div class="nav-container">
+        <div class="nav-left">
+            <button class="nav-toggle" onclick="toggleNav()" type="button" aria-label="Toggle menu">
+                <svg class="nav-toggle-open" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                <svg class="nav-toggle-close" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="display:none"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+            <a href="/" class="nav-logo" aria-label="Kintsugi home">
+                <span class="nav-logo-mark" aria-hidden="true">金</span>
+                <span class="nav-logo-text">Kintsugi</span>
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="/getting-started/install/" class="nav-link">Docs</a>
+            <a href="https://github.com/ophelios-studio/kintsugi" class="nav-link" target="_blank" rel="noopener">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                GitHub
+            </a>
+            <span class="version-badge">v0.1.0</span>
+        </nav>
+    </div>
+</header>
+<main class="landing">
+    <section class="hero">
+        <div class="hero-grid">
+            <div>
+                <span class="hero-pill">v0.1.0 · pre-alpha</span>
+                <h1 class="hero-wordmark">Kintsugi</h1>
+                <p class="hero-tagline">
+                    Mend the wallet. <span class="accent">Keep the gold.</span>
+                </p>
+                <p class="hero-sub">
+                    Atomic, sweeper-proof wallet rescue using EIP-7702.
+                    Open source. Runs locally. No fees, ever.
+                </p>
+                <div class="hero-cta-row">
+                    <div class="install-box code-block-wrapper">
+                        <span class="prompt">$</span>
+                        <code id="install-cmd">npm install -g @kintsugi/cli</code>
+                        <button type="button" class="copy-btn" aria-label="Copy install command" onclick="
+                            navigator.clipboard.writeText('npm install -g @kintsugi/cli');
+                            this.classList.add('copied');
+                            setTimeout(() => this.classList.remove('copied'), 1400);
+                        ">
+                            <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"></path></svg>
+                        </button>
+                    </div>
+                    <a href="/getting-started/install/" class="btn-secondary">
+                        Read the docs
+                        <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-illustration">
+<svg class="kintsugi-bowl" viewBox="0 0 480 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mended tea bowl with a gold kintsugi seam">
+    <defs>
+        <radialGradient id="bowl-inside" cx="50%" cy="22%" r="58%">
+            <stop offset="0%" stop-color="oklch(0.30 0.012 60)" stop-opacity="0.85"></stop>
+            <stop offset="100%" stop-color="oklch(0.20 0.012 60)" stop-opacity="0.95"></stop>
+        </radialGradient>
+    </defs>
+
+    <text class="kanji-bg" x="240" y="280">金</text>
+
+    <ellipse class="bowl-shadow" cx="240" cy="370" rx="170" ry="14"></ellipse>
+
+    <path class="bowl-stroke"
+          d="M 76 142
+             C 76 250, 130 332, 240 332
+             C 350 332, 404 250, 404 142"
+          stroke-width="6"></path>
+
+    <path class="bowl-stroke"
+          d="M 76 142
+             C 76 122, 150 110, 240 110
+             C 330 110, 404 122, 404 142
+             C 404 162, 330 174, 240 174
+             C 150 174, 76 162, 76 142 Z"
+          fill="url(#bowl-inside)"
+          fill-opacity="0.92"></path>
+
+    <path class="bowl-stroke"
+          d="M 110 192
+             Q 240 222, 370 192"
+          stroke-width="2"
+          stroke-opacity="0.35"></path>
+
+    <path class="seam"
+          d="M 188 122
+             L 196 152
+             L 184 184
+             L 208 220
+             L 198 252
+             L 226 286
+             L 218 318"></path>
+
+    <path class="seam"
+          d="M 208 220
+             L 244 232
+             L 256 250"
+          style="stroke-dasharray: 200; stroke-dashoffset: 200; animation: seam-draw 1100ms ease-out 1900ms forwards;"></path>
+</svg>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-rule"></div>
+
+    <section class="problem-section">
+        <div class="problem-grid">
+            <div>
+                <span class="section-eyebrow">The problem</span>
+                <h2 class="section-title">Your keys are leaked. Your wallet is being watched.</h2>
+                <p class="section-lede">
+                    A sweeper bot now monitors the compromised address around the clock. The moment any ETH lands there to pay gas for a recovery transaction, the bot front-runs you and drains it in the same block. Tokens, NFTs, and ENS names sit visible but unreachable. Most rescues fail before they start.
+                </p>
+                <p style="color: var(--text-muted); font-size: 0.9375rem; line-height: 1.65;">
+                    Kintsugi removes the gas dependency entirely. The victim wallet never holds ETH at any point. A separate rescuer wallet pays for and submits the recovery in one atomic Type-4 transaction, transferring every selected asset out before the sweeper sees an opening.
+                </p>
+            </div>
+            <div>
+                <div class="tx-graph" aria-label="Sweeper bot drains incoming gas">
+                    <div class="row">
+                        <span class="label">Block N</span>
+                        <span><span class="actor-victim">victim ←</span> 0.01 ETH <span class="arrow">from your wallet</span></span>
+                        <span style="color: oklch(0.6 0.012 60);">+10⁻²</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Block N</span>
+                        <span><span class="actor-sweeper">sweeper →</span> 0.01 ETH <span class="arrow">to attacker</span></span>
+                        <span class="amount-drained">drained</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Block N+1</span>
+                        <span>your rescue tx <span class="arrow">→ reverted</span></span>
+                        <span class="amount-drained">no gas</span>
+                    </div>
+                    <div class="row" style="border-top: 1px solid oklch(0.35 0.012 60); margin-top: 0.5rem; padding-top: 0.75rem;">
+                        <span class="label">Result</span>
+                        <span>tokens, NFTs, ENS still on the compromised wallet</span>
+                        <span class="amount-left">stranded</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="landing-section">
+        <span class="section-eyebrow">The recovery gap</span>
+        <h2 class="section-title">They take what's liquid. They leave what's yours.</h2>
+        <p class="section-lede">
+            Drainer bots optimize for fast liquidation. They sweep ETH and the most liquid ERC-20s, ignore everything that takes effort to fence, and move on. The leftovers are often the most personally valuable holdings, but a working sweeper still blocks any normal recovery attempt.
+        </p>
+        <div class="cards-row">
+            <div class="feature-card">
+                <div class="feature-card-icon" aria-hidden="true">字</div>
+                <h3>ENS names</h3>
+                <p>
+                    Your dot-eth identity, the one you've used everywhere for years, is rarely auto-drained. It's also typically the hardest to move once a sweeper is watching. Kintsugi handles unwrapped 2LDs, wrapped names, and subdomains in a single batch.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card-icon" aria-hidden="true">画</div>
+                <h3>Illiquid NFTs</h3>
+                <p>
+                    Long-tail collections, art, in-game items, memberships. Bots usually skip ERC-721 and ERC-1155 because the resale path is slow. They stay on the compromised wallet, visible to everyone, recoverable by no one.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card-icon" aria-hidden="true">小</div>
+                <h3>Low-cap tokens</h3>
+                <p>
+                    Reward tokens, governance positions, vested allocations, anything without a liquid pool. Drainers ignore them, but you still cannot reach them through a wallet the sweeper is gating.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-rule"></div>
+
+    <section class="landing-section landing-section-narrow">
+        <span class="section-eyebrow">How it works</span>
+        <h2 class="section-title">One transaction. No gas from you. Nothing left behind.</h2>
+        <p class="section-lede">
+            EIP-7702 lets a victim wallet temporarily delegate execution to a battle-tested rescue contract. Combined with EIP-712 batch authorization, every selected asset moves to your safe wallet inside one atomic Type-4 transaction, paid for by a separate rescuer key.
+        </p>
+        <div class="steps-row">
+            <div class="step-card">
+                <span class="step-num">1</span>
+                <h3>You sign locally</h3>
+                <p>
+                    The CLI signs an EIP-7702 authorization plus an EIP-712 batch of transfers (ERC-20, NFTs, ENS). Nothing leaves your machine yet. The victim private key is held in memory only and never written to disk.
+                </p>
+            </div>
+            <div class="step-card">
+                <span class="step-num">2</span>
+                <h3>Rescuer submits</h3>
+                <p>
+                    A separate rescuer wallet you control submits a single Type-4 transaction. It pays the gas, attaches your authorization, and calls the audited rescue contract on your behalf. Your wallet's ETH balance never rises above zero.
+                </p>
+            </div>
+            <div class="step-card">
+                <span class="step-num">3</span>
+                <h3>Assets land safely</h3>
+                <p>
+                    Inside the same transaction, the contract executes every transfer to a fresh safe address you control. The sweeper sees the rescue land, finds nothing to grab, and moves on. The victim wallet is then optionally revoked back to a pure EOA.
+                </p>
+            </div>
+        </div>
+        <div class="callout">
+            The victim wallet's balance never rises above zero. There is no opening for a sweeper to act on, because there is nothing to take.
+        </div>
+    </section>
+
+    <section class="landing-section">
+        <span class="section-eyebrow">Two ways in</span>
+        <h2 class="section-title">A guided UI for panic. A pure CLI for power.</h2>
+        <p class="section-lede">
+            Same atomic flow under the hood, two surfaces to drive it. The web UI is launched from the CLI as a localhost server. The browser only sees session-bound addresses and signatures. Private keys never leave the local Node process.
+        </p>
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <div class="preview">
+                    <img src="/assets/images/ui/welcome.png" alt="Kintsugi web UI welcome screen showing the Kintsugi wordmark and Mend the wallet, Keep the gold tagline" loading="lazy" width="1440" height="900">
+                </div>
+                <div class="body">
+                    <h3>The web UI</h3>
+                    <p>
+                        Start with <code>kintsugi ui</code> and a localhost browser tab walks you through five steps: network, wallets, discovery, plan, submit. Friendly for someone in panic mode.
+                    </p>
+                    <a href="/ui-walkthrough/network/">Walk through the UI</a>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="preview">
+                    <pre class="preview-terminal"><span class="comment"># launch the guided localhost UI</span>
+<span class="prompt">$</span> kintsugi ui
+
+<span class="comment"># ...or do everything in the terminal</span>
+<span class="prompt">$</span> kintsugi rescue
+
+<span class="comment"># inspect a wallet read-only first</span>
+<span class="prompt">$</span> kintsugi status 0xVictim...
+
+<span class="comment"># after rescue, optionally clear delegation</span>
+<span class="prompt">$</span> kintsugi revoke</pre>
+                </div>
+                <div class="body">
+                    <h3>The CLI</h3>
+                    <p>
+                        The same end-to-end rescue, fully scriptable. Inspect wallets, run interactive rescues, revoke delegation. Pipes well, no browser required.
+                    </p>
+                    <a href="/cli-reference/rescue/">Read the CLI reference</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-rule"></div>
+
+    <section class="landing-section landing-section-narrow">
+        <div class="manifesto">
+            <span class="section-eyebrow">Our stance</span>
+            <h2>
+                Open source. No fees. <span class="accent">No upsell.</span>
+            </h2>
+            <p>
+                A wallet rescue tool that charges money in the worst moment of someone's crypto life is a wallet rescue tool taking advantage of panic. We will not do that.
+            </p>
+            <p>
+                Kintsugi is MIT-licensed. The contracts are verified. The library, CLI, and UI are all in one public repository. There is no SaaS tier, no telemetry, no analytics, no signup. Run it yourself, audit every line, pay nothing but your own gas.
+            </p>
+            <div class="manifesto-meta">
+                <a href="https://github.com/ophelios-studio/kintsugi" class="contract-pill" target="_blank" rel="noopener">
+                    <span class="label">Repo</span>
+                    <code>github.com/ophelios-studio/kintsugi</code>
+                </a>
+                <span class="contract-pill">
+                    <span class="label">Sepolia rescue</span>
+                    <code>0x53c1f40c…21fd5</code>
+                </span>
+                <span class="contract-pill">
+                    <span class="label">Sepolia tracker</span>
+                    <code>0x717883ab…47963</code>
+                </span>
+                <span class="contract-pill">
+                    <span class="label">Mainnet</span>
+                    <code>pending audit</code>
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <section class="landing-section">
+        <span class="section-eyebrow">Three ways forward</span>
+        <h2 class="section-title">Where do you want to start?</h2>
+        <div class="lanes-row">
+            <a href="/getting-started/quickstart-cli/" class="lane-card">
+                <span class="eyebrow">Right now</span>
+                <h3>I'm in trouble. Walk me through a rescue.</h3>
+                <p>
+                    Five minutes from install to your assets safely sitting in a fresh wallet. Plain language, no Solidity required.
+                </p>
+                <span class="lane-cta">Start the 5 minute rescue →</span>
+            </a>
+            <a href="/concepts/the-sweeper-problem/" class="lane-card">
+                <span class="eyebrow">First</span>
+                <h3>I want to understand it before I run it.</h3>
+                <p>
+                    The sweeper problem, EIP-7702 in plain English, the rescuer wallet pattern, why the rescue is atomic.
+                </p>
+                <span class="lane-cta">Read the concepts →</span>
+            </a>
+            <a href="/security/threat-model/" class="lane-card">
+                <span class="eyebrow">Auditor mode</span>
+                <h3>Show me the trust assumptions and contracts.</h3>
+                <p>
+                    Threat model, what the rescuer can and cannot do, known limits, how to report a vulnerability, links to verified contracts.
+                </p>
+                <span class="lane-cta">Read the security docs →</span>
+            </a>
+        </div>
+    </section>
+</main>
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <span class="name" aria-hidden="true">Kintsugi</span>
+            <span>v0.1.0 pre-alpha</span>
+        </div>
+        <div class="footer-meta">
+            <span>
+                Built by
+                <a href="https://ophelios.com" target="_blank" rel="noopener">Ophelios Studio</a>
+            </span>
+            <a href="https://github.com/ophelios-studio/kintsugi" target="_blank" rel="noopener">GitHub</a>
+            <a href="/security/threat-model/">Security</a>
+            <span>MIT</span>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="/assets/js/copy-code.js"></script>
+</body>
+</html>

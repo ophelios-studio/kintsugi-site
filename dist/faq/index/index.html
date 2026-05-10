@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="leaf-base-url" content="">
+<meta name="description" content="Common questions about Kintsugi.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#f9f7f3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FAQ · Kintsugi">
+<meta property="og:description" content="Common questions about Kintsugi.">
+<meta property="og:site_name" content="Kintsugi">
+<meta property="og:url" content="https://kintsugi.ophelios.com/">
+<meta property="og:image" content="https://kintsugi.ophelios.com/assets/images/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FAQ · Kintsugi">
+<meta name="twitter:description" content="Common questions about Kintsugi.">
+<meta name="twitter:image" content="https://kintsugi.ophelios.com/assets/images/og-default.png">
+<link rel="canonical" href="https://kintsugi.ophelios.com/">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                deep: 'var(--bg-deep)',
+                surface: 'var(--bg-surface)',
+                elevated: 'var(--bg-elevated)',
+                border: 'var(--border)',
+                'border-accent': 'var(--border-accent)',
+                body: 'var(--text)',
+                bright: 'var(--text-bright)',
+                muted: 'var(--text-muted)',
+                accent: 'var(--accent)',
+                'accent-light': 'var(--accent-light)',
+                'accent-glow': 'var(--accent-glow)',
+                seam: 'var(--seam)',
+                danger: 'var(--danger)',
+            },
+            fontFamily: {
+                body: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                display: ['Shippori Mincho', 'Noto Serif JP', 'Georgia', 'serif'],
+                brand: ['Kashima Brush', 'Shippori Mincho', 'serif'],
+                mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+            },
+        },
+    },
+}
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+<link rel="stylesheet" href="/assets/css/app.css">
+    <title>FAQ · Kintsugi</title>
+</head>
+<body class="bg-deep text-body antialiased font-body">
+<header class="site-nav">
+    <div class="nav-container">
+        <div class="nav-left">
+            <button class="nav-toggle" onclick="toggleNav()" type="button" aria-label="Toggle menu">
+                <svg class="nav-toggle-open" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                <svg class="nav-toggle-close" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="display:none"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+            <a href="/" class="nav-logo" aria-label="Kintsugi home">
+                <span class="nav-logo-mark" aria-hidden="true">金</span>
+                <span class="nav-logo-text">Kintsugi</span>
+            </a>
+        </div>
+        <nav class="nav-links">
+            <button class="search-trigger" onclick="openSearch()" type="button">
+                <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                <span>Search</span>
+                <kbd>Ctrl K</kbd>
+            </button>
+            <a href="https://github.com/ophelios-studio/kintsugi" class="nav-link" target="_blank" rel="noopener">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                GitHub
+            </a>
+            <span class="version-badge">v0.1.0</span>
+        </nav>
+    </div>
+</header>
+
+    <div class="docs-layout">
+        <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+<aside class="docs-sidebar">
+    <nav class="sidebar-nav">
+        <div class="sidebar-group">
+            <h3 class="sidebar-group-title">Getting Started</h3>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="/getting-started/install"
+                       class="sidebar-link">
+                        Install
+                    </a>
+                </li>
+                <li>
+                    <a href="/getting-started/prerequisites"
+                       class="sidebar-link">
+                        Prerequisites
+                    </a>
+                </li>
+                <li>
+                    <a href="/getting-started/quickstart-cli"
+                       class="sidebar-link">
+                        Quickstart (CLI)
+                    </a>
+                </li>
+                <li>
+                    <a href="/getting-started/quickstart-ui"
+                       class="sidebar-link">
+                        Quickstart (UI)
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar-group">
+            <h3 class="sidebar-group-title">Concepts</h3>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="/concepts/the-sweeper-problem"
+                       class="sidebar-link">
+                        The sweeper problem
+                    </a>
+                </li>
+                <li>
+                    <a href="/concepts/eip-7702-explained"
+                       class="sidebar-link">
+                        EIP-7702 in plain English
+                    </a>
+                </li>
+                <li>
+                    <a href="/concepts/rescuer-pattern"
+                       class="sidebar-link">
+                        The rescuer wallet pattern
+                    </a>
+                </li>
+                <li>
+                    <a href="/concepts/nonce-tracker"
+                       class="sidebar-link">
+                        The NonceTracker
+                    </a>
+                </li>
+                <li>
+                    <a href="/concepts/atomic-batches"
+                       class="sidebar-link">
+                        Atomic batches and ordering
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar-group">
+            <h3 class="sidebar-group-title">CLI Reference</h3>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="/cli-reference/rescue"
+                       class="sidebar-link">
+                        kintsugi rescue
+                    </a>
+                </li>
+                <li>
+                    <a href="/cli-reference/ui"
+                       class="sidebar-link">
+                        kintsugi ui
+                    </a>
+                </li>
+                <li>
+                    <a href="/cli-reference/status"
+                       class="sidebar-link">
+                        kintsugi status
+                    </a>
+                </li>
+                <li>
+                    <a href="/cli-reference/revoke"
+                       class="sidebar-link">
+                        kintsugi revoke
+                    </a>
+                </li>
+                <li>
+                    <a href="/cli-reference/env-vars"
+                       class="sidebar-link">
+                        Environment variables
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar-group">
+            <h3 class="sidebar-group-title">UI Walkthrough</h3>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="/ui-walkthrough/network"
+                       class="sidebar-link">
+                        Network
+                    </a>
+                </li>
+                <li>
+                    <a href="/ui-walkthrough/wallets"
+                       class="sidebar-link">
+                        Wallets
+                    </a>
+                </li>
+                <li>
+                    <a href="/ui-walkthrough/discover"
+                       class="sidebar-link">
+                        Discover
+                    </a>
+                </li>
+                <li>
+                    <a href="/ui-walkthrough/plan"
+                       class="sidebar-link">
+                        Plan
+                    </a>
+                </li>
+                <li>
+                    <a href="/ui-walkthrough/submit"
+                       class="sidebar-link">
+                        Submit
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar-group">
+            <h3 class="sidebar-group-title">Asset Support</h3>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="/asset-support/eth-erc20"
+                       class="sidebar-link">
+                        ETH and ERC-20
+                    </a>
+                </li>
+                <li>
+                    <a href="/asset-support/nfts"
+                       class="sidebar-link">
+                        NFTs (ERC-721 and ERC-1155)
+                    </a>
+                </li>
+                <li>
+                    <a href="/asset-support/ens"
+                       class="sidebar-link">
+                        ENS names
+                    </a>
+                </li>
+                <li>
+                    <a href="/asset-support/custom-calls"
+                       class="sidebar-link">
+                        Custom calls
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar-group">
+            <h3 class="sidebar-group-title">Security</h3>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="/security/threat-model"
+                       class="sidebar-link">
+                        Threat model
+                    </a>
+                </li>
+                <li>
+                    <a href="/security/trust-assumptions"
+                       class="sidebar-link">
+                        Trust assumptions
+                    </a>
+                </li>
+                <li>
+                    <a href="/security/known-limits"
+                       class="sidebar-link">
+                        Known limits
+                    </a>
+                </li>
+                <li>
+                    <a href="/security/reporting"
+                       class="sidebar-link">
+                        Reporting a vulnerability
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar-group">
+            <h3 class="sidebar-group-title">FAQ</h3>
+            <ul class="sidebar-links">
+                <li>
+                    <a href="/faq/index"
+                       class="sidebar-link active">
+                        FAQ
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="sidebar-mobile-links">
+            <a href="https://github.com/ophelios-studio/kintsugi" class="sidebar-footer-link" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="sidebar-copyright">
+            &copy; 2026 Ophelios Studio
+        </div>
+        <div class="sidebar-powered">
+            Powered by <a href="https://leaf.ophelios.com" target="_blank" rel="noopener">Zephyrus Leaf</a>
+        </div>
+    </div>
+</aside>
+        <main class="docs-main">
+<article class="docs-content">
+    <div class="prose">
+        <h2 id="why-no-fees"><a href="#why-no-fees" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Why no fees</h2>
+<p>A wallet rescue tool that charges money in the worst moment of someone's crypto life is a wallet rescue tool taking advantage of panic. We won't do that. The contracts are not upgradeable, so a future rug-pull on this stance is structurally impossible.</p>
+<p>The only money you spend is gas, paid to your rescuer wallet, never routed through us.</p>
+<h2 id="why-open-source"><a href="#why-open-source" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Why open source</h2>
+<p>Two reasons. First, you should not have to trust an opaque binary with a private key you've already lost control of. Open source means anyone can audit <code>Rescue.sol</code>, <code>NonceTracker.sol</code>, and the entire library before running it. Second, a good rescue tool should be common infrastructure. Closed-source tools that gate this behind a paywall actively harm users.</p>
+<h2 id="can-i-bring-my-own-rescuer-wallet"><a href="#can-i-bring-my-own-rescuer-wallet" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Can I bring my own rescuer wallet</h2>
+<p>Yes. The CLI accepts a rescuer private key directly via the <code>--rescuer-pk</code> style flag (interactive prompt). The rescuer just needs about 0.005 ETH on the target chain. If you don't have one, the CLI generates a fresh one and pauses while you fund it.</p>
+<h2 id="what-chains-does-it-support-today"><a href="#what-chains-does-it-support-today" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>What chains does it support today</h2>
+<p>Sepolia (verified, used for live test rescues) and Mainnet (pending audit; addresses will be filled in once audit completes). L2 deployments come after mainnet stabilizes.</p>
+<h2 id="what-if-the-rescuer-disappears-mid-tx"><a href="#what-if-the-rescuer-disappears-mid-tx" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>What if the rescuer disappears mid-tx</h2>
+<p>There is no &quot;mid-tx&quot; state on Ethereum. A transaction is atomic: either it lands and the entire batch succeeds, or it doesn't and nothing happens. If the rescuer wallet runs out of gas mid-rescue, the transaction reverts; nothing moves; the rescuer keeps whatever is left of its balance. You can fund and re-run.</p>
+<p>If the rescuer's RPC connection drops between sign and broadcast, the transaction never goes out. Same outcome: nothing moves, re-run.</p>
+<h2 id="what-if-my-private-key-is-on-a-hardware-wallet"><a href="#what-if-my-private-key-is-on-a-hardware-wallet" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>What if my private key is on a hardware wallet</h2>
+<p>Hardware wallet support (Ledger, Trezor) is on the roadmap but not shipped yet. The CLI today accepts software-style private keys via masked prompt. If your compromised wallet is on a hardware device you still trust, wait for HW support before rescuing, or do the rescue with the seed phrase converted to a software key and then immediately transfer to a fresh HW wallet.</p>
+<h2 id="will-kintsugi-work-after-my-next-7702-delegation-change"><a href="#will-kintsugi-work-after-my-next-7702-delegation-change" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Will Kintsugi work after my next 7702 delegation change</h2>
+<p>Yes. Each rescue uses a fresh 7702 authorization signed at rescue time, with the victim's current account nonce. If you set a different delegation later, the next rescue (if you ever need one) signs a new authorization that supersedes whatever was there. The NonceTracker is per-victim and isn't affected by delegation changes.</p>
+<h2 id="can-the-attacker-run-their-own-rescue-with-my-key"><a href="#can-the-attacker-run-their-own-rescue-with-my-key" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Can the attacker run their own rescue with my key</h2>
+<p>The attacker has your private key, so they can sign anything you can. They could in principle construct a Kintsugi batch that transfers your assets to <em>their</em> wallet (not yours). That is no different from any other transaction the attacker could already submit; it does not give them a new capability.</p>
+<p>What Kintsugi gives YOU is a rescue path that does not require holding ETH at the victim. The attacker still has the same race they had before.</p>
+<p>In practice: if you suspect a key compromise, run the rescue immediately. The window matters less because the rescue itself doesn't open new attack surface.</p>
+<h2 id="does-kintsugi-work-for-smart-wallets--aas"><a href="#does-kintsugi-work-for-smart-wallets--aas" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Does Kintsugi work for Smart Wallets / AAs</h2>
+<p>Account-abstraction wallets (Safe, Argent, Sapient) usually have their own recovery flows and a different compromise model. Kintsugi targets EOAs and EIP-7702-delegated EOAs. AA accounts (with custom validation logic) are out of scope.</p>
+<h2 id="will-it-leave-a-trace-in-my-wallet"><a href="#will-it-leave-a-trace-in-my-wallet" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Will it leave a trace in my wallet</h2>
+<p>After a rescue, the victim address has an EIP-7702 delegation pointer to the Rescue contract baked into its code slot. That is a single line of bytecode that does not store anything on its own. Block explorers will show the address as &quot;contract&quot; instead of &quot;EOA.&quot;</p>
+<p>Run <code>kintsugi revoke</code> after the rescue to clear the delegation and return the address to a pure EOA. Optional but cosmetic.</p>
+<h2 id="why-does-my-etherscan-show-delegated-after-a-rescue"><a href="#why-does-my-etherscan-show-delegated-after-a-rescue" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Why does my Etherscan show &quot;delegated&quot; after a rescue</h2>
+<p>That's the EIP-7702 delegation pointer. See the question above. Run <code>kintsugi revoke</code> to clear it.</p>
+<h2 id="is-this-safe-to-use-on-a-wallet-that-still-has-a-lot-of-value"><a href="#is-this-safe-to-use-on-a-wallet-that-still-has-a-lot-of-value" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Is this safe to use on a wallet that still has a lot of value</h2>
+<p>The Sepolia version is verified and has been used for live test rescues. The Mainnet version is pending audit. If you're rescuing high-value assets, wait for the audit to publish before using mainnet, or test the flow on Sepolia first to confirm you're comfortable with the operation.</p>
+<h2 id="what-happens-to-the-victim-wallets-old-approvals"><a href="#what-happens-to-the-victim-wallets-old-approvals" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>What happens to the victim wallet's old approvals</h2>
+<p>If the victim address had granted token approvals to other contracts (DEX routers, staking contracts), those approvals stay in place after the rescue. The attacker could still spend allowances the victim previously granted. To clean up, you can include <code>approve(spender, 0)</code> ops in the rescue batch via <a href="/asset-support/custom-calls/">custom calls</a>, or run them separately afterward (less urgent because the relevant assets are already at the safe wallet).</p>
+<h2 id="where-do-i-report-bugs"><a href="#where-do-i-report-bugs" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Where do I report bugs</h2>
+<p><a href="https://github.com/ophelios-studio/kintsugi/issues">GitHub issues</a> for non-security. <a href="https://github.com/ophelios-studio/kintsugi/security/advisories/new">Security advisories</a> or <code>security@ophelios.com</code> for vulnerabilities. See <a href="/security/reporting/">Reporting a vulnerability</a>.</p>
+<h2 id="who-built-this"><a href="#who-built-this" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Who built this</h2>
+<p><a href="https://ophelios.com">Ophelios Studio</a>.</p>
+
+    </div>
+
+    <nav class="docs-pagination">
+        <a href="/security/reporting" class="pagination-link pagination-prev">
+            <span class="pagination-label">&larr; Previous</span>
+            <span class="pagination-title">Reporting a vulnerability</span>
+        </a>
+
+    </nav>
+</article>
+        </main>
+<aside class="docs-toc">
+    <div class="toc-wrapper">
+        <h4 class="toc-title">On this page</h4>
+        <ul class="toc-links">
+            <li class="toc-item">
+                <a href="#why-no-fees" class="toc-link">Why no fees</a>
+            </li>
+            <li class="toc-item">
+                <a href="#why-open-source" class="toc-link">Why open source</a>
+            </li>
+            <li class="toc-item">
+                <a href="#can-i-bring-my-own-rescuer-wallet" class="toc-link">Can I bring my own rescuer wallet</a>
+            </li>
+            <li class="toc-item">
+                <a href="#what-chains-does-it-support-today" class="toc-link">What chains does it support today</a>
+            </li>
+            <li class="toc-item">
+                <a href="#what-if-the-rescuer-disappears-mid-tx" class="toc-link">What if the rescuer disappears mid-tx</a>
+            </li>
+            <li class="toc-item">
+                <a href="#what-if-my-private-key-is-on-a-hardware-wallet" class="toc-link">What if my private key is on a hardware wallet</a>
+            </li>
+            <li class="toc-item">
+                <a href="#will-kintsugi-work-after-my-next-7702-delegation-change" class="toc-link">Will Kintsugi work after my next 7702 delegation change</a>
+            </li>
+            <li class="toc-item">
+                <a href="#can-the-attacker-run-their-own-rescue-with-my-key" class="toc-link">Can the attacker run their own rescue with my key</a>
+            </li>
+            <li class="toc-item">
+                <a href="#does-kintsugi-work-for-smart-wallets--aas" class="toc-link">Does Kintsugi work for Smart Wallets / AAs</a>
+            </li>
+            <li class="toc-item">
+                <a href="#will-it-leave-a-trace-in-my-wallet" class="toc-link">Will it leave a trace in my wallet</a>
+            </li>
+            <li class="toc-item">
+                <a href="#why-does-my-etherscan-show-delegated-after-a-rescue" class="toc-link">Why does my Etherscan show "delegated" after a rescue</a>
+            </li>
+            <li class="toc-item">
+                <a href="#is-this-safe-to-use-on-a-wallet-that-still-has-a-lot-of-value" class="toc-link">Is this safe to use on a wallet that still has a lot of value</a>
+            </li>
+            <li class="toc-item">
+                <a href="#what-happens-to-the-victim-wallets-old-approvals" class="toc-link">What happens to the victim wallet's old approvals</a>
+            </li>
+            <li class="toc-item">
+                <a href="#where-do-i-report-bugs" class="toc-link">Where do I report bugs</a>
+            </li>
+            <li class="toc-item">
+                <a href="#who-built-this" class="toc-link">Who built this</a>
+            </li>
+        </ul>
+    </div>
+</aside>
+    </div>
+
+<div class="search-overlay" id="search-overlay">
+    <div class="search-dialog" role="dialog" aria-label="Search documentation">
+        <div class="search-input-wrapper">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+            </svg>
+            <input type="text" class="search-input" id="search-input" placeholder="Search documentation..." autocomplete="off" autofocus>
+            <kbd style="font-size: 0.625rem; padding: 0.125rem 0.375rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 0.25rem; color: var(--text-muted); font-family: var(--font-mono); cursor: pointer;" onclick="closeSearch()">Esc</kbd>
+        </div>
+        <div class="search-results" id="search-results">
+            <div class="search-empty">Type to search the documentation...</div>
+        </div>
+        <div class="search-footer">
+            <span>Navigate with <kbd>&uarr;</kbd> <kbd>&darr;</kbd> keys</span>
+            <span>Press <kbd>Enter</kbd> to select</span>
+        </div>
+    </div>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup-templating.min.js"></script>
+    <script src="/assets/js/copy-code.js"></script>
+    <script src="/assets/js/sidebar.js"></script>
+    <script src="/assets/js/search.js"></script>
+</body>
+</html>

@@ -1,0 +1,416 @@
+[
+    {
+        "title": "Custom calls",
+        "section": "asset-support",
+        "url": "\/asset-support\/custom-calls",
+        "excerpt": "Kintsugi auto-discovers ETH, ERC-20, ERC-721, ERC-1155, and ENS. Anything outside that surface (staked NFTs, vesting positions, LP positions, governance escrows) needs a custom call. A custom call is just an op with arbitrary to, value, and ABI-encoded data. You use the customCall helper from @kints...",
+        "headings": [
+            "When to use a custom call",
+            "API",
+            "Full example: unstake + transfer",
+            "Atomicity guarantees apply to custom calls too",
+            "Where to use custom calls today"
+        ]
+    },
+    {
+        "title": "ENS names",
+        "section": "asset-support",
+        "url": "\/asset-support\/ens",
+        "excerpt": "ENS is the asset class that gets the most ignored by sweeper bots and is also the most personally valuable for many people. Kintsugi handles all three subtypes. #Unwrapped .eth 2LDs The classical setup: you registered yourname.eth on the BaseRegistrar, never wrapped it. Two on-chain records describe...",
+        "headings": [
+            "Unwrapped .eth 2LDs",
+            "Wrapped names",
+            "Unwrapped subdomains",
+            "Optional cleanup ops",
+            "Discovery",
+            "What about ENS on L2s"
+        ]
+    },
+    {
+        "title": "ETH and ERC-20",
+        "section": "asset-support",
+        "url": "\/asset-support\/eth-erc20",
+        "excerpt": "The most basic asset class. The victim wallet sweeps both during the rescue. #ETH The victim wallet's native ETH balance, if any, is transferred to the safe wallet inside the same Type-4 transaction. Because the rescuer pays gas, the victim never needs to top up. ETH appears in the batch as a final ...",
+        "headings": [
+            "ETH",
+            "ERC-20",
+            "Discovery",
+            "Manual entry",
+            "ETH wrapping",
+            "Tokens with fees-on-transfer",
+            "Tokens that require approval-then-transferFrom"
+        ]
+    },
+    {
+        "title": "NFTs (ERC-721 and ERC-1155)",
+        "section": "asset-support",
+        "url": "\/asset-support\/nfts",
+        "excerpt": "Kintsugi handles both NFT standards: ERC-721 (one tokenId per owner) and ERC-1155 (multiple tokenIds with quantities). #ERC-721 Each NFT is one transfer op: op.to = nftContract op.data = transferFrom(victim, safe, tokenId) Kintsugi uses transferFrom rather than safeTransferFrom for ERC-721 because t...",
+        "headings": [
+            "ERC-721",
+            "Discovery",
+            "Manual entry",
+            "ERC-1155",
+            "Discovery",
+            "Atomicity",
+            "Soulbound or paused",
+            "Staked NFTs"
+        ]
+    },
+    {
+        "title": "Environment variables",
+        "section": "cli-reference",
+        "url": "\/cli-reference\/env-vars",
+        "excerpt": "The CLI reads a few environment variables as defaults. All are optional; flags on the command line always win. Var Equivalent flag Used by ETHERSCAN_API_KEY --etherscan-api-key rescue, status ALCHEMY_API_KEY (UI Network step input) ui KINTSUGI_RPC_URL (UI Network step input) ui, rescue (advanced) #E...",
+        "headings": [
+            "Example",
+            "Why prefer the UI fields over env vars",
+            "What is never read from env"
+        ]
+    },
+    {
+        "title": "kintsugi rescue",
+        "section": "cli-reference",
+        "url": "\/cli-reference\/rescue",
+        "excerpt": "The interactive rescue command. Walks you through the five phases (network, wallets, discover, plan, submit) with masked prompts for private keys. #Synopsis kintsugi rescue [options] #Options Flag Description -p, --private-mempool Submit through Flashbots Protect instead of the public mempool. Adds ...",
+        "headings": [
+            "Synopsis",
+            "Options",
+            "What it does",
+            "Example",
+            "Exit codes",
+            "Related"
+        ]
+    },
+    {
+        "title": "kintsugi revoke",
+        "section": "cli-reference",
+        "url": "\/cli-reference\/revoke",
+        "excerpt": "After a rescue, the victim wallet has an EIP-7702 delegation pointer to the Rescue contract baked into its code slot. That delegation does nothing on its own (the Rescue contract requires a fresh victim signature to do anything), but you may want to clear it for cleanliness or to use the victim addr...",
+        "headings": [
+            "Synopsis",
+            "Options",
+            "What it does",
+            "When to use it",
+            "When not to use it",
+            "Example",
+            "Related"
+        ]
+    },
+    {
+        "title": "kintsugi status",
+        "section": "cli-reference",
+        "url": "\/cli-reference\/status",
+        "excerpt": "Inspect a wallet without touching it. No keys, no transactions, no signing. Useful before a rescue (to know what's there) and after (to confirm the safe wallet received everything). #Synopsis kintsugi status &lt;address&gt; [options] #Arguments Arg Description &lt;address&gt; The wallet address to i...",
+        "headings": [
+            "Synopsis",
+            "Arguments",
+            "Options",
+            "What it shows",
+            "Example",
+            "Use during a rescue",
+            "Related"
+        ]
+    },
+    {
+        "title": "kintsugi ui",
+        "section": "cli-reference",
+        "url": "\/cli-reference\/ui",
+        "excerpt": "Start a local Hono server bound to 127.0.0.1 and open your default browser to the rescue UI. The server holds session state in memory only; private keys never leave the local Node process. #Synopsis kintsugi ui [options] #Options Flag Description -p, --port &lt;port&gt; Port to bind to. Default: 380...",
+        "headings": [
+            "Synopsis",
+            "Options",
+            "What it does",
+            "Stopping",
+            "Example",
+            "Custom port",
+            "SSH or remote scenarios",
+            "Security notes",
+            "Related"
+        ]
+    },
+    {
+        "title": "Atomic batches and ordering",
+        "section": "concepts",
+        "url": "\/concepts\/atomic-batches",
+        "excerpt": "A Kintsugi rescue executes one function on the audited Rescue contract: function executeBatch(Batch calldata batch, bytes calldata signature) external; The contract walks through the validation checks, then loops over the ops in batch.ops and executes them in order. Any failure reverts the entire ba...",
+        "headings": [
+            "The Batch struct",
+            "The validation order",
+            "Atomicity",
+            "Order matters",
+            "Pre-transfer setup",
+            "ENS reclaim before registrant transfer",
+            "Custom ops",
+            "Gas",
+            "Deadline",
+            "Further reading"
+        ]
+    },
+    {
+        "title": "EIP-7702 in plain English",
+        "section": "concepts",
+        "url": "\/concepts\/eip-7702-explained",
+        "excerpt": "EIP-7702 introduced a new transaction type to Ethereum (Type-4, SetCodeTransaction) at the Pectra hardfork in May 2025. It lets an externally-owned account (a normal user wallet) temporarily delegate execution to a smart contract. #What is in a Type-4 transaction A Type-4 transaction looks like a no...",
+        "headings": [
+            "What is in a Type-4 transaction",
+            "The piece that makes it useful for rescue",
+            "What an EIP-7702 authorization signs",
+            "What it does not do",
+            "The trust shape",
+            "Further reading"
+        ]
+    },
+    {
+        "title": "The NonceTracker",
+        "section": "concepts",
+        "url": "\/concepts\/nonce-tracker",
+        "excerpt": "The NonceTracker is a small singleton contract that exists for one reason: to give Kintsugi a per-victim replay nonce that is safe even when the rescue contract is running as a 7702 delegate inside the victim's storage. #Why a separate contract When the Rescue contract code runs delegated at the vic...",
+        "headings": [
+            "Why a separate contract",
+            "What the NonceTracker does",
+            "How it integrates with the batch",
+            "Cross-chain replay",
+            "Why this matters even if you trust Kintsugi",
+            "Further reading"
+        ]
+    },
+    {
+        "title": "The rescuer wallet pattern",
+        "section": "concepts",
+        "url": "\/concepts\/rescuer-pattern",
+        "excerpt": "Kintsugi uses three wallets in every rescue. Knowing what each does (and what each does not do) clarifies the trust model and makes the flow easier to reason about. #The three roles Wallet Holds Signs Pays gas Receives assets Victim nothing during rescue EIP-7702 authorization + EIP-712 batch no no ...",
+        "headings": [
+            "The three roles",
+            "Victim",
+            "Rescuer",
+            "Safe",
+            "Why three and not one",
+            "The atomicity guarantee",
+            "Diagram",
+            "Further reading"
+        ]
+    },
+    {
+        "title": "The sweeper problem",
+        "section": "concepts",
+        "url": "\/concepts\/the-sweeper-problem",
+        "excerpt": "A wallet is compromised the moment its private key leaves your control. Drainer bots, infostealer malware, exfiltrated keychains, a careless paste into a phishing site. The attacker now signs everything you can. The natural response is to move the assets out before the attacker does. That is where t...",
+        "headings": [
+            "What a sweeper bot does",
+            "Why some assets get left behind",
+            "Why timing tricks do not work",
+            "What changes the picture"
+        ]
+    },
+    {
+        "title": "FAQ",
+        "section": "faq",
+        "url": "\/faq\/index",
+        "excerpt": "#Why no fees A wallet rescue tool that charges money in the worst moment of someone's crypto life is a wallet rescue tool taking advantage of panic. We won't do that. The contracts are not upgradeable, so a future rug-pull on this stance is structurally impossible. The only money you spend is gas, p...",
+        "headings": [
+            "Why no fees",
+            "Why open source",
+            "Can I bring my own rescuer wallet",
+            "What chains does it support today",
+            "What if the rescuer disappears mid-tx",
+            "What if my private key is on a hardware wallet",
+            "Will Kintsugi work after my next 7702 delegation change",
+            "Can the attacker run their own rescue with my key",
+            "Does Kintsugi work for Smart Wallets \/ AAs",
+            "Will it leave a trace in my wallet",
+            "Why does my Etherscan show \"delegated\" after a rescue",
+            "Is this safe to use on a wallet that still has a lot of value",
+            "What happens to the victim wallet's old approvals",
+            "Where do I report bugs",
+            "Who built this"
+        ]
+    },
+    {
+        "title": "Install",
+        "section": "getting-started",
+        "url": "\/getting-started\/install",
+        "excerpt": "Kintsugi runs entirely on your machine. Nothing is hosted, nothing phones home. You install one CLI and use it from any terminal. #Requirements You need Node.js 20 or newer. node --version If that prints anything below v20, install a recent Node from nodejs.org or via a version manager like nvm or m...",
+        "headings": [
+            "Requirements",
+            "Install the CLI",
+            "Install from source",
+            "Update",
+            "Uninstall",
+            "Next"
+        ]
+    },
+    {
+        "title": "Prerequisites",
+        "section": "getting-started",
+        "url": "\/getting-started\/prerequisites",
+        "excerpt": "A rescue takes about five minutes. Lining up these four things first will make the actual flow stress-free. #A clean machine If your old machine is the one that got compromised, do not run a rescue on it. The attacker may still have access. Use a separate, freshly imaged machine, or boot from a clea...",
+        "headings": [
+            "A clean machine",
+            "The compromised wallet's private key",
+            "A safe destination wallet",
+            "A clean rescuer wallet with about 0.005 ETH",
+            "A funded RPC endpoint",
+            "What you do not need",
+            "Next"
+        ]
+    },
+    {
+        "title": "Quickstart (CLI)",
+        "section": "getting-started",
+        "url": "\/getting-started\/quickstart-cli",
+        "excerpt": "If you have your prerequisites lined up, the entire rescue is one command. #Run kintsugi rescue The CLI walks you through five phases. #1. Network Pick the chain the compromised wallet lives on: ? Network: › ❯ Sepolia (testnet) Mainnet Sepolia is for testing. Mainnet is the real thing. #2. Deploymen...",
+        "headings": [
+            "Run",
+            "1. Network",
+            "2. Deployment addresses",
+            "3. Wallets",
+            "4. Discover and select",
+            "5. Plan and submit",
+            "Done",
+            "Common flags",
+            "Next"
+        ]
+    },
+    {
+        "title": "Quickstart (UI)",
+        "section": "getting-started",
+        "url": "\/getting-started\/quickstart-ui",
+        "excerpt": "The web UI runs as a localhost server launched from the CLI. The browser is just a view; the actual signing and transaction submission happen in the local Node process. Private keys never leave it. #Run kintsugi ui You'll see something like: Kintsugi UI Local server bound to 127.0.0.1 only. URL: htt...",
+        "headings": [
+            "Run",
+            "Walk through",
+            "1. Network",
+            "2. Wallets",
+            "3. Discover",
+            "4. Plan",
+            "5. Submit",
+            "Stop the server",
+            "Next"
+        ]
+    },
+    {
+        "title": "Known limits",
+        "section": "security",
+        "url": "\/security\/known-limits",
+        "excerpt": "Honest enumeration of the gaps. Anything on this list is on the roadmap or has a manual workaround. #Mainnet support is pending audit The Sepolia deployment is verified, used for live test rescues, and has been hardened over several iterations. Mainnet contract addresses will be filled in once a thi...",
+        "headings": [
+            "Mainnet support is pending audit",
+            "No hardware wallet integration yet",
+            "No L2 support yet",
+            "No browser extension yet",
+            "No staked-position auto-discovery",
+            "No custom-call UI panel yet",
+            "No multi-rescue coordination",
+            "No automatic resolver\/record cleanup on ENS",
+            "What about social-recovery accounts?"
+        ]
+    },
+    {
+        "title": "Reporting a vulnerability",
+        "section": "security",
+        "url": "\/security\/reporting",
+        "excerpt": "If you find a vulnerability that lets an attacker drain a victim, drain a rescuer, replay a signature, or otherwise subvert the rescue guarantees, please tell us before publishing. #Where to send Email: security@ophelios.com (preferred for sensitive details) GitHub: open a private security advisory ...",
+        "headings": [
+            "Where to send",
+            "What to include",
+            "Response",
+            "Out of scope",
+            "Hardening reports welcome"
+        ]
+    },
+    {
+        "title": "Threat model",
+        "section": "security",
+        "url": "\/security\/threat-model",
+        "excerpt": "Kintsugi solves one problem: moving assets out of an EVM wallet whose private key is compromised, when a sweeper bot is watching that wallet for any incoming gas. #In scope The attacker has the victim's private key. They can sign any transaction the victim could. They have a sweeper bot pointed at t...",
+        "headings": [
+            "In scope",
+            "What it does NOT defend against",
+            "Trust assumptions",
+            "Network exposure",
+            "Atomicity",
+            "Reporting a vulnerability"
+        ]
+    },
+    {
+        "title": "Trust assumptions",
+        "section": "security",
+        "url": "\/security\/trust-assumptions",
+        "excerpt": "A short, honest enumeration of every party and component that has any effect on a rescue, and what trusting them looks like. #You trust the source code @kintsugi\/core is the headless TypeScript library that builds and signs everything. @kintsugi\/cli and @kintsugi\/ui are surfaces over it. All three a...",
+        "headings": [
+            "You trust the source code",
+            "You trust your RPC provider",
+            "You trust your safe wallet",
+            "You trust the machine running Kintsugi",
+            "You DO NOT have to trust:",
+            "What \"trustless\" means here, honestly",
+            "Reporting a vulnerability"
+        ]
+    },
+    {
+        "title": "Discover",
+        "section": "ui-walkthrough",
+        "url": "\/ui-walkthrough\/discover",
+        "excerpt": "Kintsugi scans the victim address for assets and presents them in four sections: ERC-20 tokens, ERC-721 NFTs, ERC-1155 holdings, and ENS names. Each is a checkbox; everything is selected by default. #Auto-discovery If you provided an Alchemy key on the Network step, Kintsugi uses Alchemy's token and...",
+        "headings": [
+            "Auto-discovery",
+            "Manual entry",
+            "Add an ERC-20",
+            "Add an ERC-721",
+            "Scan a whole collection",
+            "ENS names",
+            "Continue"
+        ]
+    },
+    {
+        "title": "Network",
+        "section": "ui-walkthrough",
+        "url": "\/ui-walkthrough\/network",
+        "excerpt": "After kintsugi ui opens the localhost browser tab, the first step is choosing the network. #Choose the chain Two options: Sepolia: Ethereum's test network. Use this to dry-run the flow with the provided faucet ETH and test contracts. Mainnet: pending audit at the time of writing. The Sepolia deploym...",
+        "headings": [
+            "Choose the chain",
+            "RPC access",
+            "Alchemy API key (recommended)",
+            "Custom RPC URL (advanced)",
+            "Continue"
+        ]
+    },
+    {
+        "title": "Plan",
+        "section": "ui-walkthrough",
+        "url": "\/ui-walkthrough\/plan",
+        "excerpt": "Kintsugi shows the full batch in execution order, an estimated gas cost, and the rescuer's current balance. This is your last chance to verify before signing. #Batch list Each line in the batch is one op (one transfer or setup call). The order is the execution order. Per-op breakdown: transfer ERC-2...",
+        "headings": [
+            "Batch list",
+            "Gas estimate",
+            "Rescuer funding status",
+            "Sign and submit"
+        ]
+    },
+    {
+        "title": "Submit",
+        "section": "ui-walkthrough",
+        "url": "\/ui-walkthrough\/submit",
+        "excerpt": "The final step. The server has signed everything, sent the Type-4 transaction, and is now polling the chain for inclusion. #What you see A vertical timeline with four checkpoints: Signing batch and authorization. Instant. The CLI signs the EIP-712 batch and the EIP-7702 authorization in process memo...",
+        "headings": [
+            "What you see",
+            "If the transaction reverts",
+            "After success",
+            "Stop the server"
+        ]
+    },
+    {
+        "title": "Wallets",
+        "section": "ui-walkthrough",
+        "url": "\/ui-walkthrough\/wallets",
+        "excerpt": "Three cards, top to bottom. The keys you paste here live in the local Node process memory only. They are never sent to a remote server, never written to disk, never echoed to logs. #Compromised wallet (victim) Paste the private key of the compromised wallet. The input field is visually masked: as yo...",
+        "headings": [
+            "Compromised wallet (victim)",
+            "Safe destination",
+            "Rescuer wallet (pays gas)",
+            "Continue",
+            "A note on private-key handling"
+        ]
+    }
+]

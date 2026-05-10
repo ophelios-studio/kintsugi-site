@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://kintsugi.ophelios.com/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/404/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/asset-support/custom-calls/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/asset-support/ens/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/asset-support/eth-erc20/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/asset-support/nfts/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/cli-reference/env-vars/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/cli-reference/rescue/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/cli-reference/revoke/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/cli-reference/status/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/cli-reference/ui/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/concepts/atomic-batches/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/concepts/eip-7702-explained/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/concepts/nonce-tracker/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/concepts/rescuer-pattern/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/concepts/the-sweeper-problem/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/faq/index/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/getting-started/install/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/getting-started/prerequisites/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/getting-started/quickstart-cli/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/getting-started/quickstart-ui/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/security/known-limits/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/security/reporting/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/security/threat-model/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/security/trust-assumptions/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/ui-walkthrough/discover/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/ui-walkthrough/network/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/ui-walkthrough/plan/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/ui-walkthrough/submit/</loc></url>
+  <url><loc>https://kintsugi.ophelios.com/ui-walkthrough/wallets/</loc></url>
+</urlset>
