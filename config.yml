@@ -7,7 +7,7 @@ localization:
   supported_locales:
     - "en"
   locale_path: "locale"
-  timezone: "UTC"
+  timezone: "America/Montreal"
 
 render:
   engine: "latte"
@@ -16,15 +16,22 @@ render:
   mode: "always"
 
 leaf:
-  name: "My Project"
-  version: "1.0.0"
-  description: "A documentation site powered by Zephyrus Leaf."
-  github_url: ""
+  name: "Kintsugi"
+  version: "0.1.0"
+  description: "Atomic, sweeper-proof wallet rescue using EIP-7702."
+  github_url: "https://github.com/ophelios-studio/kintsugi"
   content_path: "content"
-  sections:
-    getting-started: "Getting Started"
   output_path: "dist"
   base_url: ""
-  author: ""
-  author_url: ""
+  production_url: "https://kintsugi.ophelios.com"
+  author: "Ophelios Studio"
+  author_url: "https://ophelios.com"
   license: "MIT"
+  sections:
+    getting-started: "Getting Started"
+    concepts: "Concepts"
+    cli-reference: "CLI Reference"
+    ui-walkthrough: "UI Walkthrough"
+    asset-support: "Asset Support"
+    security: "Security"
+    faq: "FAQ"
