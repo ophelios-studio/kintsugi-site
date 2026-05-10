@@ -12,8 +12,8 @@ After `kintsugi ui` opens the localhost browser tab, the first step is choosing 
 
 Two options:
 
-- **Sepolia** — Ethereum's test network. Use this to dry-run the flow with the provided faucet ETH and test contracts.
-- **Mainnet** — Pending audit at the time of writing. The Sepolia deployment is verified and has been used for live test rescues; mainnet contract addresses will be filled in once audit completes.
+- **Sepolia**: Ethereum's test network. Use this to dry-run the flow with the provided faucet ETH and test contracts.
+- **Mainnet**: pending audit at the time of writing. The Sepolia deployment is verified and has been used for live test rescues; mainnet contract addresses will be filled in once audit completes.
 
 The Rescue and NonceTracker contract addresses pre-fill for Sepolia. For mainnet, paste the audited addresses from the [security page](/security/threat-model/).
 

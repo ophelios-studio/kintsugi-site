@@ -89,6 +89,6 @@ Done. All 4 assets transferred to 0x9067...f26A.
 
 ## Related
 
-- [kintsugi ui](/cli-reference/ui/) — same flow, browser interface
-- [kintsugi status](/cli-reference/status/) — read-only inventory before rescue
-- [kintsugi revoke](/cli-reference/revoke/) — clear delegation after rescue
+- [kintsugi ui](/cli-reference/ui/) for the same flow with a browser interface
+- [kintsugi status](/cli-reference/status/) for a read-only inventory before rescue
+- [kintsugi revoke](/cli-reference/revoke/) to clear delegation after rescue

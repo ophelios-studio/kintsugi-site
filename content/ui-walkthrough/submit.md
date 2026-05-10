@@ -10,10 +10,10 @@ The final step. The server has signed everything, sent the Type-4 transaction, a
 
 A vertical timeline with four checkpoints:
 
-1. **Signing batch and authorization** — instant. The CLI signs the EIP-712 batch and the EIP-7702 authorization in process memory.
-2. **Broadcasting Type-4 transaction** — short. The rescuer wallet client sends the transaction to your RPC.
-3. **Waiting for inclusion** — usually one block, sometimes a couple. The page polls `/api/submit/status/<hash>` every 4 seconds until the receipt is available.
-4. **Done** — block number and gas used appear here. The page also shows a summary of what landed at the safe wallet.
+1. **Signing batch and authorization**. Instant. The CLI signs the EIP-712 batch and the EIP-7702 authorization in process memory.
+2. **Broadcasting Type-4 transaction**. Short. The rescuer wallet client sends the transaction to your RPC.
+3. **Waiting for inclusion**. Usually one block, sometimes a couple. The page polls `/api/submit/status/<hash>` every 4 seconds until the receipt is available.
+4. **Done**. Block number and gas used appear here. The page also shows a summary of what landed at the safe wallet.
 
 The transaction hash is shown as soon as it broadcasts, with a link to the chain explorer (Sepolia or mainnet Etherscan).
 

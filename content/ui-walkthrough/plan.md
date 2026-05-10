@@ -33,7 +33,7 @@ Below the gas estimate is the rescuer wallet card with three columns:
 - **Send ETH to this address** (with a copy button)
 - **Current balance** (live-polled every 4 seconds)
 - **Required (estimate)**
-- **Status** — `Funded ✓` when balance ≥ required, `Underfunded` otherwise
+- **Status**: `Funded ✓` when balance >= required, `Underfunded` otherwise
 
 If you generated a fresh rescuer in the Wallets step, this is where you fund it. Send the required amount (round up generously) from another wallet. The page polls the chain every 4 seconds, so the status flips to **Funded** within a few seconds of the deposit confirming.
 

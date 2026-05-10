@@ -81,5 +81,5 @@ See the [security threat model](/security/threat-model/) for the full trust anal
 
 ## Related
 
-- [kintsugi rescue](/cli-reference/rescue/) — same flow, terminal interface
-- [UI walkthrough](/ui-walkthrough/network/) — screenshots of each step
+- [kintsugi rescue](/cli-reference/rescue/) for the same flow with a terminal interface
+- [UI walkthrough](/ui-walkthrough/network/) for screenshots of each step

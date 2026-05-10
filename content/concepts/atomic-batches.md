@@ -88,7 +88,7 @@ If a batch is too expensive to fit in one block, you can run it in chunks: rescu
 
 ## Deadline
 
-The signature is valid until `batch.deadline`. The CLI defaults to a generous window (about an hour from sign time) so a slow funding step doesn't expire the signature. If you wait too long and miss the deadline, re-build and re-sign — fast operation, no funds at risk.
+The signature is valid until `batch.deadline`. The CLI defaults to a generous window (about an hour from sign time) so a slow funding step doesn't expire the signature. If you wait too long and miss the deadline, re-build and re-sign. Fast operation, no funds at risk.
 
 ## Further reading
 

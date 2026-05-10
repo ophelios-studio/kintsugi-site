@@ -30,7 +30,7 @@ If the rescuer's RPC connection drops between sign and broadcast, the transactio
 
 ## What if my private key is on a hardware wallet
 
-Hardware wallet support (Ledger, Trezor) is on the roadmap but not shipped yet. The CLI today accepts software-style private keys via masked prompt. If your compromised wallet is on a hardware device you still trust, wait for HW support before rescuing — or do the rescue with the seed phrase converted to a software key, then immediately transfer to a fresh HW wallet.
+Hardware wallet support (Ledger, Trezor) is on the roadmap but not shipped yet. The CLI today accepts software-style private keys via masked prompt. If your compromised wallet is on a hardware device you still trust, wait for HW support before rescuing, or do the rescue with the seed phrase converted to a software key and then immediately transfer to a fresh HW wallet.
 
 ## Will Kintsugi work after my next 7702 delegation change
 
