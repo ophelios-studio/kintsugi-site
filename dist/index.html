@@ -270,6 +270,61 @@ tailwind.config = {
         </div>
     </section>
 
+    <section class="landing-section landing-section-narrow counter-section" id="counter">
+        <span class="section-eyebrow">The attacker's other trick</span>
+        <h2 class="section-title">When attackers use EIP-7702 against you, we use it back.</h2>
+        <p class="section-lede">
+            After a key compromise, attackers often install their own EIP-7702 delegation on your wallet, pointing it to an auto-drainer contract that triggers on any incoming funds, on any chain. Most "why does my wallet show delegation?" stories are actually this. Kintsugi's rescue uses the same primitive to overwrite their delegation, atomically, before our transaction does anything else.
+        </p>
+        <div class="counter-grid">
+            <article class="counter-card counter-card--attack">
+                <span class="counter-card-eyebrow">Their move</span>
+                <h3 class="counter-card-title">Install an auto-drainer</h3>
+                <ol class="counter-steps">
+                    <li>
+                        <span class="counter-step-num">1</span>
+                        <span>Attacker has your private key.</span>
+                    </li>
+                    <li>
+                        <span class="counter-step-num">2</span>
+                        <span>Sign a 7702 authorization pointing your wallet at <code>AutoDrainer</code>.</span>
+                    </li>
+                    <li>
+                        <span class="counter-step-num">3</span>
+                        <span>Submit a Type-4 tx (attacker pays gas, no involvement from you).</span>
+                    </li>
+                </ol>
+                <p class="counter-card-result">
+                    Any incoming ETH is auto-stolen in the same block. Across every chain the bot watches.
+                </p>
+            </article>
+            <article class="counter-card counter-card--defense">
+                <span class="counter-card-eyebrow">Our move</span>
+                <h3 class="counter-card-title">Overwrite with the Rescue contract</h3>
+                <ol class="counter-steps">
+                    <li>
+                        <span class="counter-step-num">1</span>
+                        <span>Sign a new 7702 authorization at the <em>current</em> nonce, pointing to <code>Rescue</code>.</span>
+                    </li>
+                    <li>
+                        <span class="counter-step-num">2</span>
+                        <span>One Type-4 tx: our authorization processes first, overwriting theirs.</span>
+                    </li>
+                    <li>
+                        <span class="counter-step-num">3</span>
+                        <span>Then the same tx calls <code>Rescue.executeBatch</code> on your wallet.</span>
+                    </li>
+                </ol>
+                <p class="counter-card-result">
+                    Their drainer never executes. Assets transferred atomically to your safe wallet.
+                </p>
+            </article>
+        </div>
+        <p class="counter-footnote">
+            Newer EIP-7702 authorizations at the current nonce always win. That's the spec, not a workaround. Pair with <code>--private-mempool</code> when paranoia is warranted so the attacker can't even see our tx coming.
+        </p>
+    </section>
+
     <section class="landing-section" id="coverage">
         <span class="section-eyebrow">The recovery gap</span>
         <h2 class="section-title">They take what's liquid. They leave what's yours.</h2>
