@@ -1148,6 +1148,146 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
     }
 }
 
+/* ── Section 2.5: 7702 counter ("their move vs our move") ── */
+.counter-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+.counter-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 2rem;
+}
+@media (max-width: 900px) {
+    .counter-grid { grid-template-columns: 1fr; }
+}
+.counter-card {
+    position: relative;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 0.85rem;
+    padding: 1.5rem 1.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+.counter-card--attack {
+    border-color: oklch(0.55 0.18 28 / 0.30);
+    background:
+        linear-gradient(180deg, oklch(0.55 0.18 28 / 0.04) 0%, transparent 100%),
+        var(--bg-surface);
+}
+.counter-card--defense {
+    border-color: oklch(0.62 0.14 70 / 0.30);
+    background:
+        linear-gradient(180deg, oklch(0.62 0.14 70 / 0.05) 0%, transparent 100%),
+        var(--bg-surface);
+}
+.counter-card-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-muted);
+}
+.counter-card--attack .counter-card-eyebrow { color: var(--danger); }
+.counter-card--defense .counter-card-eyebrow { color: var(--accent); }
+.counter-card-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin: 0;
+    line-height: 1.25;
+}
+.counter-steps {
+    list-style: none;
+    margin: 0.25rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+.counter-steps li {
+    display: grid;
+    grid-template-columns: 1.6rem 1fr;
+    gap: 0.7rem;
+    align-items: start;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--text);
+}
+.counter-step-num {
+    display: inline-grid;
+    place-items: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--bg-deep);
+    color: var(--text-muted);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.78rem;
+    line-height: 1;
+}
+.counter-card--attack .counter-step-num {
+    border-color: oklch(0.55 0.18 28 / 0.45);
+    color: var(--danger);
+    background: oklch(0.55 0.18 28 / 0.06);
+}
+.counter-card--defense .counter-step-num {
+    border-color: oklch(0.62 0.14 70 / 0.45);
+    color: var(--accent);
+    background: oklch(0.62 0.14 70 / 0.06);
+}
+.counter-steps code {
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+    padding: 0.04em 0.32em;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 0.3rem;
+    color: var(--text-bright);
+    white-space: nowrap;
+}
+.counter-card-result {
+    margin: 0.5rem 0 0;
+    padding: 0.65rem 0.85rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    background: var(--bg-elevated);
+    color: var(--text);
+}
+.counter-card--attack .counter-card-result {
+    background: oklch(0.55 0.18 28 / 0.08);
+    color: var(--text-bright);
+    border-left: 3px solid var(--danger);
+}
+.counter-card--defense .counter-card-result {
+    background: oklch(0.62 0.14 70 / 0.08);
+    color: var(--text-bright);
+    border-left: 3px solid var(--accent);
+}
+.counter-footnote {
+    margin: 1.75rem 0 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+.counter-footnote code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    padding: 0.04em 0.32em;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 0.3rem;
+    color: var(--text-bright);
+}
+
 /* ── Section 3: what sweepers ignore (3 cards) ── */
 .cards-row {
     display: grid;
