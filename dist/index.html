@@ -654,9 +654,33 @@ tailwind.config = {
                             <svg class="copy-check" width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"></path></svg>
                         </button>
                     </div>
-                    <div class="deployment-network deployment-network--pending">
+                    <div class="deployment-network">
                         <span class="deployment-network-name">Mainnet</span>
-                        <span class="deployment-network-status deployment-network-status--pending">Self-audited, no third-party audit</span>
+                        <span class="deployment-network-status">Self-audited, no third-party audit</span>
+                    </div>
+                    <div class="deployment-row">
+                        <span class="deployment-row-label">Rescue contract</span>
+                        <code class="deployment-address">0x25b2e6fb74fe4a186f1b3f25b289439fcc80aaca</code>
+                        <button type="button" class="deployment-copy" aria-label="Copy mainnet Rescue address" onclick="
+                            navigator.clipboard.writeText('0x25b2e6fb74fe4a186f1b3f25b289439fcc80aaca');
+                            this.classList.add('copied');
+                            setTimeout(() => this.classList.remove('copied'), 1500);
+                        ">
+                            <svg class="copy-icon" width="13" height="13" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"></path></svg>
+                            <svg class="copy-check" width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"></path></svg>
+                        </button>
+                    </div>
+                    <div class="deployment-row">
+                        <span class="deployment-row-label">NonceTracker</span>
+                        <code class="deployment-address">0x3dda6ee79963b73cbdba9a4664c880633e7a5087</code>
+                        <button type="button" class="deployment-copy" aria-label="Copy mainnet NonceTracker address" onclick="
+                            navigator.clipboard.writeText('0x3dda6ee79963b73cbdba9a4664c880633e7a5087');
+                            this.classList.add('copied');
+                            setTimeout(() => this.classList.remove('copied'), 1500);
+                        ">
+                            <svg class="copy-icon" width="13" height="13" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"></path></svg>
+                            <svg class="copy-check" width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"></path></svg>
+                        </button>
                     </div>
                 </div>
             </div>
