@@ -424,22 +424,47 @@ tailwind.config = {
         <p class="section-lede">
             Same atomic flow under the hood, two surfaces to drive it. The web UI is launched from the CLI as a localhost server. The browser only sees session-bound addresses and signatures. Private keys never leave the local Node process.
         </p>
-        <div class="showcase-grid">
-            <div class="showcase-card">
-                <div class="preview">
-                    <img src="/assets/images/ui/welcome.png" alt="Kintsugi web UI welcome screen showing the Kintsugi wordmark and Mend the wallet, Keep the gold tagline" loading="lazy" width="1440" height="900">
+        <div class="usage-grid">
+            <article class="usage-card">
+                <div class="window">
+                    <div class="window-chrome">
+                        <span class="window-dots" aria-hidden="true">
+                            <span class="window-dot window-dot--red"></span>
+                            <span class="window-dot window-dot--yellow"></span>
+                            <span class="window-dot window-dot--green"></span>
+                        </span>
+                        <span class="window-title">127.0.0.1:38080</span>
+                        <span class="window-spacer"></span>
+                    </div>
+                    <div class="window-body window-body--ui">
+                        <img src="/assets/images/ui/welcome.png" alt="Kintsugi web UI welcome screen with the Kintsugi wordmark and the tagline Mend the wallet, Keep the gold." loading="lazy" width="1440" height="900">
+                    </div>
                 </div>
-                <div class="body">
-                    <h3>The web UI</h3>
-                    <p>
-                        Start with <code>kintsugi ui</code> and a localhost browser tab walks you through five steps: network, wallets, discovery, plan, submit. Friendly for someone in panic mode.
-                    </p>
-                    <a href="/ui-walkthrough/network/">Walk through the UI</a>
+                <div class="usage-card-meta">
+                    <span class="usage-card-eyebrow">The web UI</span>
+                    <h3 class="usage-card-title">Guided. Step by step.</h3>
+                    <ul class="usage-card-bullets">
+                        <li>Pick the network and your RPC.</li>
+                        <li>Paste victim, safe, and rescuer wallets.</li>
+                        <li>Pick what to rescue, sign, submit.</li>
+                    </ul>
+                    <a href="/ui-walkthrough/network/" class="usage-card-cta">Walk through the UI →</a>
                 </div>
-            </div>
-            <div class="showcase-card">
-                <div class="preview">
-                    <pre class="preview-terminal"><span class="comment"># launch the guided localhost UI</span>
+            </article>
+
+            <article class="usage-card">
+                <div class="window window--terminal">
+                    <div class="window-chrome window-chrome--terminal">
+                        <span class="window-dots" aria-hidden="true">
+                            <span class="window-dot window-dot--red"></span>
+                            <span class="window-dot window-dot--yellow"></span>
+                            <span class="window-dot window-dot--green"></span>
+                        </span>
+                        <span class="window-title window-title--terminal">~  kintsugi rescue</span>
+                        <span class="window-spacer"></span>
+                    </div>
+                    <div class="window-body window-body--terminal">
+                        <pre class="window-terminal-pre"><span class="comment"># launch the guided localhost UI</span>
 <span class="prompt">$</span> kintsugi ui
 
 <span class="comment"># ...or do everything in the terminal</span>
@@ -449,55 +474,89 @@ tailwind.config = {
 <span class="prompt">$</span> kintsugi status 0xVictim...
 
 <span class="comment"># after rescue, optionally clear delegation</span>
-<span class="prompt">$</span> kintsugi revoke</pre>
+<span class="prompt">$</span> kintsugi revoke
+<span class="cursor" aria-hidden="true">▍</span></pre>
+                    </div>
                 </div>
-                <div class="body">
-                    <h3>The CLI</h3>
-                    <p>
-                        The same end-to-end rescue, fully scriptable. Inspect wallets, run interactive rescues, revoke delegation. Pipes well, no browser required.
-                    </p>
-                    <a href="/cli-reference/rescue/">Read the CLI reference</a>
+                <div class="usage-card-meta">
+                    <span class="usage-card-eyebrow">The CLI</span>
+                    <h3 class="usage-card-title">Headless. Scriptable.</h3>
+                    <ul class="usage-card-bullets">
+                        <li>One command (<code>kintsugi rescue</code>) walks you through.</li>
+                        <li>Read-only inventory with <code>kintsugi status</code>.</li>
+                        <li>Pipes well. No browser required.</li>
+                    </ul>
+                    <a href="/cli-reference/rescue/" class="usage-card-cta">Read the CLI reference →</a>
                 </div>
-            </div>
+            </article>
         </div>
     </section>
 
-    <section class="landing-section agent-banner" id="agent">
-        <div class="agent-banner-grid">
-            <div>
-                <span class="section-eyebrow">Or just ask your agent</span>
-                <h2 class="section-title agent-banner-title">In panic? Don't read. <span class="accent">Ask.</span></h2>
-                <p class="section-lede agent-banner-lede">
-                    Kintsugi ships a free agent skill following the <a href="https://agentskills.io" target="_blank" rel="noopener">agentskills.io</a> spec. Install it once and Claude Code, Cursor, Codex, Cline, Gemini CLI, or any compatible agent will drive the entire flow for you in plain English.
-                </p>
-                <p class="agent-banner-prompt-label">Then just paste this and let it walk you through:</p>
-                <div class="agent-prompt code-block-wrapper">
-                    <span class="agent-prompt-quote" aria-hidden="true">"</span>
-                    <p class="agent-prompt-text" id="agent-prompt-text">My wallet got drained but I have hostage assets there. Help me rescue them with Kintsugi.</p>
-                    <button type="button" class="copy-btn agent-prompt-copy" aria-label="Copy prompt" onclick="
+    <section class="landing-section agent-section" id="agent">
+        <span class="section-eyebrow">The third way in</span>
+        <h2 class="section-title">In panic? Don't read. <span class="accent">Ask your agent.</span></h2>
+        <p class="section-lede">
+            Kintsugi ships a free agent skill following the <a href="https://agentskills.io" target="_blank" rel="noopener">agentskills.io</a> spec. Install it once and your favourite AI coding agent learns the three-wallet pattern, the ordering rules, and every gotcha. Then it walks you through a rescue in plain English.
+        </p>
+
+        <div class="agent-conversation" aria-label="Example conversation with an agent">
+            <div class="chat-message chat-message--user">
+                <div class="chat-bubble">
+                    <p class="chat-bubble-text">My wallet got drained but I have hostage assets there. Help me rescue them with Kintsugi.</p>
+                    <button type="button" class="chat-bubble-copy" aria-label="Copy this prompt" onclick="
                         navigator.clipboard.writeText('My wallet got drained but I have hostage assets there. Help me rescue them with Kintsugi.');
-                        this.classList.add('copied');
-                        setTimeout(() => this.classList.remove('copied'), 1400);
-                    ">
-                        <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"></path></svg>
-                        <span class="copy-btn-label">Copy</span>
-                    </button>
-                </div>
-            </div>
-            <div class="agent-banner-actions">
-                <p class="agent-banner-install-label">Install the skill once:</p>
-                <div class="install-box code-block-wrapper">
-                    <span class="prompt">$</span>
-                    <code id="install-skill-cmd">npx skills add ophelios-studio/skills --skill kintsugi</code>
-                    <button type="button" class="copy-btn" aria-label="Copy install command" onclick="
-                        navigator.clipboard.writeText('npx skills add ophelios-studio/skills --skill kintsugi');
                         this.classList.add('copied');
                         setTimeout(() => this.classList.remove('copied'), 1600);
                     ">
-                        <svg class="copy-icon" width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"></path></svg>
-                        <svg class="copy-check" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"></path></svg>
+                        <svg class="copy-icon" width="14" height="14" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"></path></svg>
+                        <svg class="copy-check" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"></path></svg>
                     </button>
                 </div>
+                <div class="chat-meta">
+                    <span class="chat-avatar chat-avatar--user" aria-hidden="true">You</span>
+                </div>
+            </div>
+
+            <div class="chat-message chat-message--agent">
+                <div class="chat-meta">
+                    <span class="chat-avatar chat-avatar--agent" aria-hidden="true">金</span>
+                </div>
+                <div class="chat-bubble chat-bubble--agent">
+                    <p class="chat-bubble-text">Got it. I'll walk you through this end to end. First, what chain is the compromised wallet on, and do you have a fresh wallet ready to receive the assets? If not, I can generate one for you in a moment.</p>
+                    <p class="chat-bubble-meta">Powered by the Kintsugi agent skill</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="skill-sidecar">
+            <div class="skill-sidecar-row">
+                <div class="skill-sidecar-block">
+                    <p class="skill-sidecar-label">Install the skill once:</p>
+                    <div class="install-box code-block-wrapper">
+                        <span class="prompt">$</span>
+                        <code id="install-skill-cmd">npx skills add ophelios-studio/skills --skill kintsugi</code>
+                        <button type="button" class="copy-btn" aria-label="Copy install command" onclick="
+                            navigator.clipboard.writeText('npx skills add ophelios-studio/skills --skill kintsugi');
+                            this.classList.add('copied');
+                            setTimeout(() => this.classList.remove('copied'), 1600);
+                        ">
+                            <svg class="copy-icon" width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"></path></svg>
+                            <svg class="copy-check" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="skill-sidecar-block">
+                    <p class="skill-sidecar-label">Works with:</p>
+                    <ul class="agent-clients">
+                        <li class="agent-client-chip">Claude Code</li>
+                        <li class="agent-client-chip">Cursor</li>
+                        <li class="agent-client-chip">Codex</li>
+                        <li class="agent-client-chip">Cline</li>
+                        <li class="agent-client-chip">Gemini CLI</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="skill-sidecar-cta">
                 <a href="/getting-started/with-an-agent/" class="btn-secondary">
                     See what else to ask
                     <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
