@@ -1334,6 +1334,18 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
 }
 .section-dark > .landing-section { position: relative; z-index: 1; }
 
+/* Pure-white sections that span the full viewport. Used for "Open source"
+   and "Get started" so the lower half of the page reads as one bright surface
+   matching the problem section, all the way to the footer. */
+.section-light {
+    background: oklch(1 0 0);
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+}
+
 .section-dark .section-title {
     color: oklch(0.96 0.005 80);
 }
