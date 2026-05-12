@@ -247,9 +247,81 @@
         </div>
     </section>
 
-    {* ─── 5. UI / CLI showcase as real-feeling app windows ─── *}
+    {* ─── 5. The agentic way in: ask your agent ─── *}
+    <section class="landing-section agent-section" id="agent">
+        <span class="section-eyebrow">The agentic way in</span>
+        <h2 class="section-title">In panic? Don't read. <span class="accent">Ask your agent.</span></h2>
+        <p class="section-lede">
+            Kintsugi ships a free agent skill following the <a href="https://agentskills.io" target="_blank" rel="noopener">agentskills.io</a> spec. Install it once and your favourite AI coding agent learns the three-wallet pattern, the ordering rules, and every gotcha. Then it walks you through a rescue in plain English.
+        </p>
+
+        <div class="agent-conversation" aria-label="Example conversation with an agent">
+            <div class="chat-message chat-message--user">
+                <div class="chat-bubble">
+                    <p class="chat-bubble-text">My wallet got drained but I have hostage assets there. Help me rescue them with Kintsugi.</p>
+                    <button type="button" class="chat-bubble-copy" aria-label="Copy this prompt" onclick="
+                        navigator.clipboard.writeText('My wallet got drained but I have hostage assets there. Help me rescue them with Kintsugi.');
+                        this.classList.add('copied');
+                        setTimeout(() => this.classList.remove('copied'), 1600);
+                    ">
+                        <svg class="copy-icon" width="14" height="14" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"/></svg>
+                        <svg class="copy-check" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"/></svg>
+                    </button>
+                </div>
+                <div class="chat-meta">
+                    <span class="chat-avatar chat-avatar--user" aria-hidden="true">You</span>
+                </div>
+            </div>
+
+            <div class="chat-message chat-message--agent">
+                <div class="chat-meta">
+                    <span class="chat-avatar chat-avatar--agent" aria-hidden="true">金</span>
+                </div>
+                <div class="chat-bubble chat-bubble--agent">
+                    <p class="chat-bubble-text">Got it. I'll walk you through this end to end. First, what chain is the compromised wallet on, and do you have a fresh wallet ready to receive the assets? If not, I can generate one for you in a moment.</p>
+                    <p class="chat-bubble-meta">Powered by the Kintsugi agent skill</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="skill-sidecar">
+            <div class="skill-sidecar-block">
+                <p class="skill-sidecar-label">Install the skill once:</p>
+                <div class="install-box code-block-wrapper">
+                    <span class="prompt">$</span>
+                    <code id="install-skill-cmd">npx skills add ophelios-studio/skills --skill kintsugi</code>
+                    <button type="button" class="copy-btn" aria-label="Copy install command" onclick="
+                        navigator.clipboard.writeText('npx skills add ophelios-studio/skills --skill kintsugi');
+                        this.classList.add('copied');
+                        setTimeout(() => this.classList.remove('copied'), 1600);
+                    ">
+                        <svg class="copy-icon" width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"/></svg>
+                        <svg class="copy-check" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"/></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="skill-sidecar-block">
+                <p class="skill-sidecar-label">Works with:</p>
+                <ul class="agent-clients">
+                    <li class="agent-client-chip">Claude Code</li>
+                    <li class="agent-client-chip">Cursor</li>
+                    <li class="agent-client-chip">Codex</li>
+                    <li class="agent-client-chip">Cline</li>
+                    <li class="agent-client-chip">Gemini CLI</li>
+                </ul>
+            </div>
+            <div class="skill-sidecar-cta">
+                <a href="{$leafBaseUrl}/getting-started/with-an-agent/" class="btn-secondary">
+                    See what else to ask
+                    <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {* ─── 5.5 UI / CLI showcase as real-feeling app windows ─── *}
     <section class="landing-section" id="try">
-        <span class="section-eyebrow">Two ways in</span>
+        <span class="section-eyebrow">Or do it yourself</span>
         <h2 class="section-title">A guided UI for panic. A pure CLI for power.</h2>
         <p class="section-lede">
             Same atomic flow under the hood, two surfaces to drive it. The web UI is launched from the CLI as a localhost server. The browser only sees session-bound addresses and signatures. Private keys never leave the local Node process.
@@ -322,80 +394,6 @@
         </div>
     </section>
 
-    {* ─── 5.5 The third way in: ask your agent ─── *}
-    <section class="landing-section agent-section" id="agent">
-        <span class="section-eyebrow">The third way in</span>
-        <h2 class="section-title">In panic? Don't read. <span class="accent">Ask your agent.</span></h2>
-        <p class="section-lede">
-            Kintsugi ships a free agent skill following the <a href="https://agentskills.io" target="_blank" rel="noopener">agentskills.io</a> spec. Install it once and your favourite AI coding agent learns the three-wallet pattern, the ordering rules, and every gotcha. Then it walks you through a rescue in plain English.
-        </p>
-
-        <div class="agent-conversation" aria-label="Example conversation with an agent">
-            <div class="chat-message chat-message--user">
-                <div class="chat-bubble">
-                    <p class="chat-bubble-text">My wallet got drained but I have hostage assets there. Help me rescue them with Kintsugi.</p>
-                    <button type="button" class="chat-bubble-copy" aria-label="Copy this prompt" onclick="
-                        navigator.clipboard.writeText('My wallet got drained but I have hostage assets there. Help me rescue them with Kintsugi.');
-                        this.classList.add('copied');
-                        setTimeout(() => this.classList.remove('copied'), 1600);
-                    ">
-                        <svg class="copy-icon" width="14" height="14" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"/></svg>
-                        <svg class="copy-check" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"/></svg>
-                    </button>
-                </div>
-                <div class="chat-meta">
-                    <span class="chat-avatar chat-avatar--user" aria-hidden="true">You</span>
-                </div>
-            </div>
-
-            <div class="chat-message chat-message--agent">
-                <div class="chat-meta">
-                    <span class="chat-avatar chat-avatar--agent" aria-hidden="true">金</span>
-                </div>
-                <div class="chat-bubble chat-bubble--agent">
-                    <p class="chat-bubble-text">Got it. I'll walk you through this end to end. First, what chain is the compromised wallet on, and do you have a fresh wallet ready to receive the assets? If not, I can generate one for you in a moment.</p>
-                    <p class="chat-bubble-meta">Powered by the Kintsugi agent skill</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="skill-sidecar">
-            <div class="skill-sidecar-row">
-                <div class="skill-sidecar-block">
-                    <p class="skill-sidecar-label">Install the skill once:</p>
-                    <div class="install-box code-block-wrapper">
-                        <span class="prompt">$</span>
-                        <code id="install-skill-cmd">npx skills add ophelios-studio/skills --skill kintsugi</code>
-                        <button type="button" class="copy-btn" aria-label="Copy install command" onclick="
-                            navigator.clipboard.writeText('npx skills add ophelios-studio/skills --skill kintsugi');
-                            this.classList.add('copied');
-                            setTimeout(() => this.classList.remove('copied'), 1600);
-                        ">
-                            <svg class="copy-icon" width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"/></svg>
-                            <svg class="copy-check" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"/></svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="skill-sidecar-block">
-                    <p class="skill-sidecar-label">Works with:</p>
-                    <ul class="agent-clients">
-                        <li class="agent-client-chip">Claude Code</li>
-                        <li class="agent-client-chip">Cursor</li>
-                        <li class="agent-client-chip">Codex</li>
-                        <li class="agent-client-chip">Cline</li>
-                        <li class="agent-client-chip">Gemini CLI</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="skill-sidecar-cta">
-                <a href="{$leafBaseUrl}/getting-started/with-an-agent/" class="btn-secondary">
-                    See what else to ask
-                    <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
-                </a>
-            </div>
-        </div>
-    </section>
-
     {* ─── 6. Open source manifesto (dark) ─── *}
     <section class="section-dark section-dark--a" id="open-wrap">
         <div class="landing-section" id="open">
@@ -411,21 +409,38 @@
             <div class="principles-row">
                 <article class="principle-card">
                     <span class="principle-card-icon" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0"/></svg>
+                        {* Tabler: lock-open *}
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 11m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z"/>
+                            <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0"/>
+                            <path d="M8 11v-5a4 4 0 0 1 8 0"/>
+                        </svg>
                     </span>
                     <h3 class="principle-card-title">Open source.</h3>
                     <p class="principle-card-body">MIT-licensed. Public repository. Every line auditable, every contract verified.</p>
                 </article>
                 <article class="principle-card">
                     <span class="principle-card-icon" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M5 5l14 14"/><path d="M9 12h6"/></svg>
+                        {* Tabler: coin-off *}
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5.65 5.623a9 9 0 1 0 12.717 12.745m1.672 -2.336a9 9 0 0 0 -12.074 -12.084"/>
+                            <path d="M14.518 10.486a3.5 3.5 0 0 0 -4.99 -.014m-.51 3.51a3.5 3.5 0 0 0 4.012 .005"/>
+                            <path d="M12 7v1m0 8v1"/>
+                            <path d="M3 3l18 18"/>
+                        </svg>
                     </span>
                     <h3 class="principle-card-title">No fees.</h3>
                     <p class="principle-card-body">No SaaS tier. No signup. No telemetry. Pay only your own gas.</p>
                 </article>
                 <article class="principle-card">
                     <span class="principle-card-icon" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 10h18"/><path d="M9 22V14h6v8"/></svg>
+                        {* Tabler: gift *}
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 8m0 1a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1z"/>
+                            <path d="M12 8l0 13"/>
+                            <path d="M19 12v7a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-7"/>
+                            <path d="M7.5 8a2.5 2.5 0 0 1 0 -5a4.8 8 0 0 1 4.5 5a4.8 8 0 0 1 4.5 -5a2.5 2.5 0 0 1 0 5"/>
+                        </svg>
                     </span>
                     <h3 class="principle-card-title">No upsell.</h3>
                     <p class="principle-card-body">No premium features behind a paywall. The whole tool is the whole tool.</p>
@@ -442,7 +457,6 @@
                 <div class="deployments-rows">
                     <div class="deployment-network">
                         <span class="deployment-network-name">Sepolia</span>
-                        <span class="deployment-network-status deployment-network-status--ok">Verified</span>
                     </div>
                     <div class="deployment-row">
                         <span class="deployment-row-label">Rescue contract</span>

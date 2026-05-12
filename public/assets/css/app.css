@@ -2103,27 +2103,18 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
 .chat-bubble-copy.copied .copy-icon { display: none; }
 .chat-bubble-copy.copied .copy-check { display: inline-block; }
 
-/* Skill sidecar: install command + compatible-agent chips + CTA */
+/* Skill sidecar: install command, then chips under, then CTA — single column */
 .skill-sidecar {
     background: oklch(1 0 0 / 0.94);
     border: 1px solid var(--border);
     border-radius: 1rem;
-    padding: 1.75rem;
+    padding: 1.5rem 1.75rem;
     box-shadow: 0 12px 32px -18px oklch(0.20 0.01 60 / 0.30);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-}
-.skill-sidecar-row {
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-    gap: 2rem;
-    align-items: start;
-}
-@media (max-width: 900px) {
-    .skill-sidecar-row { grid-template-columns: 1fr; gap: 1.25rem; }
+    gap: 1.25rem;
 }
 .skill-sidecar-block {
     display: flex;
