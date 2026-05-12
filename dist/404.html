@@ -82,9 +82,8 @@ tailwind.config = {
 
         <nav class="nav-menu" aria-label="Sections">
             <a href="#problem" data-section="problem" class="nav-menu-link">Problem</a>
-            <a href="#how" data-section="how" class="nav-menu-link">How</a>
-            <a href="#try" data-section="try" class="nav-menu-link">Use it</a>
-            <a href="#agent" data-section="agent" class="nav-menu-link">With agent</a>
+            <a href="#how" data-section="how" class="nav-menu-link">How it works</a>
+            <a href="#try" data-section="usage" class="nav-menu-link">Usage</a>
             <a href="#open" data-section="open" class="nav-menu-link">Open source</a>
         </nav>
 
@@ -110,9 +109,8 @@ tailwind.config = {
         </a>
         <nav class="nav-drawer-links" aria-label="Sections">
             <a href="#problem" data-section="problem" class="nav-drawer-link" onclick="window.kintsugiToggleDrawer && window.kintsugiToggleDrawer(false)">Problem</a>
-            <a href="#how" data-section="how" class="nav-drawer-link" onclick="window.kintsugiToggleDrawer && window.kintsugiToggleDrawer(false)">How</a>
-            <a href="#try" data-section="try" class="nav-drawer-link" onclick="window.kintsugiToggleDrawer && window.kintsugiToggleDrawer(false)">Use it</a>
-            <a href="#agent" data-section="agent" class="nav-drawer-link" onclick="window.kintsugiToggleDrawer && window.kintsugiToggleDrawer(false)">With agent</a>
+            <a href="#how" data-section="how" class="nav-drawer-link" onclick="window.kintsugiToggleDrawer && window.kintsugiToggleDrawer(false)">How it works</a>
+            <a href="#try" data-section="usage" class="nav-drawer-link" onclick="window.kintsugiToggleDrawer && window.kintsugiToggleDrawer(false)">Usage</a>
             <a href="#open" data-section="open" class="nav-drawer-link" onclick="window.kintsugiToggleDrawer && window.kintsugiToggleDrawer(false)">Open source</a>
             <div class="nav-drawer-divider"></div>
             <a href="/getting-started/install/" class="nav-drawer-link">Docs</a>
@@ -144,7 +142,12 @@ tailwind.config = {
     /* ── Scrollspy via IntersectionObserver ── */
     /* Some sections share a menu item. Map section IDs that should highlight
        a different menu item under the "alias" rule. */
-    var sectionAliases = { coverage: 'how', counter: 'problem' };
+    var sectionAliases = {
+      coverage: 'how',
+      counter: 'problem',
+      try: 'usage',
+      agent: 'usage',
+    };
     var sections = Array.from(document.querySelectorAll('main.landing > section[id]'));
     if (sections.length && 'IntersectionObserver' in window) {
       var visible = new Map();

@@ -112,7 +112,12 @@ tailwind.config = {
     /* ── Scrollspy via IntersectionObserver ── */
     /* Some sections share a menu item. Map section IDs that should highlight
        a different menu item under the "alias" rule. */
-    var sectionAliases = { coverage: 'how', counter: 'problem' };
+    var sectionAliases = {
+      coverage: 'how',
+      counter: 'problem',
+      try: 'usage',
+      agent: 'usage',
+    };
     var sections = Array.from(document.querySelectorAll('main.landing > section[id]'));
     if (sections.length && 'IntersectionObserver' in window) {
       var visible = new Map();
