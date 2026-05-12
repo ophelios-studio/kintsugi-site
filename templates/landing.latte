@@ -322,9 +322,8 @@
         </div>
     </section>
 
-    {* ─── 5.5 The third way in: ask your agent (parallax bg) ─── *}
-    <section class="agent-parallax" id="agent">
-        <div class="landing-section agent-section">
+    {* ─── 5.5 The third way in: ask your agent ─── *}
+    <section class="landing-section agent-section" id="agent">
         <span class="section-eyebrow">The third way in</span>
         <h2 class="section-title">In panic? Don't read. <span class="accent">Ask your agent.</span></h2>
         <p class="section-lede">
@@ -395,77 +394,126 @@
                 </a>
             </div>
         </div>
-        </div>
     </section>
 
-    {* ─── 6. Open source manifesto (white) ─── *}
-    <section class="section-light" id="open">
-        <div class="landing-section">
-        <div class="manifesto">
-            <span class="section-eyebrow">Our stance</span>
-            <h2>
-                Open source. No fees. <span class="accent">No upsell.</span>
-            </h2>
-            <p>
-                A wallet rescue tool that charges money in the worst moment of someone's crypto life is a wallet rescue tool taking advantage of panic. We will not do that.
-            </p>
-            <p>
-                Kintsugi is MIT-licensed. The contracts are verified. The library, CLI, and UI are all in one public repository. There is no SaaS tier, no telemetry, no analytics, no signup. Run it yourself, audit every line, pay nothing but your own gas.
-            </p>
-            <div class="manifesto-meta">
-                <a href="{$leafGithubUrl ?? '#'}" class="contract-pill" target="_blank" rel="noopener">
-                    <span class="label">Repo</span>
-                    <code>github.com/ophelios-studio/kintsugi</code>
-                </a>
-                <span class="contract-pill">
-                    <span class="label">Sepolia rescue</span>
-                    <code>0x53c1f40c…21fd5</code>
-                </span>
-                <span class="contract-pill">
-                    <span class="label">Sepolia tracker</span>
-                    <code>0x717883ab…47963</code>
-                </span>
-                <span class="contract-pill">
-                    <span class="label">Mainnet</span>
-                    <code>pending audit</code>
-                </span>
+    {* ─── 6 + 7: Outro cluster — open source manifesto + get-started lanes,
+       both sit over a fixed colorful watercolor parallax bg as the page closes. *}
+    <div class="outro-parallax">
+        {* ─── 6. Open source manifesto ─── *}
+        <section class="landing-section outro-section" id="open">
+            <div class="manifesto">
+                <span class="section-eyebrow">Our stance</span>
+                <h2 class="manifesto-title">
+                    Open source. No fees. <span class="accent">No upsell.</span>
+                </h2>
+                <p class="manifesto-lede">
+                    A wallet rescue tool that charges money in the worst moment of someone's crypto life is a wallet rescue tool taking advantage of panic. We will not do that.
+                </p>
             </div>
-        </div>
-        </div>
-    </section>
 
-    {* ─── 7. Get started lanes (white) ─── *}
-    <section class="section-light" id="start">
-        <div class="landing-section">
-        <span class="section-eyebrow">Three ways forward</span>
-        <h2 class="section-title">Where do you want to start?</h2>
-        <div class="lanes-row">
-            <a href="{$leafBaseUrl}/getting-started/quickstart-cli/" class="lane-card">
-                <span class="eyebrow">Right now</span>
-                <h3>I'm in trouble. Walk me through a rescue.</h3>
-                <p>
-                    Five minutes from install to your assets safely sitting in a fresh wallet. Plain language, no Solidity required.
-                </p>
-                <span class="lane-cta">Start the 5 minute rescue →</span>
-            </a>
-            <a href="{$leafBaseUrl}/concepts/the-sweeper-problem/" class="lane-card">
-                <span class="eyebrow">First</span>
-                <h3>I want to understand it before I run it.</h3>
-                <p>
-                    The sweeper problem, EIP-7702 in plain English, the rescuer wallet pattern, why the rescue is atomic.
-                </p>
-                <span class="lane-cta">Read the concepts →</span>
-            </a>
-            <a href="{$leafBaseUrl}/security/threat-model/" class="lane-card">
-                <span class="eyebrow">Auditor mode</span>
-                <h3>Show me the trust assumptions and contracts.</h3>
-                <p>
-                    Threat model, what the rescuer can and cannot do, known limits, how to report a vulnerability, links to verified contracts.
-                </p>
-                <span class="lane-cta">Read the security docs →</span>
-            </a>
-        </div>
-        </div>
-    </section>
+            <div class="principles-row">
+                <article class="principle-card">
+                    <span class="principle-card-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0"/></svg>
+                    </span>
+                    <h3 class="principle-card-title">Open source.</h3>
+                    <p class="principle-card-body">MIT-licensed. Public repository. Every line auditable, every contract verified.</p>
+                </article>
+                <article class="principle-card">
+                    <span class="principle-card-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M5 5l14 14"/><path d="M9 12h6"/></svg>
+                    </span>
+                    <h3 class="principle-card-title">No fees.</h3>
+                    <p class="principle-card-body">No SaaS tier. No signup. No telemetry. Pay only your own gas.</p>
+                </article>
+                <article class="principle-card">
+                    <span class="principle-card-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 10h18"/><path d="M9 22V14h6v8"/></svg>
+                    </span>
+                    <h3 class="principle-card-title">No upsell.</h3>
+                    <p class="principle-card-body">No premium features behind a paywall. The whole tool is the whole tool.</p>
+                </article>
+            </div>
+
+            <div class="deployments-panel">
+                <header class="deployments-panel-head">
+                    <span class="deployments-panel-eyebrow">Deployments</span>
+                    <a n:if="($leafGithubUrl ?? '') !== ''" href="{$leafGithubUrl}" target="_blank" rel="noopener" class="deployments-panel-source">
+                        View source on GitHub
+                        <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                    </a>
+                </header>
+                <div class="deployments-rows">
+                    <div class="deployment-network">
+                        <span class="deployment-network-name">Sepolia</span>
+                        <span class="deployment-network-status deployment-network-status--ok">Verified</span>
+                    </div>
+                    <div class="deployment-row">
+                        <span class="deployment-row-label">Rescue contract</span>
+                        <code class="deployment-address" id="addr-sepolia-rescue">0x53c1f40ca0a58942f9eb89d7fd445457a8521fd5</code>
+                        <button type="button" class="deployment-copy" aria-label="Copy Sepolia Rescue address" onclick="
+                            navigator.clipboard.writeText('0x53c1f40ca0a58942f9eb89d7fd445457a8521fd5');
+                            this.classList.add('copied');
+                            setTimeout(() => this.classList.remove('copied'), 1500);
+                        ">
+                            <svg class="copy-icon" width="13" height="13" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"/></svg>
+                            <svg class="copy-check" width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"/></svg>
+                        </button>
+                    </div>
+                    <div class="deployment-row">
+                        <span class="deployment-row-label">NonceTracker</span>
+                        <code class="deployment-address" id="addr-sepolia-tracker">0x717883abfa58fa2bf0f9c2d5a132227253c47963</code>
+                        <button type="button" class="deployment-copy" aria-label="Copy Sepolia NonceTracker address" onclick="
+                            navigator.clipboard.writeText('0x717883abfa58fa2bf0f9c2d5a132227253c47963');
+                            this.classList.add('copied');
+                            setTimeout(() => this.classList.remove('copied'), 1500);
+                        ">
+                            <svg class="copy-icon" width="13" height="13" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"/></svg>
+                            <svg class="copy-check" width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"/></svg>
+                        </button>
+                    </div>
+                    <div class="deployment-network deployment-network--pending">
+                        <span class="deployment-network-name">Mainnet</span>
+                        <span class="deployment-network-status deployment-network-status--pending">Pending audit</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {* ─── 7. Get-started lanes ─── *}
+        <section class="landing-section outro-section" id="start">
+            <span class="section-eyebrow">Three ways forward</span>
+            <h2 class="section-title">Where do you want to start?</h2>
+            <div class="lanes-row">
+                <a href="{$leafBaseUrl}/getting-started/quickstart-cli/" class="lane-card lane-card--panic">
+                    <span class="lane-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v6"/><circle cx="12" cy="16.5" r="0.6" fill="currentColor"/></svg>
+                    </span>
+                    <span class="lane-eyebrow">Right now</span>
+                    <h3 class="lane-title">I'm in trouble. Walk me through it.</h3>
+                    <p class="lane-body">Five minutes from install to assets safely in a fresh wallet. Plain language, no Solidity required.</p>
+                    <span class="lane-cta">Five-minute rescue →</span>
+                </a>
+                <a href="{$leafBaseUrl}/concepts/the-sweeper-problem/" class="lane-card lane-card--learn">
+                    <span class="lane-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2z"/><path d="M21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/><path d="M11 7H6"/><path d="M11 11H6"/><path d="M18 7h-5"/><path d="M18 11h-5"/></svg>
+                    </span>
+                    <span class="lane-eyebrow">First</span>
+                    <h3 class="lane-title">I want to understand it first.</h3>
+                    <p class="lane-body">The sweeper problem, EIP-7702 in plain English, the rescuer wallet pattern, why the rescue is atomic.</p>
+                    <span class="lane-cta">Read the concepts →</span>
+                </a>
+                <a href="{$leafBaseUrl}/security/threat-model/" class="lane-card lane-card--audit">
+                    <span class="lane-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><path d="M9 12l2.2 2.2L15 10"/></svg>
+                    </span>
+                    <span class="lane-eyebrow">Auditor mode</span>
+                    <h3 class="lane-title">Show me the trust assumptions.</h3>
+                    <p class="lane-body">Threat model, what the rescuer can and cannot do, known limits, how to report a vulnerability.</p>
+                    <span class="lane-cta">Read the security docs →</span>
+                </a>
+            </div>
+        </section>
+    </div>
 </main>
 {/block}
