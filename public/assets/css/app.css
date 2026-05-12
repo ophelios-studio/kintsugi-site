@@ -1309,17 +1309,22 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
 }
 
 /* ── Dark sections (the "how" cluster: coverage + how) ──
-   Two alternating shades give the scroll some rhythm; the cluster reads as
-   one deep-dive moment between the lighter problem and try sections. */
+   The <section> wrapper spans the full viewport with the dark bg; an inner
+   .landing-section caps the content width and centres it. Two alternating
+   shades give the scroll some rhythm. */
 .section-dark {
     color: oklch(0.92 0.005 80);
     position: relative;
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
 }
 .section-dark--a { background: oklch(0.16 0.012 60); }
 .section-dark--b { background: oklch(0.20 0.012 60); }
 
-/* Subtle gold dot grid + faint kanji ghost behind the dark sections so they
-   don't look like flat black panels. */
+/* Subtle gold dot grid behind dark sections so they don't read as flat black. */
 .section-dark::before {
     content: "";
     position: absolute;
@@ -1330,7 +1335,7 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
     mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
     z-index: 0;
 }
-.section-dark > * { position: relative; z-index: 1; }
+.section-dark > .landing-section { position: relative; z-index: 1; }
 
 .section-dark .section-title {
     color: oklch(0.96 0.005 80);
