@@ -6,11 +6,11 @@ description: "What Kintsugi does not (yet) do, and the workarounds in the meanti
 
 Honest enumeration of the gaps. Anything on this list is on the roadmap or has a manual workaround.
 
-## Mainnet support is pending audit
+## No third-party audit
 
-The Sepolia deployment is verified, used for live test rescues, and has been hardened over several iterations. Mainnet contract addresses will be filled in once a third-party audit completes.
+The contracts have not been formally audited by a paid third party. The maintainer published a detailed self-audit (see [Smart-contract self-audit](/security/self-audit/)) before deploying to mainnet, with the Slither static-analysis output and the disposition of every finding. External review is welcome and encouraged.
 
-In the meantime, Sepolia rescues work end-to-end and exercise the same code path.
+A paid audit is on the roadmap but is not a blocker: the contracts are immutable post-deploy (no admin, no upgrade, no pause), so an audit would only buy additional confidence in the bytecode that ships, not change the operational risk profile.
 
 ## No hardware wallet integration yet
 

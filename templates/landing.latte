@@ -449,10 +449,16 @@
             <div class="deployments-panel">
                 <header class="deployments-panel-head">
                     <span class="deployments-panel-eyebrow">Deployments</span>
-                    <a n:if="($leafGithubUrl ?? '') !== ''" href="{$leafGithubUrl}" target="_blank" rel="noopener" class="deployments-panel-source">
-                        View source on GitHub
-                        <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
-                    </a>
+                    <span class="deployments-panel-links">
+                        <a href="{$leafBaseUrl}/security/self-audit/" class="deployments-panel-source">
+                            Read the self-audit
+                            <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                        </a>
+                        <a n:if="($leafGithubUrl ?? '') !== ''" href="{$leafGithubUrl}" target="_blank" rel="noopener" class="deployments-panel-source">
+                            View source on GitHub
+                            <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                        </a>
+                    </span>
                 </header>
                 <div class="deployments-rows">
                     <div class="deployment-network">
@@ -484,7 +490,7 @@
                     </div>
                     <div class="deployment-network deployment-network--pending">
                         <span class="deployment-network-name">Mainnet</span>
-                        <span class="deployment-network-status deployment-network-status--pending">Pending audit</span>
+                        <span class="deployment-network-status deployment-network-status--pending">Self-audited, no third-party audit</span>
                     </div>
                 </div>
             </div>
