@@ -70,7 +70,14 @@ A malicious off-brand "Kintsugi UI" could show the user `safe = trustedAddress` 
 - `timestamp`: standard EIP-712 deadline pattern
 - `naming-convention`: style preference (matches OpenZeppelin's `UPPER_CASE` for immutables)
 
-Full disposition table is in `AUDIT.md`. None require code changes.
+## Symbolic execution
+
+[Mythril](https://github.com/Consensys/mythril) was run against the compiled deployed bytecode and reported two findings, both reviewed:
+
+- **SWC-110 ("assertion violation")**: false positive. Mythril flags any reachable `0xfe` (`INVALID`) opcode, but Solidity 0.8 uses the standard `Panic(uint256)` revert path for enum-out-of-range and similar built-in checks. The path Mythril found is inside OpenZeppelin's `ECDSA.tryRecover` and cannot be triggered in practice.
+- **SWC-116 ("dependence on predictable environment variable")**: false positive (mislabeled). Mythril flags `block.chainid` read in the constructor; this is the standard EIP-712 domain-separator pattern.
+
+Full disposition tables for both tools are in `AUDIT.md`. None require code changes.
 
 ## What the audit does NOT cover
 

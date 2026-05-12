@@ -443,7 +443,13 @@ tailwind.config = {
 <li><code>timestamp</code>: standard EIP-712 deadline pattern</li>
 <li><code>naming-convention</code>: style preference (matches OpenZeppelin's <code>UPPER_CASE</code> for immutables)</li>
 </ul>
-<p>Full disposition table is in <code>AUDIT.md</code>. None require code changes.</p>
+<h2 id="symbolic-execution"><a href="#symbolic-execution" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Symbolic execution</h2>
+<p><a href="https://github.com/Consensys/mythril">Mythril</a> was run against the compiled deployed bytecode and reported two findings, both reviewed:</p>
+<ul>
+<li><strong>SWC-110 (&quot;assertion violation&quot;)</strong>: false positive. Mythril flags any reachable <code>0xfe</code> (<code>INVALID</code>) opcode, but Solidity 0.8 uses the standard <code>Panic(uint256)</code> revert path for enum-out-of-range and similar built-in checks. The path Mythril found is inside OpenZeppelin's <code>ECDSA.tryRecover</code> and cannot be triggered in practice.</li>
+<li><strong>SWC-116 (&quot;dependence on predictable environment variable&quot;)</strong>: false positive (mislabeled). Mythril flags <code>block.chainid</code> read in the constructor; this is the standard EIP-712 domain-separator pattern.</li>
+</ul>
+<p>Full disposition tables for both tools are in <code>AUDIT.md</code>. None require code changes.</p>
 <h2 id="what-the-audit-does-not-cover"><a href="#what-the-audit-does-not-cover" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>What the audit does NOT cover</h2>
 <p>Two operational risks remain regardless of audit status:</p>
 <ol>
@@ -489,6 +495,9 @@ tailwind.config = {
             </li>
             <li class="toc-item">
                 <a href="#static-analysis" class="toc-link">Static analysis</a>
+            </li>
+            <li class="toc-item">
+                <a href="#symbolic-execution" class="toc-link">Symbolic execution</a>
             </li>
             <li class="toc-item">
                 <a href="#what-the-audit-does-not-cover" class="toc-link">What the audit does NOT cover</a>

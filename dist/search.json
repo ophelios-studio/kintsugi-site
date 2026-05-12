@@ -345,6 +345,7 @@
             "Defensive properties confirmed",
             "The one Medium finding",
             "Static analysis",
+            "Symbolic execution",
             "What the audit does NOT cover",
             "Found something we missed?"
         ]
