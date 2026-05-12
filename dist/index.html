@@ -458,7 +458,7 @@ tailwind.config = {
         <div class="skill-sidecar">
             <div class="skill-sidecar-block">
                 <p class="skill-sidecar-label">Install the skill once:</p>
-                <div class="install-box code-block-wrapper">
+                <div class="install-box install-box--wide code-block-wrapper">
                     <span class="prompt">$</span>
                     <code id="install-skill-cmd">npx skills add ophelios-studio/skills --skill kintsugi</code>
                     <button type="button" class="copy-btn" aria-label="Copy install command" onclick="
@@ -471,21 +471,21 @@ tailwind.config = {
                     </button>
                 </div>
             </div>
-            <div class="skill-sidecar-block">
-                <p class="skill-sidecar-label">Works with:</p>
-                <ul class="agent-clients">
-                    <li class="agent-client-chip">Claude Code</li>
-                    <li class="agent-client-chip">Cursor</li>
-                    <li class="agent-client-chip">Codex</li>
-                    <li class="agent-client-chip">Cline</li>
-                    <li class="agent-client-chip">Gemini CLI</li>
-                </ul>
-            </div>
-            <div class="skill-sidecar-cta">
-                <a href="/getting-started/with-an-agent/" class="btn-secondary">
+            <div class="skill-sidecar-row">
+                <a href="/getting-started/with-an-agent/" class="btn-secondary skill-sidecar-cta">
                     See what else to ask
                     <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 </a>
+                <div class="skill-sidecar-works">
+                    <p class="skill-sidecar-label">Works with:</p>
+                    <ul class="agent-clients">
+                        <li class="agent-client-chip">Claude Code</li>
+                        <li class="agent-client-chip">Cursor</li>
+                        <li class="agent-client-chip">Codex</li>
+                        <li class="agent-client-chip">Cline</li>
+                        <li class="agent-client-chip">Gemini CLI</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
