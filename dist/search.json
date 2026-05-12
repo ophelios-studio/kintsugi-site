@@ -368,7 +368,7 @@
         "title": "Trust assumptions",
         "section": "security",
         "url": "\/security\/trust-assumptions",
-        "excerpt": "A short, honest enumeration of every party and component that has any effect on a rescue, and what trusting them looks like. #You trust the source code @ophelios\/core is the headless TypeScript library that builds and signs everything. @ophelios\/cli and @ophelios\/ui are surfaces over it. All three a...",
+        "excerpt": "A short, honest enumeration of every party and component that has any effect on a rescue, and what trusting them looks like. #You trust the source code @ophelios\/kintsugi-core is the headless TypeScript library that builds and signs everything. @ophelios\/kintsugi-cli and @ophelios\/kintsugi-ui are su...",
         "headings": [
             "You trust the source code",
             "You trust your RPC provider",

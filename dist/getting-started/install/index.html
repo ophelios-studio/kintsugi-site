@@ -402,7 +402,7 @@ tailwind.config = {
 </code></pre>
 <p>If that prints anything below <code>v20</code>, install a recent Node from <a href="https://nodejs.org">nodejs.org</a> or via a version manager like <code>nvm</code> or <code>mise</code>.</p>
 <h2 id="install-the-cli"><a href="#install-the-cli" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Install the CLI</h2>
-<pre><code class="language-bash">npm install -g @ophelios/cli
+<pre><code class="language-bash">npm install -g @ophelios/kintsugi-cli
 </code></pre>
 <p>That installs the <code>kintsugi</code> binary globally. Verify:</p>
 <pre><code class="language-bash">kintsugi --help
@@ -413,18 +413,18 @@ tailwind.config = {
 <pre><code class="language-bash">git clone https://github.com/ophelios-studio/kintsugi
 cd kintsugi
 npm install
-npm --workspace @ophelios/core run build
-npm --workspace @ophelios/cli run build
-npm --workspace @ophelios/cli link
+npm --workspace @ophelios/kintsugi-core run build
+npm --workspace @ophelios/kintsugi-cli run build
+npm --workspace @ophelios/kintsugi-cli link
 kintsugi --help
 </code></pre>
 <p>The <code>link</code> step makes the local <code>kintsugi</code> command available on your PATH the same way a global npm install would.</p>
 <h2 id="update"><a href="#update" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Update</h2>
-<pre><code class="language-bash">npm install -g @ophelios/cli@latest
+<pre><code class="language-bash">npm install -g @ophelios/kintsugi-cli@latest
 </code></pre>
 <p>There is no auto-update. Releases are tagged on GitHub.</p>
 <h2 id="uninstall"><a href="#uninstall" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Uninstall</h2>
-<pre><code class="language-bash">npm uninstall -g @ophelios/cli
+<pre><code class="language-bash">npm uninstall -g @ophelios/kintsugi-cli
 </code></pre>
 <p>Kintsugi writes nothing to disk, so removing the binary is the only cleanup needed.</p>
 <h2 id="next"><a href="#next" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Next</h2>

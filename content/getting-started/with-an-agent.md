@@ -49,7 +49,7 @@ The agent has the ordering rules, the gotchas, and the contract addresses alread
 
 Kintsugi is meant to be used in panic. Reading docs in panic is a bad time. An AI agent that already knows the tool well enough to run it for you removes one layer of cognitive load at the worst possible moment.
 
-It's also useful in calm: developers building custom rescue flows for non-standard assets (staked positions, vesting, governance) get a teammate who already knows the API and the ordering rules, instead of paging through `@ophelios/core` source.
+It's also useful in calm: developers building custom rescue flows for non-standard assets (staked positions, vesting, governance) get a teammate who already knows the API and the ordering rules, instead of paging through `@ophelios/kintsugi-core` source.
 
 ## Reading the skill yourself
 

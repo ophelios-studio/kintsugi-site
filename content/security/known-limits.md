@@ -42,7 +42,7 @@ A "common protocols" custom-call library (auto-detect Uniswap v3 LPs, Lido stETH
 
 ## No custom-call UI panel yet
 
-Custom calls are a TypeScript API today. They are not exposed in the UI's Discovery panel. Developers can write a small script importing `@ophelios/core` to compose batches with custom calls; non-developers cannot.
+Custom calls are a TypeScript API today. They are not exposed in the UI's Discovery panel. Developers can write a small script importing `@ophelios/kintsugi-core` to compose batches with custom calls; non-developers cannot.
 
 Workaround: pair with someone who can write 30 lines of TypeScript, or wait for the UI panel.
 
@@ -56,7 +56,7 @@ This is intentional: multi-victim rescue would multiply the attack surface and i
 
 Kintsugi transfers ENS ownership but does not automatically clear malicious records the attacker may have set on a resolver (text records, contenthash, etc.). The new safe wallet should audit and reset records after the rescue.
 
-Helper functions exist in `@ophelios/core` (`setResolver`, `clearReverseRecord`) and can be added to the rescue batch via custom calls if you want them executed atomically.
+Helper functions exist in `@ophelios/kintsugi-core` (`setResolver`, `clearReverseRecord`) and can be added to the rescue batch via custom calls if you want them executed atomically.
 
 ## What about social-recovery accounts?
 

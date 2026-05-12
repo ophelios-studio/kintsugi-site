@@ -414,14 +414,14 @@ tailwind.config = {
 <p>Workaround: use <a href="/asset-support/custom-calls/">custom calls</a> to add unstake/exit/withdraw ops to the batch, followed by transfer ops on the resulting tokens. The whole sequence runs atomically.</p>
 <p>A &quot;common protocols&quot; custom-call library (auto-detect Uniswap v3 LPs, Lido stETH wrapping, Aave aTokens, etc.) is on the medium-term roadmap.</p>
 <h2 id="no-custom-call-ui-panel-yet"><a href="#no-custom-call-ui-panel-yet" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>No custom-call UI panel yet</h2>
-<p>Custom calls are a TypeScript API today. They are not exposed in the UI's Discovery panel. Developers can write a small script importing <code>@ophelios/core</code> to compose batches with custom calls; non-developers cannot.</p>
+<p>Custom calls are a TypeScript API today. They are not exposed in the UI's Discovery panel. Developers can write a small script importing <code>@ophelios/kintsugi-core</code> to compose batches with custom calls; non-developers cannot.</p>
 <p>Workaround: pair with someone who can write 30 lines of TypeScript, or wait for the UI panel.</p>
 <h2 id="no-multi-rescue-coordination"><a href="#no-multi-rescue-coordination" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>No multi-rescue coordination</h2>
 <p>Each <code>kintsugi rescue</code> invocation is one rescue against one victim. If you are recovering from a wallet compromise that affected multiple addresses (a corporate setup, a multi-account wallet), you run the CLI once per address. There is no batch-of-batches mode.</p>
 <p>This is intentional: multi-victim rescue would multiply the attack surface and introduces ordering questions that are easier to handle one at a time.</p>
 <h2 id="no-automatic-resolverrecord-cleanup-on-ens"><a href="#no-automatic-resolverrecord-cleanup-on-ens" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>No automatic resolver/record cleanup on ENS</h2>
 <p>Kintsugi transfers ENS ownership but does not automatically clear malicious records the attacker may have set on a resolver (text records, contenthash, etc.). The new safe wallet should audit and reset records after the rescue.</p>
-<p>Helper functions exist in <code>@ophelios/core</code> (<code>setResolver</code>, <code>clearReverseRecord</code>) and can be added to the rescue batch via custom calls if you want them executed atomically.</p>
+<p>Helper functions exist in <code>@ophelios/kintsugi-core</code> (<code>setResolver</code>, <code>clearReverseRecord</code>) and can be added to the rescue batch via custom calls if you want them executed atomically.</p>
 <h2 id="what-about-social-recovery-accounts"><a href="#what-about-social-recovery-accounts" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>What about social-recovery accounts?</h2>
 <p>Social-recovery wallets (Argent, Safe with guardians, Sapient AAs) usually have their own recovery flow and don't have the same compromise model. Kintsugi targets EOAs and EIP-7702-delegated EOAs. AA accounts (with custom validation logic) are out of scope.</p>
 

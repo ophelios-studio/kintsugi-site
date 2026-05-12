@@ -396,7 +396,7 @@ tailwind.config = {
 <article class="docs-content">
     <div class="prose">
         <p>Kintsugi auto-discovers ETH, ERC-20, ERC-721, ERC-1155, and ENS. Anything outside that surface (staked NFTs, vesting positions, LP positions, governance escrows) needs a custom call.</p>
-<p>A custom call is just an op with arbitrary <code>to</code>, <code>value</code>, and ABI-encoded <code>data</code>. You use the <code>customCall</code> helper from <code>@ophelios/core</code> and place the resulting op in the batch alongside the auto-discovered ones.</p>
+<p>A custom call is just an op with arbitrary <code>to</code>, <code>value</code>, and ABI-encoded <code>data</code>. You use the <code>customCall</code> helper from <code>@ophelios/kintsugi-core</code> and place the resulting op in the batch alongside the auto-discovered ones.</p>
 <h2 id="when-to-use-a-custom-call"><a href="#when-to-use-a-custom-call" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>When to use a custom call</h2>
 <ul>
 <li><strong>Unstake before transfer.</strong> NFTs locked in a staking contract need to come back to the victim address before the standard transfer op can move them.</li>
@@ -407,7 +407,7 @@ tailwind.config = {
 </ul>
 <p>If the goal is &quot;get the assets out of the victim&quot;, custom calls let you do anything the victim could do, atomically, in one batch.</p>
 <h2 id="api"><a href="#api" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>API</h2>
-<pre><code class="language-ts">import { customCall } from '@ophelios/core'
+<pre><code class="language-ts">import { customCall } from '@ophelios/kintsugi-core'
 
 const op = customCall({
   to: '0xStakingContract',
@@ -433,7 +433,7 @@ const op = customCall({
   signRescueAuthorization,
   submitRescue,
   type Op,
-} from '@ophelios/core'
+} from '@ophelios/kintsugi-core'
 
 const stakingAbi = [{
   type: 'function',
@@ -482,7 +482,7 @@ const txHash = await submitRescue({
 <h2 id="atomicity-guarantees-apply-to-custom-calls-too"><a href="#atomicity-guarantees-apply-to-custom-calls-too" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Atomicity guarantees apply to custom calls too</h2>
 <p>Custom calls are part of the same batch as the auto-discovered ops. They get the same atomicity: either every op (custom + standard) succeeds or the whole batch reverts. The sweeper has no opening between an unstake op and the following transfer.</p>
 <h2 id="where-to-use-custom-calls-today"><a href="#where-to-use-custom-calls-today" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Where to use custom calls today</h2>
-<p>Currently custom calls are a TypeScript API on <code>@ophelios/core</code>. The CLI and UI auto-discover and build batches without exposing custom calls to non-developers. If you need custom calls for a rescue, write a small TypeScript script that imports <code>@ophelios/core</code> and submits your own batch.</p>
+<p>Currently custom calls are a TypeScript API on <code>@ophelios/kintsugi-core</code>. The CLI and UI auto-discover and build batches without exposing custom calls to non-developers. If you need custom calls for a rescue, write a small TypeScript script that imports <code>@ophelios/kintsugi-core</code> and submits your own batch.</p>
 <p>Adding a &quot;custom calls&quot; UI panel that accepts contract address + ABI fragment + function call is on the roadmap.</p>
 
     </div>

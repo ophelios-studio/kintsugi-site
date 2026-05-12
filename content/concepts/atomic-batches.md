@@ -78,7 +78,7 @@ Unwrapped .eth 2LD names need their controller reclaimed before the registrant i
 
 ### Custom ops
 
-For assets Kintsugi doesn't auto-discover (vesting positions, LP positions, exotic NFTs), you can compose your own ops with `customCall` from `@ophelios/core` and place them where they need to be in the array. See the [custom calls](/asset-support/custom-calls/) page.
+For assets Kintsugi doesn't auto-discover (vesting positions, LP positions, exotic NFTs), you can compose your own ops with `customCall` from `@ophelios/kintsugi-core` and place them where they need to be in the array. See the [custom calls](/asset-support/custom-calls/) page.
 
 ## Gas
 

@@ -8,7 +8,7 @@ A short, honest enumeration of every party and component that has any effect on 
 
 ## You trust the source code
 
-`@ophelios/core` is the headless TypeScript library that builds and signs everything. `@ophelios/cli` and `@ophelios/ui` are surfaces over it. All three are MIT-licensed, in one public monorepo, with no minified or obfuscated bundles.
+`@ophelios/kintsugi-core` is the headless TypeScript library that builds and signs everything. `@ophelios/kintsugi-cli` and `@ophelios/kintsugi-ui` are surfaces over it. All three are MIT-licensed, in one public monorepo, with no minified or obfuscated bundles.
 
 The Solidity contracts (`Rescue.sol` + `NonceTracker.sol`) are about 150 lines combined. They have no admin functions, no upgrades, no pausability, no ownership concept. What's deployed is what's audited.
 
