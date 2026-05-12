@@ -2320,6 +2320,12 @@ main.landing {
     transition: color 0.15s ease, transform 0.15s ease;
 }
 .deployments-panel-source:hover { color: var(--accent-light); transform: translateX(2px); }
+.deployments-panel-links {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
 
 .deployments-rows {
     display: flex;

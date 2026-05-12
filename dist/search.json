@@ -307,9 +307,9 @@
         "title": "Known limits",
         "section": "security",
         "url": "\/security\/known-limits",
-        "excerpt": "Honest enumeration of the gaps. Anything on this list is on the roadmap or has a manual workaround. #Mainnet support is pending audit The Sepolia deployment is verified, used for live test rescues, and has been hardened over several iterations. Mainnet contract addresses will be filled in once a thi...",
+        "excerpt": "Honest enumeration of the gaps. Anything on this list is on the roadmap or has a manual workaround. #No third-party audit The contracts have not been formally audited by a paid third party. The maintainer published a detailed self-audit (see Smart-contract self-audit) before deploying to mainnet, wi...",
         "headings": [
-            "Mainnet support is pending audit",
+            "No third-party audit",
             "No hardware wallet integration yet",
             "No L2 support yet",
             "No browser extension yet",
@@ -331,6 +331,22 @@
             "Response",
             "Out of scope",
             "Hardening reports welcome"
+        ]
+    },
+    {
+        "title": "Smart-contract self-audit",
+        "section": "security",
+        "url": "\/security\/self-audit",
+        "excerpt": "A formal third-party audit costs USD 20-80k and takes weeks. The maintainer is one person, the contract surface is 179 lines, the design is intentionally minimal, and the test suite is comprehensive. A paid audit remains on the roadmap, but this self-audit is published now so users have something su...",
+        "headings": [
+            "TL;DR",
+            "The full audit document",
+            "Threat model",
+            "Defensive properties confirmed",
+            "The one Medium finding",
+            "Static analysis",
+            "What the audit does NOT cover",
+            "Found something we missed?"
         ]
     },
     {

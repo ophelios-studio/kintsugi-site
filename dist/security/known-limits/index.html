@@ -360,6 +360,12 @@ tailwind.config = {
                         Reporting a vulnerability
                     </a>
                 </li>
+                <li>
+                    <a href="/security/self-audit"
+                       class="sidebar-link">
+                        Smart-contract self-audit
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="sidebar-group">
@@ -390,9 +396,9 @@ tailwind.config = {
 <article class="docs-content">
     <div class="prose">
         <p>Honest enumeration of the gaps. Anything on this list is on the roadmap or has a manual workaround.</p>
-<h2 id="mainnet-support-is-pending-audit"><a href="#mainnet-support-is-pending-audit" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Mainnet support is pending audit</h2>
-<p>The Sepolia deployment is verified, used for live test rescues, and has been hardened over several iterations. Mainnet contract addresses will be filled in once a third-party audit completes.</p>
-<p>In the meantime, Sepolia rescues work end-to-end and exercise the same code path.</p>
+<h2 id="no-third-party-audit"><a href="#no-third-party-audit" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>No third-party audit</h2>
+<p>The contracts have not been formally audited by a paid third party. The maintainer published a detailed self-audit (see <a href="/security/self-audit/">Smart-contract self-audit</a>) before deploying to mainnet, with the Slither static-analysis output and the disposition of every finding. External review is welcome and encouraged.</p>
+<p>A paid audit is on the roadmap but is not a blocker: the contracts are immutable post-deploy (no admin, no upgrade, no pause), so an audit would only buy additional confidence in the bytecode that ships, not change the operational risk profile.</p>
 <h2 id="no-hardware-wallet-integration-yet"><a href="#no-hardware-wallet-integration-yet" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>No hardware wallet integration yet</h2>
 <p>The CLI accepts private keys via masked prompts. There is no Ledger/Trezor support for either the EIP-712 batch signature or the EIP-7702 authorization. Both signing flows require integrations specific to each hardware wallet vendor.</p>
 <p>This matters if your compromised wallet is on a hardware device you still trust. For pure software wallets (MetaMask seed compromised), the current paste-the-key path is fine.</p>
@@ -439,7 +445,7 @@ tailwind.config = {
         <h4 class="toc-title">On this page</h4>
         <ul class="toc-links">
             <li class="toc-item">
-                <a href="#mainnet-support-is-pending-audit" class="toc-link">Mainnet support is pending audit</a>
+                <a href="#no-third-party-audit" class="toc-link">No third-party audit</a>
             </li>
             <li class="toc-item">
                 <a href="#no-hardware-wallet-integration-yet" class="toc-link">No hardware wallet integration yet</a>

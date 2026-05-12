@@ -4,20 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="leaf-base-url" content="">
-<meta name="description" content="Run a full rescue from the terminal in five minutes.">
+<meta name="description" content="The security analysis the maintainer did before deploying Kintsugi to mainnet, published in full.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#f9f7f3">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Quickstart (CLI) · Kintsugi">
-<meta property="og:description" content="Run a full rescue from the terminal in five minutes.">
+<meta property="og:title" content="Smart-contract self-audit · Kintsugi">
+<meta property="og:description" content="The security analysis the maintainer did before deploying Kintsugi to mainnet, published in full.">
 <meta property="og:site_name" content="Kintsugi">
 <meta property="og:url" content="https://kintsugi.ophelios.com/">
 <meta property="og:image" content="https://kintsugi.ophelios.com/assets/images/og-default.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Quickstart (CLI) · Kintsugi">
-<meta name="twitter:description" content="Run a full rescue from the terminal in five minutes.">
+<meta name="twitter:title" content="Smart-contract self-audit · Kintsugi">
+<meta name="twitter:description" content="The security analysis the maintainer did before deploying Kintsugi to mainnet, published in full.">
 <meta name="twitter:image" content="https://kintsugi.ophelios.com/assets/images/og-default.png">
 <link rel="canonical" href="https://kintsugi.ophelios.com/">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -56,7 +56,7 @@ tailwind.config = {
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 <link rel="stylesheet" href="/assets/css/app.css">
-    <title>Quickstart (CLI) · Kintsugi</title>
+    <title>Smart-contract self-audit · Kintsugi</title>
 </head>
 <body class="bg-deep text-body antialiased font-body">
 
@@ -181,7 +181,7 @@ tailwind.config = {
                 </li>
                 <li>
                     <a href="/getting-started/quickstart-cli"
-                       class="sidebar-link active">
+                       class="sidebar-link">
                         Quickstart (CLI)
                     </a>
                 </li>
@@ -362,7 +362,7 @@ tailwind.config = {
                 </li>
                 <li>
                     <a href="/security/self-audit"
-                       class="sidebar-link">
+                       class="sidebar-link active">
                         Smart-contract self-audit
                     </a>
                 </li>
@@ -395,82 +395,75 @@ tailwind.config = {
         <main class="docs-main">
 <article class="docs-content">
     <div class="prose">
-        <p>If you have your prerequisites lined up, the entire rescue is one command.</p>
-<h2 id="run"><a href="#run" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Run</h2>
-<pre><code class="language-bash">kintsugi rescue
-</code></pre>
-<p>The CLI walks you through five phases.</p>
-<h2 id="1-network"><a href="#1-network" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>1. Network</h2>
-<p>Pick the chain the compromised wallet lives on:</p>
-<pre><code class="language-text">? Network: › 
-❯ Sepolia (testnet)
-  Mainnet
-</code></pre>
-<p>Sepolia is for testing. Mainnet is the real thing.</p>
-<h2 id="2-deployment-addresses"><a href="#2-deployment-addresses" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>2. Deployment addresses</h2>
-<p>The Rescue and NonceTracker contract addresses on the chain you picked. Defaults are pre-filled for Sepolia. For mainnet, paste the addresses from the <a href="/security/threat-model/">security page</a>.</p>
-<h2 id="3-wallets"><a href="#3-wallets" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>3. Wallets</h2>
-<p>Three wallets, in order:</p>
+        <p>A formal third-party audit costs USD 20-80k and takes weeks. The maintainer is one person, the contract surface is 179 lines, the design is intentionally minimal, and the test suite is comprehensive. A paid audit remains on the roadmap, but this self-audit is published now so users have something substantive to read before mainnet deploy, instead of &quot;trust me.&quot;</p>
+<p>The contract is immutable post-deploy: no admin keys, no upgrade path. An audit adds no operational dependency. It would only buy additional confidence in the bytecode that ships.</p>
+<p>External review is welcome and encouraged. See <a href="/security/reporting/">Reporting</a>.</p>
+<h2 id="tldr"><a href="#tldr" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>TL;DR</h2>
+<p>The Rescue contract grants the executor (the rescuer) only the same powers the victim's EOA already has. It just lets those powers be exercised atomically with no sweeper-observable ETH-balance window. <strong>There are no critical or high-severity contract-level findings.</strong></p>
+<p>The single Medium item is an off-chain UX rule for any tool that builds batches: surface every operation's <code>to</code> and decoded <code>data</code> to the signer, not just the cosmetic <code>safe</code> field. Kintsugi's own CLI and UI already do this; this audit elevates the rule to a permanent invariant for any re-implementation.</p>
+<h2 id="the-full-audit-document"><a href="#the-full-audit-document" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>The full audit document</h2>
+<p>The complete audit, with line references, Slither tooling output, and the disposition of every detector finding, is in the repository as <code>AUDIT.md</code>:</p>
+<p><a href="https://github.com/ophelios-studio/kintsugi/blob/main/AUDIT.md">Read AUDIT.md on GitHub</a></p>
+<p>A summary follows below.</p>
+<h2 id="threat-model"><a href="#threat-model" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Threat model</h2>
+<p>The attacker we care about:</p>
 <ul>
-<li><strong>Victim private key.</strong> Paste it. Input is masked. Kintsugi shows you the derived address to confirm before continuing.</li>
-<li><strong>Safe address.</strong> Paste the destination address. Kintsugi never asks for its private key.</li>
-<li><strong>Rescuer.</strong> Choose: paste an existing rescuer key, or generate one. If you generate one, the CLI prints the address and pauses while you fund it. Send about 0.005 ETH and press Enter.</li>
+<li>has the victim's private key;</li>
+<li>has a sweeper bot watching the victim wallet;</li>
+<li>can run a malicious &quot;Kintsugi&quot; front-end (CLI, UI, or agent skill);</li>
+<li>can watch the public mempool;</li>
+<li>can deploy their own contracts on the same chain;</li>
+<li>cannot break ECDSA, cannot break the EIP-712 standard, cannot break solc 0.8.28.</li>
 </ul>
-<h2 id="4-discover-and-select"><a href="#4-discover-and-select" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>4. Discover and select</h2>
-<p>Kintsugi scans the victim address for ERC-20 tokens, ERC-721 NFTs, ERC-1155 balances, and ENS names. You then pick which to rescue using arrow keys and space:</p>
-<pre><code class="language-text">ERC-20 tokens
-  ◉ MOCK   100   0x36d4...ef63
-  ◉ USDC    42   0xa0b8...eb48
-
-ERC-721 NFTs
-  ◉ MyArt #12   0xd9f1...c8c4
-  ◯ MyArt #13   0xd9f1...c8c4
-</code></pre>
-<p>By default everything is selected. Toggle off anything you don't want to rescue.</p>
-<h2 id="5-plan-and-submit"><a href="#5-plan-and-submit" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>5. Plan and submit</h2>
-<p>The CLI prints the full batch in execution order, then asks for confirmation:</p>
-<pre><code class="language-text">Batch (4 ops)
-  1. transfer MOCK 100 → safe
-  2. transfer MyArt #12 → safe
-  3. transfer ETH 0.0042 → safe
-  4. ...
-
-Estimated gas: 412 000
-Estimated cost: 0.000402 ETH
-Rescuer balance: 0.005 ETH (sufficient)
-
-Sign and submit? (y/N)
-</code></pre>
-<p>Type <code>y</code> and press Enter. The CLI signs the EIP-7702 authorization, signs the EIP-712 batch, and the rescuer submits one Type-4 transaction.</p>
-<p>You'll see the tx hash, then a wait, then a block number when it lands. Most rescues are mined in the next block.</p>
-<h2 id="done"><a href="#done" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Done</h2>
-<p>All selected assets are now in your safe wallet. The compromised wallet is empty.</p>
-<p>If you want to clear the EIP-7702 delegation from the victim address (so it returns to a plain EOA), run <code>kintsugi revoke</code>. Optional.</p>
-<h2 id="common-flags"><a href="#common-flags" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Common flags</h2>
-<pre><code class="language-bash"># route through Flashbots Protect (private mempool)
-kintsugi rescue --private-mempool
-
-# pre-fill the Etherscan API key
-kintsugi rescue --etherscan-api-key YOURKEY
-
-# override deployed contract addresses
-kintsugi rescue --rescue-address 0x... --tracker-address 0x...
-</code></pre>
-<p>Full reference: <a href="/cli-reference/rescue/">CLI Reference / rescue</a>.</p>
-<h2 id="next"><a href="#next" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Next</h2>
-<p>Prefer a browser? <a href="/getting-started/quickstart-ui/">Run with the UI</a>.</p>
+<p>The question this audit answers: does the existence of the deployed Rescue contract grant such an attacker any new capability they didn't already have?</p>
+<h2 id="defensive-properties-confirmed"><a href="#defensive-properties-confirmed" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Defensive properties confirmed</h2>
+<ul>
+<li><strong>Strict signature verification.</strong> OpenZeppelin's <code>ECDSA.tryRecover</code> rejects high-s malleable signatures, invalid v values, and bad-length inputs. The recovered signer must equal <code>address(this)</code> (the victim under EIP-7702 delegation).</li>
+<li><strong>Cross-chain replay impossible.</strong> The <code>_DOMAIN_SEPARATOR</code> is immutable and embeds <code>block.chainid</code> at deploy time, AND the contract checks <code>block.chainid == batch.chainId</code> at execution. Belt and suspenders.</li>
+<li><strong>No storage on the Rescue contract.</strong> All state is <code>immutable</code> (in bytecode) or in the external <code>NonceTracker</code>. Under 7702 delegation no storage slot of the victim is ever written by the Rescue code.</li>
+<li><strong>Nonces isolated per victim.</strong> The <code>NonceTracker</code> is keyed by <code>msg.sender</code>, which under delegation is the victim. No one can advance another account's nonce.</li>
+<li><strong>Atomic-or-revert.</strong> Any single op revert reverts the whole transaction including the nonce bump. No partial state is ever observable.</li>
+<li><strong>Direct calls to the deployed Rescue address are useless.</strong> Without 7702 delegation, <code>address(this)</code> would be the deployed Rescue contract (no private key). The signature check always fails.</li>
+<li><strong>No admin / no pause / no upgrade / no ownership.</strong> Truly trustless. Once deployed, no one (including the maintainer) can change behavior, drain funds, or freeze it.</li>
+<li><strong>Sweeper-bot bypass is structurally guaranteed.</strong> The victim's ETH balance never has to rise above zero during the rescue. Tested explicitly.</li>
+<li><strong>Front-running is harmless.</strong> A mempool watcher copying the auth_list and executeBatch payload would just complete the same rescue (assets still go to the victim-signed safe address). They cannot redirect funds without a new signature.</li>
+<li><strong>Re-entrancy safe.</strong> The nonce is bumped <em>before</em> the calls loop. Re-entry would require a fresh signature with the new nonce.</li>
+</ul>
+<h2 id="the-one-medium-finding"><a href="#the-one-medium-finding" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>The one Medium finding</h2>
+<p><strong>M1: <code>Batch.safe</code> is signed but not enforced.</strong></p>
+<p>The <code>safe</code> field is part of the signed EIP-712 struct (so it's visible to wallet sign-prompts) but the contract does NOT check that operations actually transfer to it. This is a deliberate design choice to keep ops fully general.</p>
+<p>A malicious off-brand &quot;Kintsugi UI&quot; could show the user <code>safe = trustedAddress</code> while the actual ops drain elsewhere. A user who only reads the <code>safe</code> field gets drained.</p>
+<p><strong>The mitigation is a strict off-chain rule:</strong> any tool that builds and shows a Kintsugi batch must surface every op's <code>to</code> address and decoded <code>data</code> to the signer. Kintsugi's own CLI and UI explicitly render every op's recipient and decoded calldata at the plan-review step.</p>
+<h2 id="static-analysis"><a href="#static-analysis" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Static analysis</h2>
+<p><a href="https://github.com/crytic/slither">Slither</a> was run against <code>Rescue.sol</code> and reported eight findings, all reviewed:</p>
+<ul>
+<li><code>arbitrary-send-eth</code>, <code>low-level-calls</code>, <code>calls-loop</code>: expected by design (the contract executes arbitrary victim-signed operations)</li>
+<li><code>unused-return</code> (×2): false positive (the values ARE used or the side effect is the point)</li>
+<li><code>reentrancy-events</code>: not exploitable (nonce bumped before the loop)</li>
+<li><code>timestamp</code>: standard EIP-712 deadline pattern</li>
+<li><code>naming-convention</code>: style preference (matches OpenZeppelin's <code>UPPER_CASE</code> for immutables)</li>
+</ul>
+<p>Full disposition table is in <code>AUDIT.md</code>. None require code changes.</p>
+<h2 id="what-the-audit-does-not-cover"><a href="#what-the-audit-does-not-cover" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>What the audit does NOT cover</h2>
+<p>Two operational risks remain regardless of audit status:</p>
+<ol>
+<li><strong>A compromised key remains compromised.</strong> If the victim's key is in the attacker's hands, the attacker can drain via direct <code>transfer</code> calls without ever touching Kintsugi.</li>
+<li><strong>Off-chain tool integrity.</strong> The contract executes whatever the victim signs. If victims download a malicious lookalike &quot;Kintsugi&quot; tool, the contract dutifully drains them. Defenses: pinning the agent-skill source repo (<code>ophelios-studio/skills</code>), using only the canonical npm package (<code>@kintsugi/cli</code>), and the per-op review rule above.</li>
+</ol>
+<h2 id="found-something-we-missed"><a href="#found-something-we-missed" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Found something we missed?</h2>
+<p>Open an issue on the repo or follow the <a href="/security/reporting/">responsible-disclosure process</a>. Even small clarifications are welcome.</p>
 
     </div>
 
     <nav class="docs-pagination">
-        <a href="/getting-started/prerequisites" class="pagination-link pagination-prev">
+        <a href="/security/reporting" class="pagination-link pagination-prev">
             <span class="pagination-label">&larr; Previous</span>
-            <span class="pagination-title">Prerequisites</span>
+            <span class="pagination-title">Reporting a vulnerability</span>
         </a>
 
-        <a href="/getting-started/quickstart-ui" class="pagination-link pagination-next">
+        <a href="/faq/index" class="pagination-link pagination-next">
             <span class="pagination-label">Next &rarr;</span>
-            <span class="pagination-title">Quickstart (UI)</span>
+            <span class="pagination-title">FAQ</span>
         </a>
     </nav>
 </article>
@@ -480,31 +473,28 @@ kintsugi rescue --rescue-address 0x... --tracker-address 0x...
         <h4 class="toc-title">On this page</h4>
         <ul class="toc-links">
             <li class="toc-item">
-                <a href="#run" class="toc-link">Run</a>
+                <a href="#tldr" class="toc-link">TL;DR</a>
             </li>
             <li class="toc-item">
-                <a href="#1-network" class="toc-link">1. Network</a>
+                <a href="#the-full-audit-document" class="toc-link">The full audit document</a>
             </li>
             <li class="toc-item">
-                <a href="#2-deployment-addresses" class="toc-link">2. Deployment addresses</a>
+                <a href="#threat-model" class="toc-link">Threat model</a>
             </li>
             <li class="toc-item">
-                <a href="#3-wallets" class="toc-link">3. Wallets</a>
+                <a href="#defensive-properties-confirmed" class="toc-link">Defensive properties confirmed</a>
             </li>
             <li class="toc-item">
-                <a href="#4-discover-and-select" class="toc-link">4. Discover and select</a>
+                <a href="#the-one-medium-finding" class="toc-link">The one Medium finding</a>
             </li>
             <li class="toc-item">
-                <a href="#5-plan-and-submit" class="toc-link">5. Plan and submit</a>
+                <a href="#static-analysis" class="toc-link">Static analysis</a>
             </li>
             <li class="toc-item">
-                <a href="#done" class="toc-link">Done</a>
+                <a href="#what-the-audit-does-not-cover" class="toc-link">What the audit does NOT cover</a>
             </li>
             <li class="toc-item">
-                <a href="#common-flags" class="toc-link">Common flags</a>
-            </li>
-            <li class="toc-item">
-                <a href="#next" class="toc-link">Next</a>
+                <a href="#found-something-we-missed" class="toc-link">Found something we missed?</a>
             </li>
         </ul>
     </div>
