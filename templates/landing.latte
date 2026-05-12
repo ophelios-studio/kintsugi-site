@@ -396,8 +396,89 @@
         </div>
     </section>
 
-    {* ─── 7. Get-started lanes (last section in main) ─── *}
-    <section class="section-light" id="start-wrap">
+    {* ─── 6. Open source manifesto (dark) ─── *}
+    <section class="section-dark section-dark--a" id="open-wrap">
+        <div class="landing-section" id="open">
+            <div class="manifesto">
+                <span class="section-eyebrow">Our stance</span>
+                <h2 class="manifesto-title">
+                    Open source. No fees. <span class="accent">No upsell.</span>
+                </h2>
+                <p class="manifesto-lede">
+                    A wallet rescue tool that charges money in the worst moment of someone's crypto life is a wallet rescue tool taking advantage of panic. We will not do that.
+                </p>
+            </div>
+            <div class="principles-row">
+                <article class="principle-card">
+                    <span class="principle-card-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0"/></svg>
+                    </span>
+                    <h3 class="principle-card-title">Open source.</h3>
+                    <p class="principle-card-body">MIT-licensed. Public repository. Every line auditable, every contract verified.</p>
+                </article>
+                <article class="principle-card">
+                    <span class="principle-card-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M5 5l14 14"/><path d="M9 12h6"/></svg>
+                    </span>
+                    <h3 class="principle-card-title">No fees.</h3>
+                    <p class="principle-card-body">No SaaS tier. No signup. No telemetry. Pay only your own gas.</p>
+                </article>
+                <article class="principle-card">
+                    <span class="principle-card-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 10h18"/><path d="M9 22V14h6v8"/></svg>
+                    </span>
+                    <h3 class="principle-card-title">No upsell.</h3>
+                    <p class="principle-card-body">No premium features behind a paywall. The whole tool is the whole tool.</p>
+                </article>
+            </div>
+            <div class="deployments-panel">
+                <header class="deployments-panel-head">
+                    <span class="deployments-panel-eyebrow">Deployments</span>
+                    <a n:if="($leafGithubUrl ?? '') !== ''" href="{$leafGithubUrl}" target="_blank" rel="noopener" class="deployments-panel-source">
+                        View source on GitHub
+                        <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                    </a>
+                </header>
+                <div class="deployments-rows">
+                    <div class="deployment-network">
+                        <span class="deployment-network-name">Sepolia</span>
+                        <span class="deployment-network-status deployment-network-status--ok">Verified</span>
+                    </div>
+                    <div class="deployment-row">
+                        <span class="deployment-row-label">Rescue contract</span>
+                        <code class="deployment-address">0x53c1f40ca0a58942f9eb89d7fd445457a8521fd5</code>
+                        <button type="button" class="deployment-copy" aria-label="Copy Sepolia Rescue address" onclick="
+                            navigator.clipboard.writeText('0x53c1f40ca0a58942f9eb89d7fd445457a8521fd5');
+                            this.classList.add('copied');
+                            setTimeout(() => this.classList.remove('copied'), 1500);
+                        ">
+                            <svg class="copy-icon" width="13" height="13" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"/></svg>
+                            <svg class="copy-check" width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"/></svg>
+                        </button>
+                    </div>
+                    <div class="deployment-row">
+                        <span class="deployment-row-label">NonceTracker</span>
+                        <code class="deployment-address">0x717883abfa58fa2bf0f9c2d5a132227253c47963</code>
+                        <button type="button" class="deployment-copy" aria-label="Copy Sepolia NonceTracker address" onclick="
+                            navigator.clipboard.writeText('0x717883abfa58fa2bf0f9c2d5a132227253c47963');
+                            this.classList.add('copied');
+                            setTimeout(() => this.classList.remove('copied'), 1500);
+                        ">
+                            <svg class="copy-icon" width="13" height="13" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"/></svg>
+                            <svg class="copy-check" width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"/></svg>
+                        </button>
+                    </div>
+                    <div class="deployment-network deployment-network--pending">
+                        <span class="deployment-network-name">Mainnet</span>
+                        <span class="deployment-network-status deployment-network-status--pending">Pending audit</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {* ─── 7. Get-started lanes (last main section, dark, rounded bottom) ─── *}
+    <section class="section-dark section-dark--b section-dark--last" id="start-wrap">
         <div class="landing-section" id="start">
             <span class="section-eyebrow">Three ways forward</span>
             <h2 class="section-title">Where do you want to start?</h2>
@@ -434,93 +515,11 @@
     </section>
 </main>
 
-{* ─── Outro reveal: Our Stance + footer.
-   These are OUTSIDE <main> so they can sit fixed at the bottom of the viewport,
-   revealed as the user scrolls past the main content. Both share a white surface
-   so they merge seamlessly into one closing block. *}
+{* ─── Outro reveal: footer-only, fixed at viewport bottom, behind main.
+   The dark last main section's rounded bottom corners float above the white
+   footer reveal, creating the "card lifts off" moment as you scroll past. *}
 {block footer}
 <div class="outro-reveal" id="outro-reveal">
-    <section class="landing-section outro-section" id="open">
-            <div class="manifesto">
-                <span class="section-eyebrow">Our stance</span>
-                <h2 class="manifesto-title">
-                    Open source. No fees. <span class="accent">No upsell.</span>
-                </h2>
-                <p class="manifesto-lede">
-                    A wallet rescue tool that charges money in the worst moment of someone's crypto life is a wallet rescue tool taking advantage of panic. We will not do that.
-                </p>
-            </div>
-
-            <div class="principles-row">
-                <article class="principle-card">
-                    <span class="principle-card-icon" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0"/></svg>
-                    </span>
-                    <h3 class="principle-card-title">Open source.</h3>
-                    <p class="principle-card-body">MIT-licensed. Public repository. Every line auditable, every contract verified.</p>
-                </article>
-                <article class="principle-card">
-                    <span class="principle-card-icon" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M5 5l14 14"/><path d="M9 12h6"/></svg>
-                    </span>
-                    <h3 class="principle-card-title">No fees.</h3>
-                    <p class="principle-card-body">No SaaS tier. No signup. No telemetry. Pay only your own gas.</p>
-                </article>
-                <article class="principle-card">
-                    <span class="principle-card-icon" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 10h18"/><path d="M9 22V14h6v8"/></svg>
-                    </span>
-                    <h3 class="principle-card-title">No upsell.</h3>
-                    <p class="principle-card-body">No premium features behind a paywall. The whole tool is the whole tool.</p>
-                </article>
-            </div>
-
-            <div class="deployments-panel">
-                <header class="deployments-panel-head">
-                    <span class="deployments-panel-eyebrow">Deployments</span>
-                    <a n:if="($leafGithubUrl ?? '') !== ''" href="{$leafGithubUrl}" target="_blank" rel="noopener" class="deployments-panel-source">
-                        View source on GitHub
-                        <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
-                    </a>
-                </header>
-                <div class="deployments-rows">
-                    <div class="deployment-network">
-                        <span class="deployment-network-name">Sepolia</span>
-                        <span class="deployment-network-status deployment-network-status--ok">Verified</span>
-                    </div>
-                    <div class="deployment-row">
-                        <span class="deployment-row-label">Rescue contract</span>
-                        <code class="deployment-address" id="addr-sepolia-rescue">0x53c1f40ca0a58942f9eb89d7fd445457a8521fd5</code>
-                        <button type="button" class="deployment-copy" aria-label="Copy Sepolia Rescue address" onclick="
-                            navigator.clipboard.writeText('0x53c1f40ca0a58942f9eb89d7fd445457a8521fd5');
-                            this.classList.add('copied');
-                            setTimeout(() => this.classList.remove('copied'), 1500);
-                        ">
-                            <svg class="copy-icon" width="13" height="13" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"/></svg>
-                            <svg class="copy-check" width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"/></svg>
-                        </button>
-                    </div>
-                    <div class="deployment-row">
-                        <span class="deployment-row-label">NonceTracker</span>
-                        <code class="deployment-address" id="addr-sepolia-tracker">0x717883abfa58fa2bf0f9c2d5a132227253c47963</code>
-                        <button type="button" class="deployment-copy" aria-label="Copy Sepolia NonceTracker address" onclick="
-                            navigator.clipboard.writeText('0x717883abfa58fa2bf0f9c2d5a132227253c47963');
-                            this.classList.add('copied');
-                            setTimeout(() => this.classList.remove('copied'), 1500);
-                        ">
-                            <svg class="copy-icon" width="13" height="13" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"/></svg>
-                            <svg class="copy-check" width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"/></svg>
-                        </button>
-                    </div>
-                    <div class="deployment-network deployment-network--pending">
-                        <span class="deployment-network-name">Mainnet</span>
-                        <span class="deployment-network-status deployment-network-status--pending">Pending audit</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        {* The white footer that merges seamlessly with the open section above *}
         <footer class="site-footer site-footer--reveal">
             <div class="landing-section">
                 <div class="reveal-footer-grid">
