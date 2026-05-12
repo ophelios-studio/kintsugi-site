@@ -1150,14 +1150,14 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
 
 /* ── Section 2.5: 7702 counter ("their move vs our move") ── */
 .counter-section {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 5rem;
+    padding-bottom: 5.5rem;
 }
 .counter-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-    margin-top: 2rem;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
 }
 @media (max-width: 900px) {
     .counter-grid { grid-template-columns: 1fr; }
@@ -1166,23 +1166,40 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
     position: relative;
     background: var(--bg-surface);
     border: 1px solid var(--border);
-    border-radius: 0.85rem;
-    padding: 1.5rem 1.5rem 1.25rem;
+    border-radius: 1rem;
+    padding: 2rem 2rem 1.75rem;
     display: flex;
     flex-direction: column;
-    gap: 0.85rem;
+    gap: 1.1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.counter-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 1rem 1rem 0 0;
+    pointer-events: none;
 }
 .counter-card--attack {
-    border-color: oklch(0.55 0.18 28 / 0.30);
+    border-color: oklch(0.55 0.18 28 / 0.35);
     background:
-        linear-gradient(180deg, oklch(0.55 0.18 28 / 0.04) 0%, transparent 100%),
+        linear-gradient(180deg, oklch(0.55 0.18 28 / 0.05) 0%, transparent 60%),
         var(--bg-surface);
+    box-shadow: 0 12px 36px -22px oklch(0.55 0.18 28 / 0.25);
+}
+.counter-card--attack::before {
+    background: linear-gradient(90deg, transparent 0%, var(--danger) 50%, transparent 100%);
 }
 .counter-card--defense {
-    border-color: oklch(0.62 0.14 70 / 0.30);
+    border-color: oklch(0.62 0.14 70 / 0.40);
     background:
-        linear-gradient(180deg, oklch(0.62 0.14 70 / 0.05) 0%, transparent 100%),
+        linear-gradient(180deg, oklch(0.62 0.14 70 / 0.06) 0%, transparent 60%),
         var(--bg-surface);
+    box-shadow: 0 12px 36px -22px oklch(0.62 0.14 70 / 0.30);
+}
+.counter-card--defense::before {
+    background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
 }
 .counter-card-eyebrow {
     font-size: 0.7rem;
@@ -1195,11 +1212,12 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
 .counter-card--defense .counter-card-eyebrow { color: var(--accent); }
 .counter-card-title {
     font-family: var(--font-display);
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 600;
     color: var(--text-bright);
     margin: 0;
-    line-height: 1.25;
+    line-height: 1.2;
+    letter-spacing: -0.012em;
 }
 .counter-steps {
     list-style: none;
@@ -1211,26 +1229,27 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
 }
 .counter-steps li {
     display: grid;
-    grid-template-columns: 1.6rem 1fr;
-    gap: 0.7rem;
+    grid-template-columns: 1.85rem 1fr;
+    gap: 0.85rem;
     align-items: start;
-    font-size: 0.92rem;
-    line-height: 1.5;
+    font-size: 1rem;
+    line-height: 1.55;
     color: var(--text);
 }
 .counter-step-num {
     display: inline-grid;
     place-items: center;
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 1.85rem;
+    height: 1.85rem;
     border-radius: 50%;
     border: 1px solid var(--border);
     background: var(--bg-deep);
     color: var(--text-muted);
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: 0.78rem;
+    font-size: 0.88rem;
     line-height: 1;
+    margin-top: 0.05rem;
 }
 .counter-card--attack .counter-step-num {
     border-color: oklch(0.55 0.18 28 / 0.45);
@@ -1253,13 +1272,14 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
     white-space: nowrap;
 }
 .counter-card-result {
-    margin: 0.5rem 0 0;
-    padding: 0.65rem 0.85rem;
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-    line-height: 1.5;
+    margin: 0.6rem 0 0;
+    padding: 0.85rem 1rem;
+    border-radius: 0.55rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
     background: var(--bg-elevated);
     color: var(--text);
+    font-weight: 500;
 }
 .counter-card--attack .counter-card-result {
     background: oklch(0.55 0.18 28 / 0.08);
@@ -1286,6 +1306,95 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
     border: 1px solid var(--border);
     border-radius: 0.3rem;
     color: var(--text-bright);
+}
+
+/* ── Dark sections (the "how" cluster: coverage + how) ──
+   Two alternating shades give the scroll some rhythm; the cluster reads as
+   one deep-dive moment between the lighter problem and try sections. */
+.section-dark {
+    color: oklch(0.92 0.005 80);
+    position: relative;
+}
+.section-dark--a { background: oklch(0.16 0.012 60); }
+.section-dark--b { background: oklch(0.20 0.012 60); }
+
+/* Subtle gold dot grid + faint kanji ghost behind the dark sections so they
+   don't look like flat black panels. */
+.section-dark::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(oklch(0.78 0.13 75 / 0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    z-index: 0;
+}
+.section-dark > * { position: relative; z-index: 1; }
+
+.section-dark .section-title {
+    color: oklch(0.96 0.005 80);
+}
+.section-dark .section-lede {
+    color: oklch(0.78 0.008 60);
+}
+.section-dark .section-eyebrow {
+    color: var(--seam);
+}
+
+/* feature-card and step-card on dark: invert surface to dark, keep gold accents */
+.section-dark .feature-card,
+.section-dark .step-card {
+    background: oklch(0.20 0.014 60);
+    border-color: oklch(0.32 0.012 60);
+    color: oklch(0.92 0.005 80);
+}
+.section-dark--b .feature-card,
+.section-dark--b .step-card {
+    background: oklch(0.24 0.014 60);
+    border-color: oklch(0.36 0.012 60);
+}
+.section-dark .feature-card:hover,
+.section-dark .step-card:hover {
+    border-color: oklch(0.62 0.14 70 / 0.45);
+    box-shadow: 0 8px 28px -14px oklch(0.62 0.14 70 / 0.20);
+}
+.section-dark .feature-card h3,
+.section-dark .step-card h3 {
+    color: oklch(0.96 0.005 80);
+}
+.section-dark .feature-card p,
+.section-dark .step-card p {
+    color: oklch(0.74 0.008 60);
+}
+.section-dark .feature-card-icon {
+    background: oklch(0.62 0.14 70 / 0.18);
+    color: var(--seam);
+    border: 1px solid oklch(0.62 0.14 70 / 0.30);
+}
+.section-dark .step-num {
+    background: var(--accent);
+    color: oklch(0.16 0.01 60);
+    box-shadow: 0 0 0 4px oklch(0.62 0.14 70 / 0.12);
+}
+.section-dark .callout {
+    background: oklch(0.62 0.14 70 / 0.10);
+    border-left-color: var(--seam);
+    color: oklch(0.94 0.005 80);
+    font-style: italic;
+}
+
+/* The divider rule between dark sections — softer so it reads as one cluster */
+.section-dark + .section-dark > .divider-rule,
+.section-dark .divider-rule {
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        oklch(0.32 0.012 60) 30%,
+        oklch(0.62 0.14 70 / 0.4) 50%,
+        oklch(0.32 0.012 60) 70%,
+        transparent 100%
+    );
 }
 
 /* ── Section 3: what sweepers ignore (3 cards) ── */

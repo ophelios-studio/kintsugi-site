@@ -131,6 +131,9 @@ tailwind.config = {
     update();
 
     /* ── Scrollspy via IntersectionObserver ── */
+    /* Some sections share a menu item. Map section IDs that should highlight
+       a different menu item under the "alias" rule. */
+    var sectionAliases = { coverage: 'how', counter: 'problem' };
     var sections = Array.from(document.querySelectorAll('main.landing > section[id]'));
     if (sections.length && 'IntersectionObserver' in window) {
       var visible = new Map();
@@ -144,10 +147,10 @@ tailwind.config = {
         visible.forEach(function(r, id){
           if (r > bestRatio) { bestRatio = r; best = id; }
         });
-        if (best) document.body.dataset.activeSection = best;
+        if (best) {
+          document.body.dataset.activeSection = sectionAliases[best] || best;
+        }
       }, {
-        /* Active strip is the middle 30% of the viewport. A section becomes
-           "active" when it crosses that band. */
         rootMargin: '-35% 0px -35% 0px',
         threshold: [0, 0.001, 0.25, 0.5, 0.75, 1],
       });
@@ -270,7 +273,7 @@ tailwind.config = {
         </div>
     </section>
 
-    <section class="landing-section landing-section-narrow counter-section" id="counter">
+    <section class="landing-section counter-section" id="counter">
         <span class="section-eyebrow">The attacker's other trick</span>
         <h2 class="section-title">When attackers use EIP-7702 against you, we use it back.</h2>
         <p class="section-lede">
@@ -325,7 +328,7 @@ tailwind.config = {
         </p>
     </section>
 
-    <section class="landing-section" id="coverage">
+    <section class="landing-section section-dark section-dark--a" id="coverage">
         <span class="section-eyebrow">The recovery gap</span>
         <h2 class="section-title">They take what's liquid. They leave what's yours.</h2>
         <p class="section-lede">
@@ -358,7 +361,7 @@ tailwind.config = {
 
     <div class="divider-rule"></div>
 
-    <section class="landing-section landing-section-narrow" id="how">
+    <section class="landing-section landing-section-narrow section-dark section-dark--b" id="how">
         <span class="section-eyebrow">How it works</span>
         <h2 class="section-title">One transaction. No gas from you. Nothing left behind.</h2>
         <p class="section-lede">
