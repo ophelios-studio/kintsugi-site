@@ -396,11 +396,51 @@
         </div>
     </section>
 
-    {* ─── 6 + 7: Outro cluster — open source manifesto + get-started lanes,
-       both sit over a fixed colorful watercolor parallax bg as the page closes. *}
-    <div class="outro-parallax">
-        {* ─── 6. Open source manifesto ─── *}
-        <section class="landing-section outro-section" id="open">
+    {* ─── 7. Get-started lanes (last section in main) ─── *}
+    <section class="section-light" id="start-wrap">
+        <div class="landing-section" id="start">
+            <span class="section-eyebrow">Three ways forward</span>
+            <h2 class="section-title">Where do you want to start?</h2>
+            <div class="lanes-row">
+                <a href="{$leafBaseUrl}/getting-started/quickstart-cli/" class="lane-card lane-card--panic">
+                    <span class="lane-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v6"/><circle cx="12" cy="16.5" r="0.6" fill="currentColor"/></svg>
+                    </span>
+                    <span class="lane-eyebrow">Right now</span>
+                    <h3 class="lane-title">I'm in trouble. Walk me through it.</h3>
+                    <p class="lane-body">Five minutes from install to assets safely in a fresh wallet. Plain language, no Solidity required.</p>
+                    <span class="lane-cta">Five-minute rescue →</span>
+                </a>
+                <a href="{$leafBaseUrl}/concepts/the-sweeper-problem/" class="lane-card lane-card--learn">
+                    <span class="lane-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2z"/><path d="M21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/><path d="M11 7H6"/><path d="M11 11H6"/><path d="M18 7h-5"/><path d="M18 11h-5"/></svg>
+                    </span>
+                    <span class="lane-eyebrow">First</span>
+                    <h3 class="lane-title">I want to understand it first.</h3>
+                    <p class="lane-body">The sweeper problem, EIP-7702 in plain English, the rescuer wallet pattern, why the rescue is atomic.</p>
+                    <span class="lane-cta">Read the concepts →</span>
+                </a>
+                <a href="{$leafBaseUrl}/security/threat-model/" class="lane-card lane-card--audit">
+                    <span class="lane-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><path d="M9 12l2.2 2.2L15 10"/></svg>
+                    </span>
+                    <span class="lane-eyebrow">Auditor mode</span>
+                    <h3 class="lane-title">Show me the trust assumptions.</h3>
+                    <p class="lane-body">Threat model, what the rescuer can and cannot do, known limits, how to report a vulnerability.</p>
+                    <span class="lane-cta">Read the security docs →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+{* ─── Outro reveal: Our Stance + footer.
+   These are OUTSIDE <main> so they can sit fixed at the bottom of the viewport,
+   revealed as the user scrolls past the main content. Both share a white surface
+   so they merge seamlessly into one closing block. *}
+{block footer}
+<div class="outro-reveal" id="outro-reveal">
+    <section class="landing-section outro-section" id="open">
             <div class="manifesto">
                 <span class="section-eyebrow">Our stance</span>
                 <h2 class="manifesto-title">
@@ -480,40 +520,89 @@
             </div>
         </section>
 
-        {* ─── 7. Get-started lanes ─── *}
-        <section class="landing-section outro-section" id="start">
-            <span class="section-eyebrow">Three ways forward</span>
-            <h2 class="section-title">Where do you want to start?</h2>
-            <div class="lanes-row">
-                <a href="{$leafBaseUrl}/getting-started/quickstart-cli/" class="lane-card lane-card--panic">
-                    <span class="lane-icon" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v6"/><circle cx="12" cy="16.5" r="0.6" fill="currentColor"/></svg>
-                    </span>
-                    <span class="lane-eyebrow">Right now</span>
-                    <h3 class="lane-title">I'm in trouble. Walk me through it.</h3>
-                    <p class="lane-body">Five minutes from install to assets safely in a fresh wallet. Plain language, no Solidity required.</p>
-                    <span class="lane-cta">Five-minute rescue →</span>
-                </a>
-                <a href="{$leafBaseUrl}/concepts/the-sweeper-problem/" class="lane-card lane-card--learn">
-                    <span class="lane-icon" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2z"/><path d="M21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/><path d="M11 7H6"/><path d="M11 11H6"/><path d="M18 7h-5"/><path d="M18 11h-5"/></svg>
-                    </span>
-                    <span class="lane-eyebrow">First</span>
-                    <h3 class="lane-title">I want to understand it first.</h3>
-                    <p class="lane-body">The sweeper problem, EIP-7702 in plain English, the rescuer wallet pattern, why the rescue is atomic.</p>
-                    <span class="lane-cta">Read the concepts →</span>
-                </a>
-                <a href="{$leafBaseUrl}/security/threat-model/" class="lane-card lane-card--audit">
-                    <span class="lane-icon" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><path d="M9 12l2.2 2.2L15 10"/></svg>
-                    </span>
-                    <span class="lane-eyebrow">Auditor mode</span>
-                    <h3 class="lane-title">Show me the trust assumptions.</h3>
-                    <p class="lane-body">Threat model, what the rescuer can and cannot do, known limits, how to report a vulnerability.</p>
-                    <span class="lane-cta">Read the security docs →</span>
-                </a>
+        {* The white footer that merges seamlessly with the open section above *}
+        <footer class="site-footer site-footer--reveal">
+            <div class="landing-section">
+                <div class="reveal-footer-grid">
+                    <div class="reveal-footer-brand">
+                        <a href="{$leafBaseUrl}/" class="reveal-footer-logo" aria-label="Kintsugi home">
+                            <span class="reveal-footer-mark" aria-hidden="true">金</span>
+                            <span class="reveal-footer-name">Kintsugi</span>
+                        </a>
+                        <p class="reveal-footer-tag">Mend the wallet. Keep the gold.</p>
+                        <p class="reveal-footer-by">
+                            Built by
+                            <a n:if="($leafAuthorUrl ?? '') !== ''" href="{$leafAuthorUrl}" target="_blank" rel="noopener">{$leafAuthor ?? 'Ophelios Studio'}</a>
+                            <span n:if="($leafAuthorUrl ?? '') === ''">{$leafAuthor ?? 'Ophelios Studio'}</span>
+                        </p>
+                    </div>
+                    <nav class="reveal-footer-cols" aria-label="Footer">
+                        <div class="reveal-footer-col">
+                            <h4>Product</h4>
+                            <ul>
+                                <li><a href="{$leafBaseUrl}/getting-started/install/">Install</a></li>
+                                <li><a href="{$leafBaseUrl}/cli-reference/rescue/">CLI</a></li>
+                                <li><a href="{$leafBaseUrl}/ui-walkthrough/network/">UI walkthrough</a></li>
+                                <li><a href="{$leafBaseUrl}/getting-started/with-an-agent/">Agent skill</a></li>
+                            </ul>
+                        </div>
+                        <div class="reveal-footer-col">
+                            <h4>Concepts</h4>
+                            <ul>
+                                <li><a href="{$leafBaseUrl}/concepts/the-sweeper-problem/">The sweeper problem</a></li>
+                                <li><a href="{$leafBaseUrl}/concepts/eip-7702-explained/">EIP-7702 explained</a></li>
+                                <li><a href="{$leafBaseUrl}/concepts/rescuer-pattern/">Rescuer pattern</a></li>
+                                <li><a href="{$leafBaseUrl}/concepts/atomic-batches/">Atomic batches</a></li>
+                            </ul>
+                        </div>
+                        <div class="reveal-footer-col">
+                            <h4>Security</h4>
+                            <ul>
+                                <li><a href="{$leafBaseUrl}/security/threat-model/">Threat model</a></li>
+                                <li><a href="{$leafBaseUrl}/security/trust-assumptions/">Trust assumptions</a></li>
+                                <li><a href="{$leafBaseUrl}/security/known-limits/">Known limits</a></li>
+                                <li><a href="{$leafBaseUrl}/security/reporting/">Report a vulnerability</a></li>
+                            </ul>
+                        </div>
+                        <div class="reveal-footer-col">
+                            <h4>Project</h4>
+                            <ul>
+                                <li><a n:if="($leafGithubUrl ?? '') !== ''" href="{$leafGithubUrl}" target="_blank" rel="noopener">GitHub</a></li>
+                                <li><a href="https://github.com/ophelios-studio/skills" target="_blank" rel="noopener">Agent skills repo</a></li>
+                                <li><a n:if="($leafAuthorUrl ?? '') !== ''" href="{$leafAuthorUrl}" target="_blank" rel="noopener">Ophelios Studio</a></li>
+                                <li><a href="{$leafBaseUrl}/faq/index/">FAQ</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                <div class="reveal-footer-bottom">
+                    <span>v{$leafVersion ?? '0.1.0'} pre-alpha</span>
+                    <span class="reveal-footer-bottom-spacer" aria-hidden="true"></span>
+                    <span>{$leafLicense ?? 'MIT'} License</span>
+                    <span>&copy; 2026 Ophelios Studio</span>
+                </div>
+                <div class="reveal-footer-mark-bg" aria-hidden="true">金</div>
             </div>
-        </section>
-    </div>
-</main>
+        </footer>
+</div>
+
+{* Size main's bottom margin to match the reveal height so the page can scroll
+   far enough to fully uncover the reveal. Re-runs on resize. *}
+<script>
+(function(){
+  function fit(){
+    var main = document.querySelector('main.landing');
+    var reveal = document.getElementById('outro-reveal');
+    if (!main || !reveal) return;
+    main.style.marginBottom = reveal.offsetHeight + 'px';
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fit);
+  } else {
+    fit();
+  }
+  window.addEventListener('load', fit);
+  window.addEventListener('resize', fit);
+})();
+</script>
 {/block}

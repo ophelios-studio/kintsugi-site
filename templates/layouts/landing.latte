@@ -9,7 +9,7 @@
 <body class="bg-deep text-body antialiased font-body">
     {include '../partials/nav.latte'}
     {block content}{/block}
-    {include '../partials/footer.latte'}
+    {block footer}{include '../partials/footer.latte'}{/block}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>

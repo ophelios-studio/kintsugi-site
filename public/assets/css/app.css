@@ -2061,55 +2061,47 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
     .chat-message { max-width: 100%; }
 }
 
-/* ── Outro cluster (open + start) over a fixed watercolor parallax ── */
-.outro-parallax {
-    position: relative;
-    width: 100%;
-    background-image: url("/assets/images/agent-bg.webp");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    overflow: hidden;
-}
-.outro-parallax::before {
-    content: "";
-    position: absolute;
-    inset: 0;
+/* ── Outro reveal: Our Stance + footer fixed at viewport bottom, behind main ──
+   When the user scrolls past <main>, the main element scrolls UP off the screen
+   and uncovers the .outro-reveal layer fixed below it. JS sets <main>'s
+   margin-bottom to the rendered height of .outro-reveal so the page can scroll
+   far enough to fully reveal it. */
+.outro-reveal {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    background: oklch(1 0 0);
     pointer-events: none;
-    background: linear-gradient(
-        180deg,
-        oklch(1 0 0 / 0.96) 0%,
-        oklch(1 0 0 / 0.82) 6%,
-        oklch(1 0 0 / 0.78) 50%,
-        oklch(1 0 0 / 0.86) 94%,
-        oklch(1 0 0 / 0.96) 100%
-    );
-    backdrop-filter: blur(2px) saturate(115%);
-    -webkit-backdrop-filter: blur(2px) saturate(115%);
 }
-.outro-parallax > .outro-section { position: relative; z-index: 1; }
-.outro-section { padding-top: 5rem; padding-bottom: 5rem; }
-.outro-section + .outro-section { padding-top: 1rem; }
+.outro-reveal > * { pointer-events: auto; }
 
-@supports (-webkit-touch-callout: none) {
-    .outro-parallax { background-attachment: scroll; }
+main.landing {
+    position: relative;
+    z-index: 1;
+    /* Fallback solid bg so the reveal stays hidden even on sections without
+       their own background. JS overrides margin-bottom to match the reveal height. */
+    background: var(--bg-deep);
+    margin-bottom: 600px;
 }
+
+.outro-section { padding-top: 3rem; padding-bottom: 0.5rem; }
 
 /* ── Section 6: Open source manifesto ── */
 .manifesto {
     text-align: center;
     max-width: 56rem;
-    margin: 0 auto 2.5rem;
+    margin: 0 auto 1.5rem;
 }
 .manifesto-title {
     font-family: var(--font-display);
-    font-size: clamp(2.25rem, 4.5vw, 3rem);
+    font-size: clamp(2rem, 3.8vw, 2.6rem);
     font-weight: 600;
     color: var(--text-bright);
     line-height: 1.1;
     letter-spacing: -0.022em;
-    margin: 0.5rem 0 1.25rem;
+    margin: 0.25rem 0 0.75rem;
 }
 .manifesto-title .accent { color: var(--accent); }
 .manifesto-lede {
@@ -2124,19 +2116,17 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
 .principles-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
-    margin: 0 auto 2.5rem;
+    gap: 1rem;
+    margin: 0 auto 1.5rem;
 }
 @media (max-width: 900px) {
     .principles-row { grid-template-columns: 1fr; }
 }
 .principle-card {
-    background: oklch(1 0 0 / 0.92);
+    background: oklch(1 0 0);
     border: 1px solid oklch(0.62 0.14 70 / 0.18);
     border-radius: 0.85rem;
-    padding: 1.4rem 1.4rem 1.5rem;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    padding: 1.1rem 1.2rem 1.2rem;
     box-shadow: 0 6px 22px -16px oklch(0.20 0.01 60 / 0.22);
     text-align: center;
     transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
@@ -2149,37 +2139,35 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
 .principle-card-icon {
     display: inline-grid;
     place-items: center;
-    width: 2.6rem;
-    height: 2.6rem;
-    border-radius: 0.6rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 0.5rem;
     background: oklch(0.62 0.14 70 / 0.12);
     color: var(--seam);
     border: 1px solid oklch(0.62 0.14 70 / 0.30);
-    margin-bottom: 0.85rem;
+    margin-bottom: 0.55rem;
 }
 .principle-card-title {
     font-family: var(--font-display);
-    font-size: 1.35rem;
+    font-size: 1.2rem;
     font-weight: 600;
     color: var(--text-bright);
-    margin: 0 0 0.45rem;
+    margin: 0 0 0.3rem;
     letter-spacing: -0.012em;
 }
 .principle-card-body {
     margin: 0;
     color: var(--text);
-    font-size: 0.95rem;
-    line-height: 1.55;
+    font-size: 0.875rem;
+    line-height: 1.5;
 }
 
 /* Deployments panel (replaces the loose contract-pills) */
 .deployments-panel {
-    background: oklch(1 0 0 / 0.94);
+    background: oklch(1 0 0);
     border: 1px solid var(--border);
     border-radius: 0.85rem;
-    padding: 1.25rem 1.5rem;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    padding: 1rem 1.25rem;
     box-shadow: 0 8px 26px -18px oklch(0.20 0.01 60 / 0.30);
     max-width: 56rem;
     margin: 0 auto;
@@ -2438,6 +2426,124 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
     color: var(--text-muted);
 }
 .footer-meta a:hover { color: var(--text-bright); }
+
+/* ── White reveal footer (used inside the .outro-reveal block) ── */
+.site-footer--reveal {
+    background: oklch(1 0 0);
+    border-top: none;
+    padding: 0.5rem 1.5rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+.site-footer--reveal > .landing-section {
+    position: relative;
+}
+.reveal-footer-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr);
+    gap: 2.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+}
+@media (max-width: 900px) {
+    .reveal-footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+.reveal-footer-brand { display: flex; flex-direction: column; gap: 0.6rem; }
+.reveal-footer-logo {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    text-decoration: none;
+}
+.reveal-footer-mark {
+    color: var(--seam);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.85rem;
+    line-height: 1;
+    transform: translateY(0.04em);
+}
+.reveal-footer-name {
+    font-family: var(--font-brand);
+    font-size: 2rem;
+    color: var(--text-bright);
+    letter-spacing: 0.01em;
+    line-height: 1;
+}
+.reveal-footer-tag {
+    margin: 0.25rem 0 0;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.4;
+    font-style: italic;
+}
+.reveal-footer-by {
+    margin: 0.25rem 0 0;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+.reveal-footer-by a { color: var(--accent); font-weight: 500; text-decoration: none; }
+.reveal-footer-by a:hover { color: var(--accent-light); }
+
+.reveal-footer-cols {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+@media (max-width: 700px) {
+    .reveal-footer-cols { grid-template-columns: repeat(2, 1fr); }
+}
+.reveal-footer-col h4 {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-bright);
+    margin: 0 0 0.85rem;
+}
+.reveal-footer-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+.reveal-footer-col a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.15s ease;
+}
+.reveal-footer-col a:hover { color: var(--accent); }
+
+.reveal-footer-bottom {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    padding-top: 1rem;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+}
+.reveal-footer-bottom-spacer { flex: 1 1 auto; }
+
+/* The kanji watermark behind the footer for atmosphere */
+.reveal-footer-mark-bg {
+    position: absolute;
+    right: -3vw;
+    bottom: -8vw;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 26vw;
+    color: oklch(0.62 0.14 70 / 0.04);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+}
 
 /* ──────────── Docs layout (preserve framework structure) ──────────── */
 .docs-layout {
