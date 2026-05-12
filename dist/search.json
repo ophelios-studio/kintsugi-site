@@ -3,7 +3,7 @@
         "title": "Custom calls",
         "section": "asset-support",
         "url": "\/asset-support\/custom-calls",
-        "excerpt": "Kintsugi auto-discovers ETH, ERC-20, ERC-721, ERC-1155, and ENS. Anything outside that surface (staked NFTs, vesting positions, LP positions, governance escrows) needs a custom call. A custom call is just an op with arbitrary to, value, and ABI-encoded data. You use the customCall helper from @kints...",
+        "excerpt": "Kintsugi auto-discovers ETH, ERC-20, ERC-721, ERC-1155, and ENS. Anything outside that surface (staked NFTs, vesting positions, LP positions, governance escrows) needs a custom call. A custom call is just an op with arbitrary to, value, and ABI-encoded data. You use the customCall helper from @ophel...",
         "headings": [
             "When to use a custom call",
             "API",
@@ -368,7 +368,7 @@
         "title": "Trust assumptions",
         "section": "security",
         "url": "\/security\/trust-assumptions",
-        "excerpt": "A short, honest enumeration of every party and component that has any effect on a rescue, and what trusting them looks like. #You trust the source code @kintsugi\/core is the headless TypeScript library that builds and signs everything. @kintsugi\/cli and @kintsugi\/ui are surfaces over it. All three a...",
+        "excerpt": "A short, honest enumeration of every party and component that has any effect on a rescue, and what trusting them looks like. #You trust the source code @ophelios\/core is the headless TypeScript library that builds and signs everything. @ophelios\/cli and @ophelios\/ui are surfaces over it. All three a...",
         "headings": [
             "You trust the source code",
             "You trust your RPC provider",

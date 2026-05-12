@@ -6,7 +6,7 @@ description: "Add arbitrary contract calls to the rescue batch for unstake, clai
 
 Kintsugi auto-discovers ETH, ERC-20, ERC-721, ERC-1155, and ENS. Anything outside that surface (staked NFTs, vesting positions, LP positions, governance escrows) needs a custom call.
 
-A custom call is just an op with arbitrary `to`, `value`, and ABI-encoded `data`. You use the `customCall` helper from `@kintsugi/core` and place the resulting op in the batch alongside the auto-discovered ones.
+A custom call is just an op with arbitrary `to`, `value`, and ABI-encoded `data`. You use the `customCall` helper from `@ophelios/core` and place the resulting op in the batch alongside the auto-discovered ones.
 
 ## When to use a custom call
 
@@ -21,7 +21,7 @@ If the goal is "get the assets out of the victim", custom calls let you do anyth
 ## API
 
 ```ts
-import { customCall } from '@kintsugi/core'
+import { customCall } from '@ophelios/core'
 
 const op = customCall({
   to: '0xStakingContract',
@@ -51,7 +51,7 @@ import {
   signRescueAuthorization,
   submitRescue,
   type Op,
-} from '@kintsugi/core'
+} from '@ophelios/core'
 
 const stakingAbi = [{
   type: 'function',
@@ -105,6 +105,6 @@ Custom calls are part of the same batch as the auto-discovered ops. They get the
 
 ## Where to use custom calls today
 
-Currently custom calls are a TypeScript API on `@kintsugi/core`. The CLI and UI auto-discover and build batches without exposing custom calls to non-developers. If you need custom calls for a rescue, write a small TypeScript script that imports `@kintsugi/core` and submits your own batch.
+Currently custom calls are a TypeScript API on `@ophelios/core`. The CLI and UI auto-discover and build batches without exposing custom calls to non-developers. If you need custom calls for a rescue, write a small TypeScript script that imports `@ophelios/core` and submits your own batch.
 
 Adding a "custom calls" UI panel that accepts contract address + ABI fragment + function call is on the roadmap.

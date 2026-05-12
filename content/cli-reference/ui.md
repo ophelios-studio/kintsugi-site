@@ -25,7 +25,7 @@ kintsugi ui [options]
 2. Starts a Hono HTTP server bound to `127.0.0.1` on the given port.
 3. Constructs a URL of the form `http://127.0.0.1:<port>/#t=<token>`.
 4. Opens that URL in your default browser (unless `--no-browser`).
-5. Serves the React UI bundle plus the JSON API the UI uses to drive `@kintsugi/core`.
+5. Serves the React UI bundle plus the JSON API the UI uses to drive `@ophelios/core`.
 
 The token sits in the URL fragment, which is never sent in the HTTP request line. The UI reads it client-side and attaches it as the `X-Kintsugi-Token` header on every API call. Any request without the token returns 401.
 

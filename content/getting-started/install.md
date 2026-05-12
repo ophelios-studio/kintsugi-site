@@ -19,7 +19,7 @@ If that prints anything below `v20`, install a recent Node from [nodejs.org](htt
 ## Install the CLI
 
 ```bash
-npm install -g @kintsugi/cli
+npm install -g @ophelios/cli
 ```
 
 That installs the `kintsugi` binary globally. Verify:
@@ -38,9 +38,9 @@ If you prefer to read every line before running it (recommended for a tool that 
 git clone https://github.com/ophelios-studio/kintsugi
 cd kintsugi
 npm install
-npm --workspace @kintsugi/core run build
-npm --workspace @kintsugi/cli run build
-npm --workspace @kintsugi/cli link
+npm --workspace @ophelios/core run build
+npm --workspace @ophelios/cli run build
+npm --workspace @ophelios/cli link
 kintsugi --help
 ```
 
@@ -49,7 +49,7 @@ The `link` step makes the local `kintsugi` command available on your PATH the sa
 ## Update
 
 ```bash
-npm install -g @kintsugi/cli@latest
+npm install -g @ophelios/cli@latest
 ```
 
 There is no auto-update. Releases are tagged on GitHub.
@@ -57,7 +57,7 @@ There is no auto-update. Releases are tagged on GitHub.
 ## Uninstall
 
 ```bash
-npm uninstall -g @kintsugi/cli
+npm uninstall -g @ophelios/cli
 ```
 
 Kintsugi writes nothing to disk, so removing the binary is the only cleanup needed.

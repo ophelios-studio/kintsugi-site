@@ -454,7 +454,7 @@ tailwind.config = {
 <p>Two operational risks remain regardless of audit status:</p>
 <ol>
 <li><strong>A compromised key remains compromised.</strong> If the victim's key is in the attacker's hands, the attacker can drain via direct <code>transfer</code> calls without ever touching Kintsugi.</li>
-<li><strong>Off-chain tool integrity.</strong> The contract executes whatever the victim signs. If victims download a malicious lookalike &quot;Kintsugi&quot; tool, the contract dutifully drains them. Defenses: pinning the agent-skill source repo (<code>ophelios-studio/skills</code>), using only the canonical npm package (<code>@kintsugi/cli</code>), and the per-op review rule above.</li>
+<li><strong>Off-chain tool integrity.</strong> The contract executes whatever the victim signs. If victims download a malicious lookalike &quot;Kintsugi&quot; tool, the contract dutifully drains them. Defenses: pinning the agent-skill source repo (<code>ophelios-studio/skills</code>), using only the canonical npm package (<code>@ophelios/cli</code>), and the per-op review rule above.</li>
 </ol>
 <h2 id="found-something-we-missed"><a href="#found-something-we-missed" class="heading-permalink" aria-hidden="true" title="Permalink">#</a>Found something we missed?</h2>
 <p>Open an issue on the repo or follow the <a href="/security/reporting/">responsible-disclosure process</a>. Even small clarifications are welcome.</p>

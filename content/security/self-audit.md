@@ -84,7 +84,7 @@ Full disposition tables for both tools are in `AUDIT.md`. None require code chan
 Two operational risks remain regardless of audit status:
 
 1. **A compromised key remains compromised.** If the victim's key is in the attacker's hands, the attacker can drain via direct `transfer` calls without ever touching Kintsugi.
-2. **Off-chain tool integrity.** The contract executes whatever the victim signs. If victims download a malicious lookalike "Kintsugi" tool, the contract dutifully drains them. Defenses: pinning the agent-skill source repo (`ophelios-studio/skills`), using only the canonical npm package (`@kintsugi/cli`), and the per-op review rule above.
+2. **Off-chain tool integrity.** The contract executes whatever the victim signs. If victims download a malicious lookalike "Kintsugi" tool, the contract dutifully drains them. Defenses: pinning the agent-skill source repo (`ophelios-studio/skills`), using only the canonical npm package (`@ophelios/cli`), and the per-op review rule above.
 
 ## Found something we missed?
 
