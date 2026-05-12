@@ -1490,6 +1490,15 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
 .section-dark--a { background: oklch(0.16 0.012 60); }
 .section-dark--b { background: oklch(0.20 0.012 60); }
 
+/* The last main section before the reveal: rounded bottom corners so it floats
+   like a card above the white footer reveal underneath. */
+.section-dark--last {
+    border-bottom-left-radius: 3rem;
+    border-bottom-right-radius: 3rem;
+    overflow: hidden;
+    box-shadow: 0 24px 48px -32px oklch(0.20 0.01 60 / 0.45);
+}
+
 /* Subtle gold dot grid behind dark sections so they don't read as flat black. */
 .section-dark::before {
     content: "";
@@ -1560,6 +1569,103 @@ body[data-active-section="open"] .nav-drawer-link[data-section="open"] {
     color: oklch(0.16 0.01 60);
     box-shadow: 0 0 0 4px oklch(0.62 0.14 70 / 0.12);
 }
+
+/* Principle cards inside dark sections */
+.section-dark .principle-card {
+    background: oklch(0.22 0.012 60);
+    border-color: oklch(0.62 0.14 70 / 0.22);
+    box-shadow: 0 8px 26px -18px oklch(0 0 0 / 0.45);
+}
+.section-dark--b .principle-card { background: oklch(0.26 0.012 60); }
+.section-dark .principle-card:hover {
+    border-color: oklch(0.62 0.14 70 / 0.50);
+    box-shadow: 0 12px 32px -18px oklch(0.62 0.14 70 / 0.30);
+}
+.section-dark .principle-card-icon {
+    background: oklch(0.62 0.14 70 / 0.18);
+    border-color: oklch(0.62 0.14 70 / 0.40);
+    color: var(--seam-bright);
+}
+.section-dark .principle-card-title { color: oklch(0.96 0.005 80); }
+.section-dark .principle-card-body { color: oklch(0.74 0.008 60); }
+
+/* Deployments panel inside dark sections */
+.section-dark .deployments-panel {
+    background: oklch(0.22 0.012 60);
+    border-color: oklch(0.32 0.012 60);
+    box-shadow: 0 8px 26px -18px oklch(0 0 0 / 0.45);
+}
+.section-dark--b .deployments-panel { background: oklch(0.26 0.012 60); }
+.section-dark .deployments-panel-head { border-bottom-color: oklch(0.34 0.012 60); }
+.section-dark .deployments-panel-eyebrow { color: oklch(0.62 0.012 60); }
+.section-dark .deployment-network { border-top-color: oklch(0.32 0.012 60 / 0.9); }
+.section-dark .deployment-network-name { color: oklch(0.96 0.005 80); }
+.section-dark .deployment-network-status--ok {
+    color: oklch(0.78 0.16 145);
+    background: oklch(0.78 0.16 145 / 0.14);
+    border-color: oklch(0.78 0.16 145 / 0.40);
+}
+.section-dark .deployment-network-status--pending {
+    color: oklch(0.65 0.012 60);
+    background: oklch(0.30 0.012 60);
+    border-color: oklch(0.36 0.012 60);
+}
+.section-dark .deployment-row:hover { background: oklch(0.30 0.012 60); }
+.section-dark .deployment-row-label { color: oklch(0.65 0.012 60); }
+.section-dark .deployment-address { color: oklch(0.92 0.005 80); }
+.section-dark .deployment-copy {
+    border-color: oklch(0.36 0.012 60);
+    color: oklch(0.65 0.012 60);
+}
+.section-dark .deployment-copy:hover {
+    color: var(--seam-bright);
+    border-color: var(--seam);
+    background: oklch(0.30 0.012 60);
+}
+
+/* Lane cards inside dark sections (per-lane accents kept) */
+.section-dark .lane-card {
+    background: oklch(0.22 0.012 60);
+    border-color: oklch(0.32 0.012 60);
+    box-shadow: 0 8px 26px -18px oklch(0 0 0 / 0.45);
+}
+.section-dark--b .lane-card { background: oklch(0.26 0.012 60); }
+.section-dark .lane-card:hover {
+    box-shadow: 0 16px 36px -20px oklch(0 0 0 / 0.55);
+}
+.section-dark .lane-icon {
+    background: oklch(0.30 0.012 60);
+    border-color: oklch(0.36 0.012 60);
+}
+.section-dark .lane-card--panic .lane-icon {
+    background: oklch(0.55 0.18 28 / 0.16);
+    border-color: oklch(0.55 0.18 28 / 0.45);
+    color: oklch(0.78 0.16 28);
+}
+.section-dark .lane-card--learn .lane-icon {
+    background: oklch(0.62 0.14 70 / 0.16);
+    border-color: oklch(0.62 0.14 70 / 0.45);
+    color: var(--seam-bright);
+}
+.section-dark .lane-card--audit .lane-icon {
+    background: oklch(0.55 0.06 220 / 0.16);
+    border-color: oklch(0.55 0.06 220 / 0.45);
+    color: oklch(0.78 0.06 220);
+}
+.section-dark .lane-eyebrow { color: oklch(0.62 0.012 60); }
+.section-dark .lane-card--panic .lane-eyebrow { color: oklch(0.78 0.16 28); }
+.section-dark .lane-card--learn .lane-eyebrow { color: var(--seam-bright); }
+.section-dark .lane-card--audit .lane-eyebrow { color: oklch(0.78 0.06 220); }
+.section-dark .lane-title { color: oklch(0.96 0.005 80); }
+.section-dark .lane-body { color: oklch(0.74 0.008 60); }
+.section-dark .lane-cta { color: var(--seam-bright); }
+.section-dark .lane-card--panic .lane-cta { color: oklch(0.78 0.16 28); }
+.section-dark .lane-card--audit .lane-cta { color: oklch(0.78 0.06 220); }
+
+/* Manifesto inside dark section */
+.section-dark .manifesto-title { color: oklch(0.96 0.005 80); }
+.section-dark .manifesto-title .accent { color: var(--seam-bright); }
+.section-dark .manifesto-lede { color: oklch(0.78 0.008 60); }
 .section-dark .callout {
     background: oklch(0.62 0.14 70 / 0.10);
     border-left-color: var(--seam);
