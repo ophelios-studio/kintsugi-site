@@ -200,32 +200,50 @@
             <p class="section-lede">
                 EIP-7702 lets a victim wallet temporarily delegate execution to a battle-tested rescue contract. Combined with EIP-712 batch authorization, every selected asset moves to your safe wallet inside one atomic Type-4 transaction, paid for by a separate rescuer key.
             </p>
-            <div class="steps-row">
-                <div class="step-card">
-                    <span class="step-num">1</span>
-                    <h3>You sign locally</h3>
-                    <p>
-                        The CLI signs an EIP-7702 authorization plus an EIP-712 batch of transfers (ERC-20, NFTs, ENS). Nothing leaves your machine yet. The victim private key is held in memory only and never written to disk.
-                    </p>
+            <figure class="rescue-story" aria-label="The rescue sequence">
+                <figcaption class="rescue-story-eyebrow">The rescue, in three beats</figcaption>
+                <ol class="rescue-steps">
+                    <li class="rescue-step" data-step="1" style="--step-delay: 0s">
+                        <span class="rescue-step-index" aria-hidden="true">1</span>
+                        <span class="rescue-step-icon" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 3.5l6 6L9 21H3v-6z"/><path d="M13 5l6 6"/><path d="M3 21h18"/></svg>
+                        </span>
+                        <div class="rescue-step-body">
+                            <p class="rescue-step-title">You sign, locally.</p>
+                            <p class="rescue-step-sub">An EIP-7702 authorization plus an EIP-712 batch of transfers (ERC-20, NFTs, ENS). Keys live in your local Node process only and are never written to disk.</p>
+                        </div>
+                    </li>
+                    <li class="rescue-step" data-step="2" style="--step-delay: 2s">
+                        <span class="rescue-step-index" aria-hidden="true">2</span>
+                        <span class="rescue-step-icon" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3L11 13"/><path d="M21 3L14.5 21l-3.5-8L3 9.5z"/></svg>
+                        </span>
+                        <div class="rescue-step-body">
+                            <p class="rescue-step-title">Your rescuer submits one Type-4 transaction.</p>
+                            <p class="rescue-step-sub">A separate wallet you control pays the gas. Your authorization processes first inside the tx, then it calls <code>Rescue.executeBatch</code> on your wallet.</p>
+                        </div>
+                    </li>
+                    <li class="rescue-step" data-step="3" style="--step-delay: 4s">
+                        <span class="rescue-step-index" aria-hidden="true">3</span>
+                        <span class="rescue-step-icon" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><circle cx="12" cy="14.5" r="2"/><path d="M12 14.5v2"/></svg>
+                        </span>
+                        <div class="rescue-step-body">
+                            <p class="rescue-step-title">Every asset lands at your safe wallet.</p>
+                            <p class="rescue-step-sub">Same block, atomic. The sweeper sees the tx land, finds the wallet empty, and moves on.</p>
+                        </div>
+                    </li>
+                </ol>
+                <div class="rescue-result">
+                    <span class="rescue-result-icon" aria-hidden="true">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><path d="M9 12l2.2 2.2L15 10"/></svg>
+                    </span>
+                    <div>
+                        <p class="rescue-result-title">Your balance never rose above zero.</p>
+                        <p class="rescue-result-sub">There was no opening for a sweeper to act on, because there was nothing to take. After the rescue, optionally clear the delegation with <code>kintsugi revoke</code> to leave a pure EOA behind.</p>
+                    </div>
                 </div>
-                <div class="step-card">
-                    <span class="step-num">2</span>
-                    <h3>Rescuer submits</h3>
-                    <p>
-                        A separate rescuer wallet you control submits a single Type-4 transaction. It pays the gas, attaches your authorization, and calls the audited rescue contract on your behalf. Your wallet's ETH balance never rises above zero.
-                    </p>
-                </div>
-                <div class="step-card">
-                    <span class="step-num">3</span>
-                    <h3>Assets land safely</h3>
-                    <p>
-                        Inside the same transaction, the contract executes every transfer to a fresh safe address you control. The sweeper sees the rescue land, finds nothing to grab, and moves on. The victim wallet is then optionally revoked back to a pure EOA.
-                    </p>
-                </div>
-            </div>
-            <div class="callout">
-                The victim wallet's balance never rises above zero. There is no opening for a sweeper to act on, because there is nothing to take.
-            </div>
+            </figure>
         </div>
     </section>
 
