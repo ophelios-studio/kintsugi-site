@@ -1,11 +1,10 @@
 {default bool $docsMode = false}
 {var $bigMode = !$docsMode}
 {var $menuItems = [
-    ['section' => 'problem',  'label' => 'Problem'],
-    ['section' => 'how',      'label' => 'How'],
-    ['section' => 'try',      'label' => 'Use it'],
-    ['section' => 'agent',    'label' => 'With agent'],
-    ['section' => 'open',     'label' => 'Open source'],
+    ['section' => 'problem',  'label' => 'Problem',      'href' => '#problem'],
+    ['section' => 'how',      'label' => 'How it works', 'href' => '#how'],
+    ['section' => 'usage',    'label' => 'Usage',        'href' => '#try'],
+    ['section' => 'open',     'label' => 'Open source',  'href' => '#open'],
 ]}
 
 <header class="site-nav{if $bigMode} site-nav--big{/if}" data-big-mode="{$bigMode ? 'true' : 'false'}">
@@ -27,7 +26,7 @@
         {if $bigMode}
         <nav class="nav-menu" aria-label="Sections">
             {foreach $menuItems as $item}
-            <a href="#{$item['section']}" data-section="{$item['section']}" class="nav-menu-link">{$item['label']}</a>
+            <a href="{$item['href']}" data-section="{$item['section']}" class="nav-menu-link">{$item['label']}</a>
             {/foreach}
         </nav>
         {/if}
@@ -63,7 +62,7 @@
         </a>
         <nav class="nav-drawer-links" aria-label="Sections">
             {foreach $menuItems as $item}
-            <a href="#{$item['section']}" data-section="{$item['section']}" class="nav-drawer-link" onclick="window.kintsugiToggleDrawer && window.kintsugiToggleDrawer(false)">{$item['label']}</a>
+            <a href="{$item['href']}" data-section="{$item['section']}" class="nav-drawer-link" onclick="window.kintsugiToggleDrawer && window.kintsugiToggleDrawer(false)">{$item['label']}</a>
             {/foreach}
             <div class="nav-drawer-divider"></div>
             <a href="{$leafBaseUrl}/getting-started/install/" class="nav-drawer-link">Docs</a>
@@ -99,7 +98,12 @@
     /* ── Scrollspy via IntersectionObserver ── */
     /* Some sections share a menu item. Map section IDs that should highlight
        a different menu item under the "alias" rule. */
-    var sectionAliases = { coverage: 'how', counter: 'problem' };
+    var sectionAliases = {
+      coverage: 'how',
+      counter: 'problem',
+      try: 'usage',
+      agent: 'usage',
+    };
     var sections = Array.from(document.querySelectorAll('main.landing > section[id]'));
     if (sections.length && 'IntersectionObserver' in window) {
       var visible = new Map();
