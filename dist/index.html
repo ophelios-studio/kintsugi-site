@@ -328,70 +328,72 @@ tailwind.config = {
         </p>
     </section>
 
-    <section class="landing-section section-dark section-dark--a" id="coverage">
-        <span class="section-eyebrow">The recovery gap</span>
-        <h2 class="section-title">They take what's liquid. They leave what's yours.</h2>
-        <p class="section-lede">
-            Drainer bots optimize for fast liquidation. They sweep ETH and the most liquid ERC-20s, ignore everything that takes effort to fence, and move on. The leftovers are often the most personally valuable holdings, but a working sweeper still blocks any normal recovery attempt.
-        </p>
-        <div class="cards-row">
-            <div class="feature-card">
-                <div class="feature-card-icon" aria-hidden="true">字</div>
-                <h3>ENS names</h3>
-                <p>
-                    Your dot-eth identity, the one you've used everywhere for years, is rarely auto-drained. It's also typically the hardest to move once a sweeper is watching. Kintsugi handles unwrapped 2LDs, wrapped names, and subdomains in a single batch.
-                </p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-card-icon" aria-hidden="true">画</div>
-                <h3>Illiquid NFTs</h3>
-                <p>
-                    Long-tail collections, art, in-game items, memberships. Bots usually skip ERC-721 and ERC-1155 because the resale path is slow. They stay on the compromised wallet, visible to everyone, recoverable by no one.
-                </p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-card-icon" aria-hidden="true">小</div>
-                <h3>Low-cap tokens</h3>
-                <p>
-                    Reward tokens, governance positions, vested allocations, anything without a liquid pool. Drainers ignore them, but you still cannot reach them through a wallet the sweeper is gating.
-                </p>
+    <section class="section-dark section-dark--a" id="coverage">
+        <div class="landing-section">
+            <span class="section-eyebrow">The recovery gap</span>
+            <h2 class="section-title">They take what's liquid. They leave what's yours.</h2>
+            <p class="section-lede">
+                Drainer bots optimize for fast liquidation. They sweep ETH and the most liquid ERC-20s, ignore everything that takes effort to fence, and move on. The leftovers are often the most personally valuable holdings, but a working sweeper still blocks any normal recovery attempt.
+            </p>
+            <div class="cards-row">
+                <div class="feature-card">
+                    <div class="feature-card-icon" aria-hidden="true">字</div>
+                    <h3>ENS names</h3>
+                    <p>
+                        Your dot-eth identity, the one you've used everywhere for years, is rarely auto-drained. It's also typically the hardest to move once a sweeper is watching. Kintsugi handles unwrapped 2LDs, wrapped names, and subdomains in a single batch.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon" aria-hidden="true">画</div>
+                    <h3>Illiquid NFTs</h3>
+                    <p>
+                        Long-tail collections, art, in-game items, memberships. Bots usually skip ERC-721 and ERC-1155 because the resale path is slow. They stay on the compromised wallet, visible to everyone, recoverable by no one.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon" aria-hidden="true">小</div>
+                    <h3>Low-cap tokens</h3>
+                    <p>
+                        Reward tokens, governance positions, vested allocations, anything without a liquid pool. Drainers ignore them, but you still cannot reach them through a wallet the sweeper is gating.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
-    <div class="divider-rule"></div>
-
-    <section class="landing-section landing-section-narrow section-dark section-dark--b" id="how">
-        <span class="section-eyebrow">How it works</span>
-        <h2 class="section-title">One transaction. No gas from you. Nothing left behind.</h2>
-        <p class="section-lede">
-            EIP-7702 lets a victim wallet temporarily delegate execution to a battle-tested rescue contract. Combined with EIP-712 batch authorization, every selected asset moves to your safe wallet inside one atomic Type-4 transaction, paid for by a separate rescuer key.
-        </p>
-        <div class="steps-row">
-            <div class="step-card">
-                <span class="step-num">1</span>
-                <h3>You sign locally</h3>
-                <p>
-                    The CLI signs an EIP-7702 authorization plus an EIP-712 batch of transfers (ERC-20, NFTs, ENS). Nothing leaves your machine yet. The victim private key is held in memory only and never written to disk.
-                </p>
+    <section class="section-dark section-dark--b" id="how">
+        <div class="landing-section landing-section-narrow">
+            <span class="section-eyebrow">How it works</span>
+            <h2 class="section-title">One transaction. No gas from you. Nothing left behind.</h2>
+            <p class="section-lede">
+                EIP-7702 lets a victim wallet temporarily delegate execution to a battle-tested rescue contract. Combined with EIP-712 batch authorization, every selected asset moves to your safe wallet inside one atomic Type-4 transaction, paid for by a separate rescuer key.
+            </p>
+            <div class="steps-row">
+                <div class="step-card">
+                    <span class="step-num">1</span>
+                    <h3>You sign locally</h3>
+                    <p>
+                        The CLI signs an EIP-7702 authorization plus an EIP-712 batch of transfers (ERC-20, NFTs, ENS). Nothing leaves your machine yet. The victim private key is held in memory only and never written to disk.
+                    </p>
+                </div>
+                <div class="step-card">
+                    <span class="step-num">2</span>
+                    <h3>Rescuer submits</h3>
+                    <p>
+                        A separate rescuer wallet you control submits a single Type-4 transaction. It pays the gas, attaches your authorization, and calls the audited rescue contract on your behalf. Your wallet's ETH balance never rises above zero.
+                    </p>
+                </div>
+                <div class="step-card">
+                    <span class="step-num">3</span>
+                    <h3>Assets land safely</h3>
+                    <p>
+                        Inside the same transaction, the contract executes every transfer to a fresh safe address you control. The sweeper sees the rescue land, finds nothing to grab, and moves on. The victim wallet is then optionally revoked back to a pure EOA.
+                    </p>
+                </div>
             </div>
-            <div class="step-card">
-                <span class="step-num">2</span>
-                <h3>Rescuer submits</h3>
-                <p>
-                    A separate rescuer wallet you control submits a single Type-4 transaction. It pays the gas, attaches your authorization, and calls the audited rescue contract on your behalf. Your wallet's ETH balance never rises above zero.
-                </p>
+            <div class="callout">
+                The victim wallet's balance never rises above zero. There is no opening for a sweeper to act on, because there is nothing to take.
             </div>
-            <div class="step-card">
-                <span class="step-num">3</span>
-                <h3>Assets land safely</h3>
-                <p>
-                    Inside the same transaction, the contract executes every transfer to a fresh safe address you control. The sweeper sees the rescue land, finds nothing to grab, and moves on. The victim wallet is then optionally revoked back to a pure EOA.
-                </p>
-            </div>
-        </div>
-        <div class="callout">
-            The victim wallet's balance never rises above zero. There is no opening for a sweeper to act on, because there is nothing to take.
         </div>
     </section>
 
