@@ -646,6 +646,23 @@ tailwind.config = {
                     <p class="manifesto-pillar-sub">No premium features behind a paywall. The whole tool is the whole tool.</p>
                 </div>
             </div>
+            <aside class="manifesto-tip reveal" style="--step-delay: 0.3s" aria-label="Donations are welcome but never required">
+                <p class="manifesto-tip-text">
+                    Did Kintsugi rescue your assets? <span class="manifesto-tip-accent">Buy us a coffee.</span> Any token, any EVM chain. Optional — we'll never ask twice.
+                </p>
+                <div class="manifesto-tip-address">
+                    <code id="donate-address">0x75866ab2AB70bc58c5d4086E0a7b4089224a6412</code>
+                    <button type="button" class="manifesto-tip-copy" aria-label="Copy donation address" onclick="
+                        navigator.clipboard.writeText('0x75866ab2AB70bc58c5d4086E0a7b4089224a6412');
+                        this.classList.add('copied');
+                        setTimeout(() => this.classList.remove('copied'), 1600);
+                    ">
+                        <svg class="copy-icon" width="14" height="14" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2V4a2 2 0 00-2-2H8zm-4 5a2 2 0 00-2 2v9a2 2 0 002 2h7a2 2 0 002-2v-1H8a3 3 0 01-3-3V7H4z"></path></svg>
+                        <svg class="copy-check" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 5.5"></path></svg>
+                    </button>
+                </div>
+                <p class="manifesto-tip-note">Same wallet across every EVM chain. Tips are not tax-deductible donations, just a thank-you.</p>
+            </aside>
             <div class="deployments-panel">
                 <header class="deployments-panel-head">
                     <span class="deployments-panel-eyebrow">Deployments</span>
