@@ -179,6 +179,18 @@ tailwind.config = {
 })();
 </script>
 <main class="landing">
+    <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+        <defs>
+            <linearGradient id="seam-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%"   stop-color="oklch(0.78 0.13 75)" stop-opacity="0"></stop>
+                <stop offset="20%"  stop-color="oklch(0.78 0.13 75)" stop-opacity="0.9"></stop>
+                <stop offset="50%"  stop-color="oklch(0.72 0.13 75)" stop-opacity="1"></stop>
+                <stop offset="80%"  stop-color="oklch(0.78 0.13 75)" stop-opacity="0.9"></stop>
+                <stop offset="100%" stop-color="oklch(0.78 0.13 75)" stop-opacity="0"></stop>
+            </linearGradient>
+        </defs>
+    </svg>
+
     <section class="hero" id="hero">
         <div class="hero-grid">
             <div class="hero-content">
@@ -281,51 +293,54 @@ tailwind.config = {
         <span class="section-eyebrow">The attacker's other trick</span>
         <h2 class="section-title">When attackers use EIP-7702 against you, we use it back.</h2>
         <p class="section-lede">
-            After a key compromise, attackers often install their own EIP-7702 delegation on your wallet, pointing it to an auto-drainer contract that triggers on any incoming funds, on any chain. Most "why does my wallet show delegation?" stories are actually this. Kintsugi's rescue uses the same primitive to overwrite their delegation, atomically, before our transaction does anything else.
+            After a key compromise, attackers often install their own EIP-7702 delegation on your wallet, pointing it to an auto-drainer contract that triggers on any incoming funds, on any chain. Kintsugi's rescue uses the same primitive to overwrite their delegation, atomically, before our transaction does anything else.
         </p>
-        <div class="counter-grid">
-            <article class="counter-card counter-card--attack">
-                <span class="counter-card-eyebrow">Their move</span>
-                <h3 class="counter-card-title">Install an auto-drainer</h3>
-                <ol class="counter-steps">
+        <div class="counter-diagram">
+            <div class="counter-side counter-side--attack reveal" style="--step-delay: 0s">
+                <p class="counter-side-eyebrow">Their move</p>
+                <h3 class="counter-side-title">Install an auto-drainer</h3>
+                <ol class="counter-side-steps">
                     <li>
-                        <span class="counter-step-num">1</span>
+                        <span class="counter-side-num">1</span>
                         <span>Attacker has your private key.</span>
                     </li>
                     <li>
-                        <span class="counter-step-num">2</span>
+                        <span class="counter-side-num">2</span>
                         <span>Sign a 7702 authorization pointing your wallet at <code>AutoDrainer</code>.</span>
                     </li>
                     <li>
-                        <span class="counter-step-num">3</span>
+                        <span class="counter-side-num">3</span>
                         <span>Submit a Type-4 tx (attacker pays gas, no involvement from you).</span>
                     </li>
                 </ol>
-                <p class="counter-card-result">
-                    Any incoming ETH is auto-stolen in the same block. Across every chain the bot watches.
-                </p>
-            </article>
-            <article class="counter-card counter-card--defense">
-                <span class="counter-card-eyebrow">Our move</span>
-                <h3 class="counter-card-title">Overwrite with the Rescue contract</h3>
-                <ol class="counter-steps">
+                <p class="counter-side-result">Any incoming ETH is auto-stolen in the same block. Across every chain the bot watches.</p>
+            </div>
+            <div class="counter-spark" aria-hidden="true">
+                <svg class="counter-spark-seam seam-svg" viewBox="0 0 18 320" preserveAspectRatio="none">
+                    <path d="M9 0 L 6 60 L 12 130 L 5 200 L 11 260 L 9 320" vector-effect="non-scaling-stroke"></path>
+                </svg>
+                <span class="counter-spark-pulse"></span>
+                <span class="counter-spark-label">The overwrite moment</span>
+            </div>
+            <div class="counter-side counter-side--defense reveal" style="--step-delay: 0.18s">
+                <p class="counter-side-eyebrow">Our move</p>
+                <h3 class="counter-side-title">Overwrite with the Rescue contract</h3>
+                <ol class="counter-side-steps">
                     <li>
-                        <span class="counter-step-num">1</span>
+                        <span class="counter-side-num">1</span>
                         <span>Sign a new 7702 authorization at the <em>current</em> nonce, pointing to <code>Rescue</code>.</span>
                     </li>
                     <li>
-                        <span class="counter-step-num">2</span>
+                        <span class="counter-side-num">2</span>
                         <span>One Type-4 tx: our authorization processes first, overwriting theirs.</span>
                     </li>
                     <li>
-                        <span class="counter-step-num">3</span>
+                        <span class="counter-side-num">3</span>
                         <span>Then the same tx calls <code>Rescue.executeBatch</code> on your wallet.</span>
                     </li>
                 </ol>
-                <p class="counter-card-result">
-                    Their drainer never executes. Assets transferred atomically to your safe wallet.
-                </p>
-            </article>
+                <p class="counter-side-result">Their drainer never executes. Assets transferred atomically to your safe wallet.</p>
+            </div>
         </div>
         <p class="counter-footnote">
             Newer EIP-7702 authorizations at the current nonce always win. That's the spec, not a workaround. Pair with <code>--private-mempool</code> when paranoia is warranted so the attacker can't even see our tx coming.
@@ -339,27 +354,32 @@ tailwind.config = {
             <p class="section-lede">
                 Drainer bots optimize for fast liquidation. They sweep ETH and the most liquid ERC-20s, ignore everything that takes effort to fence, and move on. The leftovers are often the most personally valuable holdings, but a working sweeper still blocks any normal recovery attempt.
             </p>
-            <div class="cards-row">
-                <div class="feature-card">
-                    <div class="feature-card-icon" aria-hidden="true">字</div>
-                    <h3>ENS names</h3>
-                    <p>
-                        Your dot-eth identity, the one you've used everywhere for years, is rarely auto-drained. It's also typically the hardest to move once a sweeper is watching. Kintsugi handles unwrapped 2LDs, wrapped names, and subdomains in a single batch.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-card-icon" aria-hidden="true">画</div>
-                    <h3>Illiquid NFTs</h3>
-                    <p>
-                        Long-tail collections, art, in-game items, memberships. Bots usually skip ERC-721 and ERC-1155 because the resale path is slow. They stay on the compromised wallet, visible to everyone, recoverable by no one.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-card-icon" aria-hidden="true">小</div>
-                    <h3>Low-cap tokens</h3>
-                    <p>
-                        Reward tokens, governance positions, vested allocations, anything without a liquid pool. Drainers ignore them, but you still cannot reach them through a wallet the sweeper is gating.
-                    </p>
+            <div class="leftbehind-stack">
+                <article class="leftbehind-card reveal" style="--step-delay: 0s">
+                    <span class="leftbehind-kanji" aria-hidden="true">字</span>
+                    <p class="leftbehind-card-eyebrow">ENS name</p>
+                    <p class="leftbehind-card-name">vitalik.eth</p>
+                    <p class="leftbehind-card-tag">7-year hold <span class="dot">·</span> trapped</p>
+                    <p class="leftbehind-card-note">Your dot-eth identity, used everywhere for years, is rarely auto-drained — and typically the hardest to move once a sweeper is watching. Kintsugi handles unwrapped 2LDs, wrapped names, and subdomains in a single batch.</p>
+                </article>
+                <article class="leftbehind-card reveal" style="--step-delay: 0.12s">
+                    <span class="leftbehind-kanji" aria-hidden="true">画</span>
+                    <p class="leftbehind-card-eyebrow">Illiquid NFT</p>
+                    <p class="leftbehind-card-name is-display">BAYC #1234</p>
+                    <p class="leftbehind-card-tag">ERC-721 <span class="dot">·</span> trapped</p>
+                    <p class="leftbehind-card-note">Long-tail collections, art, in-game items, memberships. Bots usually skip ERC-721 and ERC-1155 — resale path's too slow. They stay visible, recoverable by no one.</p>
+                </article>
+                <article class="leftbehind-card reveal" style="--step-delay: 0.24s">
+                    <span class="leftbehind-kanji" aria-hidden="true">小</span>
+                    <p class="leftbehind-card-eyebrow">Low-cap token</p>
+                    <p class="leftbehind-card-name">$AAVE — gov</p>
+                    <p class="leftbehind-card-tag">vested position <span class="dot">·</span> trapped</p>
+                    <p class="leftbehind-card-note">Reward tokens, governance positions, vested allocations — anything without a deep pool. Drainers ignore them, but you still can't reach them through a wallet the sweeper is gating.</p>
+                </article>
+                <div class="leftbehind-seam">
+                    <svg class="seam-svg" viewBox="0 0 1000 320" preserveAspectRatio="none" aria-hidden="true">
+                        <path d="M20 290 L 220 230 L 410 195 L 600 130 L 780 80 L 980 30" vector-effect="non-scaling-stroke"></path>
+                    </svg>
                 </div>
             </div>
         </div>
@@ -372,49 +392,43 @@ tailwind.config = {
             <p class="section-lede">
                 EIP-7702 lets a victim wallet temporarily delegate execution to a battle-tested rescue contract. Combined with EIP-712 batch authorization, every selected asset moves to your safe wallet inside one atomic Type-4 transaction, paid for by a separate rescuer key.
             </p>
-            <figure class="rescue-story" aria-label="The rescue sequence">
+            <figure class="rescue-story rescue-story--horizontal" aria-label="The rescue sequence">
                 <figcaption class="rescue-story-eyebrow">The rescue, in three beats</figcaption>
-                <ol class="rescue-steps">
-                    <li class="rescue-step" data-step="1" style="--step-delay: 0s">
+                <svg class="rescue-seam seam-svg" preserveAspectRatio="none" viewBox="0 0 1000 12" aria-hidden="true">
+                    <path d="M0 6 L 150 4 L 320 8 L 500 5 L 680 9 L 840 5 L 1000 7"></path>
+                </svg>
+                <ol class="rescue-steps rescue-steps--horizontal">
+                    <li class="rescue-step reveal" data-step="1" style="--step-delay: 0s">
                         <span class="rescue-step-index" aria-hidden="true">1</span>
-                        <span class="rescue-step-icon" aria-hidden="true">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 3.5l6 6L9 21H3v-6z"></path><path d="M13 5l6 6"></path><path d="M3 21h18"></path></svg>
-                        </span>
                         <div class="rescue-step-body">
                             <p class="rescue-step-title">You sign, locally.</p>
-                            <p class="rescue-step-sub">An EIP-7702 authorization plus an EIP-712 batch of transfers (ERC-20, NFTs, ENS). Keys live in your local Node process only and are never written to disk.</p>
+                            <p class="rescue-step-sub">EIP-7702 authorization + EIP-712 batch of transfers. Keys live in your local Node process only and are never written to disk.</p>
                         </div>
                     </li>
-                    <li class="rescue-step" data-step="2" style="--step-delay: 2s">
+                    <li class="rescue-step reveal" data-step="2" style="--step-delay: 0.15s">
                         <span class="rescue-step-index" aria-hidden="true">2</span>
-                        <span class="rescue-step-icon" aria-hidden="true">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3L11 13"></path><path d="M21 3L14.5 21l-3.5-8L3 9.5z"></path></svg>
-                        </span>
                         <div class="rescue-step-body">
-                            <p class="rescue-step-title">Your rescuer submits one Type-4 transaction.</p>
-                            <p class="rescue-step-sub">A separate wallet you control pays the gas. Your authorization processes first inside the tx, then it calls <code>Rescue.executeBatch</code> on your wallet.</p>
+                            <p class="rescue-step-title">Your rescuer submits one Type-4 tx.</p>
+                            <p class="rescue-step-sub">A separate wallet you control pays the gas. Your authorization processes first, then it calls <code>Rescue.executeBatch</code>.</p>
                         </div>
                     </li>
-                    <li class="rescue-step" data-step="3" style="--step-delay: 4s">
+                    <li class="rescue-step reveal" data-step="3" style="--step-delay: 0.3s">
                         <span class="rescue-step-index" aria-hidden="true">3</span>
-                        <span class="rescue-step-icon" aria-hidden="true">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18"></path><circle cx="12" cy="14.5" r="2"></circle><path d="M12 14.5v2"></path></svg>
-                        </span>
                         <div class="rescue-step-body">
-                            <p class="rescue-step-title">Every asset lands at your safe wallet.</p>
+                            <p class="rescue-step-title">Every asset at your safe wallet.</p>
                             <p class="rescue-step-sub">Same block, atomic. The sweeper sees the tx land, finds the wallet empty, and moves on.</p>
                         </div>
                     </li>
+                    <li class="rescue-step rescue-step--terminus reveal" style="--step-delay: 0.45s">
+                        <span class="rescue-step-index rescue-step-index--terminus" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"></path><path d="M9 12l2.2 2.2L15 10"></path></svg>
+                        </span>
+                        <div class="rescue-step-body">
+                            <p class="rescue-step-title">Balance never rose above zero.</p>
+                            <p class="rescue-step-sub">No opening for a sweeper, because there was nothing to take. After, optionally clear the delegation with <code>kintsugi revoke</code>.</p>
+                        </div>
+                    </li>
                 </ol>
-                <div class="rescue-result">
-                    <span class="rescue-result-icon" aria-hidden="true">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"></path><path d="M9 12l2.2 2.2L15 10"></path></svg>
-                    </span>
-                    <div>
-                        <p class="rescue-result-title">Your balance never rose above zero.</p>
-                        <p class="rescue-result-sub">There was no opening for a sweeper to act on, because there was nothing to take. After the rescue, optionally clear the delegation with <code>kintsugi revoke</code> to leave a pure EOA behind.</p>
-                    </div>
-                </div>
             </figure>
         </div>
     </section>
@@ -427,7 +441,7 @@ tailwind.config = {
         </p>
 
         <div class="agent-conversation" aria-label="Example conversation with an agent">
-            <div class="chat-message chat-message--user">
+            <div class="chat-message chat-message--user reveal" style="--step-delay: 0s">
                 <div class="chat-bubble">
                     <p class="chat-bubble-text">My wallet got drained but I have hostage assets there. Help me rescue them with Kintsugi.</p>
                     <button type="button" class="chat-bubble-copy" aria-label="Copy this prompt" onclick="
@@ -444,13 +458,44 @@ tailwind.config = {
                 </div>
             </div>
 
-            <div class="chat-message chat-message--agent">
+            <div class="chat-message chat-message--agent reveal" style="--step-delay: 0.12s">
                 <div class="chat-meta">
                     <span class="chat-avatar chat-avatar--agent" aria-hidden="true">金</span>
                 </div>
                 <div class="chat-bubble chat-bubble--agent">
-                    <p class="chat-bubble-text">Got it. I'll walk you through this end to end. First, what chain is the compromised wallet on, and do you have a fresh wallet ready to receive the assets? If not, I can generate one for you in a moment.</p>
+                    <p class="chat-bubble-text">Got it. I'll walk you through this end to end. First, what chain is the compromised wallet on, and do you have a fresh wallet ready to receive the assets?</p>
+                </div>
+            </div>
+
+            <div class="chat-message chat-message--user reveal" style="--step-delay: 0.24s">
+                <div class="chat-bubble">
+                    <p class="chat-bubble-text">Mainnet. I have a fresh wallet ready.</p>
+                </div>
+                <div class="chat-meta">
+                    <span class="chat-avatar chat-avatar--user" aria-hidden="true">You</span>
+                </div>
+            </div>
+
+            <div class="chat-message chat-message--agent reveal" style="--step-delay: 0.36s">
+                <div class="chat-meta">
+                    <span class="chat-avatar chat-avatar--agent" aria-hidden="true">金</span>
+                </div>
+                <div class="chat-bubble chat-bubble--agent">
+                    <p class="chat-bubble-text">Good. Let's start with a read-only inventory of the compromised wallet — that tells us exactly what we'll batch into the rescue. Paste the victim address when you're ready.</p>
                     <p class="chat-bubble-meta">Powered by the Kintsugi agent skill</p>
+                </div>
+            </div>
+
+            <div class="chat-message chat-message--agent reveal" style="--step-delay: 0.52s" aria-hidden="true">
+                <div class="chat-meta">
+                    <span class="chat-avatar chat-avatar--agent" aria-hidden="true">金</span>
+                </div>
+                <div class="chat-bubble chat-bubble--agent chat-bubble--typing" role="status" aria-label="Agent is typing">
+                    <span class="typing-dots">
+                        <span class="typing-dot"></span>
+                        <span class="typing-dot"></span>
+                        <span class="typing-dot"></span>
+                    </span>
                 </div>
             </div>
         </div>
@@ -492,12 +537,12 @@ tailwind.config = {
 
     <section class="landing-section" id="try">
         <span class="section-eyebrow">Or do it yourself</span>
-        <h2 class="section-title">A guided UI for panic. A pure CLI for power.</h2>
+        <h2 class="section-title">A UI for panic. A CLI for power.</h2>
         <p class="section-lede">
             Same atomic flow under the hood, two surfaces to drive it. The web UI is launched from the CLI as a localhost server. The browser only sees session-bound addresses and signatures. Private keys never leave the local Node process.
         </p>
-        <div class="usage-grid">
-            <article class="usage-card">
+        <div class="usage-stage">
+            <article class="usage-stage-card usage-stage-card--front reveal" style="--step-delay: 0s">
                 <div class="window">
                     <div class="window-chrome">
                         <span class="window-dots" aria-hidden="true">
@@ -524,7 +569,7 @@ tailwind.config = {
                 </div>
             </article>
 
-            <article class="usage-card">
+            <article class="usage-stage-card usage-stage-card--back reveal" style="--step-delay: 0.15s">
                 <div class="window window--terminal">
                     <div class="window-chrome window-chrome--terminal">
                         <span class="window-dots" aria-hidden="true">
@@ -568,49 +613,29 @@ tailwind.config = {
         <div class="landing-section" id="open">
             <div class="manifesto">
                 <span class="section-eyebrow">Our stance</span>
-                <h2 class="manifesto-title">
-                    Open source. No fees. <span class="accent">No upsell.</span>
-                </h2>
                 <p class="manifesto-lede">
                     A wallet rescue tool that charges money in the worst moment of someone's crypto life is a wallet rescue tool taking advantage of panic. We will not do that.
                 </p>
             </div>
-            <div class="principles-row">
-                <article class="principle-card">
-                    <span class="principle-card-icon" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 11m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z"></path>
-                            <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0"></path>
-                            <path d="M8 11v-5a4 4 0 0 1 8 0"></path>
-                        </svg>
-                    </span>
-                    <h3 class="principle-card-title">Open source.</h3>
-                    <p class="principle-card-body">MIT-licensed. Public repository. Every line auditable, every contract verified.</p>
-                </article>
-                <article class="principle-card">
-                    <span class="principle-card-icon" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5.65 5.623a9 9 0 1 0 12.717 12.745m1.672 -2.336a9 9 0 0 0 -12.074 -12.084"></path>
-                            <path d="M14.518 10.486a3.5 3.5 0 0 0 -4.99 -.014m-.51 3.51a3.5 3.5 0 0 0 4.012 .005"></path>
-                            <path d="M12 7v1m0 8v1"></path>
-                            <path d="M3 3l18 18"></path>
-                        </svg>
-                    </span>
-                    <h3 class="principle-card-title">No fees.</h3>
-                    <p class="principle-card-body">No SaaS tier. No signup. No telemetry. Pay only your own gas.</p>
-                </article>
-                <article class="principle-card">
-                    <span class="principle-card-icon" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 8m0 1a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1z"></path>
-                            <path d="M12 8l0 13"></path>
-                            <path d="M19 12v7a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-7"></path>
-                            <path d="M7.5 8a2.5 2.5 0 0 1 0 -5a4.8 8 0 0 1 4.5 5a4.8 8 0 0 1 4.5 -5a2.5 2.5 0 0 1 0 5"></path>
-                        </svg>
-                    </span>
-                    <h3 class="principle-card-title">No upsell.</h3>
-                    <p class="principle-card-body">No premium features behind a paywall. The whole tool is the whole tool.</p>
-                </article>
+            <div class="manifesto-pillars">
+                <div class="manifesto-pillar reveal" style="--step-delay: 0s">
+                    <h3 class="manifesto-pillar-title">Open source.</h3>
+                    <p class="manifesto-pillar-sub">MIT-licensed. Public repository. Every line auditable, every contract verified.</p>
+                </div>
+                <svg class="seam-rule seam-svg" preserveAspectRatio="none" viewBox="0 0 600 12" aria-hidden="true">
+                    <path d="M4 7 L 120 5 L 250 8 L 380 5 L 510 8 L 596 6"></path>
+                </svg>
+                <div class="manifesto-pillar reveal" style="--step-delay: 0.1s">
+                    <h3 class="manifesto-pillar-title">No <span class="brush">fees.</span></h3>
+                    <p class="manifesto-pillar-sub">No SaaS tier. No signup. No telemetry. Pay only your own gas.</p>
+                </div>
+                <svg class="seam-rule seam-svg" preserveAspectRatio="none" viewBox="0 0 600 12" aria-hidden="true">
+                    <path d="M4 6 L 110 9 L 240 5 L 360 8 L 490 5 L 596 8"></path>
+                </svg>
+                <div class="manifesto-pillar reveal" style="--step-delay: 0.2s">
+                    <h3 class="manifesto-pillar-title">No upsell.</h3>
+                    <p class="manifesto-pillar-sub">No premium features behind a paywall. The whole tool is the whole tool.</p>
+                </div>
             </div>
             <div class="deployments-panel">
                 <header class="deployments-panel-head">
@@ -692,32 +717,41 @@ tailwind.config = {
             <span class="section-eyebrow">Three ways forward</span>
             <h2 class="section-title">Where do you want to start?</h2>
             <div class="lanes-row">
-                <a href="/getting-started/quickstart-cli/" class="lane-card lane-card--panic">
+                <a href="/getting-started/quickstart-cli/" class="lane-card lane-card--panic reveal" style="--step-delay: 0s">
+                    <span class="lane-numeral" aria-hidden="true">01</span>
                     <span class="lane-icon" aria-hidden="true">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v6"></path><circle cx="12" cy="16.5" r="0.6" fill="currentColor"></circle></svg>
                     </span>
                     <span class="lane-eyebrow">Right now</span>
                     <h3 class="lane-title">I'm in trouble. Walk me through it.</h3>
                     <p class="lane-body">Five minutes from install to assets safely in a fresh wallet. Plain language, no Solidity required.</p>
-                    <span class="lane-cta">Five-minute rescue →</span>
+                    <span class="lane-cta">Five-minute rescue
+                        <svg class="lane-cta-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12"></path><path d="M11 5l5 5-5 5"></path></svg>
+                    </span>
                 </a>
-                <a href="/concepts/the-sweeper-problem/" class="lane-card lane-card--learn">
+                <a href="/concepts/the-sweeper-problem/" class="lane-card lane-card--learn reveal" style="--step-delay: 0.1s">
+                    <span class="lane-numeral" aria-hidden="true">02</span>
                     <span class="lane-icon" aria-hidden="true">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2z"></path><path d="M21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"></path><path d="M11 7H6"></path><path d="M11 11H6"></path><path d="M18 7h-5"></path><path d="M18 11h-5"></path></svg>
                     </span>
                     <span class="lane-eyebrow">First</span>
                     <h3 class="lane-title">I want to understand it first.</h3>
                     <p class="lane-body">The sweeper problem, EIP-7702 in plain English, the rescuer wallet pattern, why the rescue is atomic.</p>
-                    <span class="lane-cta">Read the concepts →</span>
+                    <span class="lane-cta">Read the concepts
+                        <svg class="lane-cta-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12"></path><path d="M11 5l5 5-5 5"></path></svg>
+                    </span>
                 </a>
-                <a href="/security/threat-model/" class="lane-card lane-card--audit">
+                <a href="/security/threat-model/" class="lane-card lane-card--audit reveal" style="--step-delay: 0.2s">
+                    <span class="lane-numeral" aria-hidden="true">03</span>
                     <span class="lane-icon" aria-hidden="true">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"></path><path d="M9 12l2.2 2.2L15 10"></path></svg>
                     </span>
                     <span class="lane-eyebrow">Auditor mode</span>
                     <h3 class="lane-title">Show me the trust assumptions.</h3>
                     <p class="lane-body">Threat model, what the rescuer can and cannot do, known limits, how to report a vulnerability.</p>
-                    <span class="lane-cta">Read the security docs →</span>
+                    <span class="lane-cta">Read the security docs
+                        <svg class="lane-cta-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12"></path><path d="M11 5l5 5-5 5"></path></svg>
+                    </span>
                 </a>
             </div>
         </div>
@@ -806,6 +840,8 @@ tailwind.config = {
   window.addEventListener('resize', fit);
 })();
 </script>
+
+    <script src="/assets/js/reveal.js" defer></script>
 <div class="outro-reveal" id="outro-reveal">
         <footer class="site-footer site-footer--reveal">
             <div class="landing-section">
@@ -892,5 +928,6 @@ tailwind.config = {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
     <script src="/assets/js/copy-code.js"></script>
+    <script src="/assets/js/reveal.js" defer></script>
 </body>
 </html>
