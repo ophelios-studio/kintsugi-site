@@ -2953,6 +2953,9 @@ main.landing {
     max-width: 100%;
 }
 .manifesto-tip-address code {
+    background: transparent;
+    border: none;
+    padding: 0;
     font-family: var(--font-mono);
     font-size: 0.82rem;
     color: var(--seam-bright);
