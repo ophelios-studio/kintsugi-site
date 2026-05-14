@@ -2,7 +2,7 @@
 <html lang="{$currentLocale ?? 'en'}">
 <head>
     {include '../partials/head.latte'}
-    <title>{$title ?? $leafName ?? 'Kintsugi'} · {$leafName ?? 'Kintsugi'}</title>
+    <title>{if isset($title) && $title !== '' && $title !== ($leafName ?? 'Kintsugi')}{$title} · {$leafName ?? 'Kintsugi'}{else}{$leafName ?? 'Kintsugi'} — Mend the wallet. Keep the gold.{/if}</title>
     {block styles}{/block}
     {block head}{/block}
 </head>

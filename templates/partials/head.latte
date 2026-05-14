@@ -1,22 +1,36 @@
+{var $siteName = $leafName ?? 'Kintsugi'}
+{var $siteTagline = 'Mend the wallet. Keep the gold.'}
+{var $isHome = !isset($title) || $title === '' || $title === $siteName}
+{var $metaTitle = $isHome ? $siteName . ' — ' . $siteTagline : $title . ' · ' . $siteName}
+{var $metaDescription = ($pageDescription ?? '') !== '' ? $pageDescription : ($leafDescription ?? 'Atomic, sweeper-proof wallet rescue using EIP-7702. Open source. Runs locally. No fees, ever.')}
+{var $ogType = $isHome ? 'website' : 'article'}
+{var $ogImage = ($leafProductionUrl ?? '') . '/assets/images/og-default.png'}
+{var $canonicalUrl = ($leafProductionUrl ?? '') . ($requestPath ?? '/')}
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="leaf-base-url" content="{$leafBaseUrl}">
-<meta n:if="($pageDescription ?? '') !== ''" name="description" content="{$pageDescription}">
+<meta name="description" content="{$metaDescription}">
+<meta name="keywords" content="EIP-7702, wallet rescue, sweeper bot, drained wallet, ERC-20, NFT recovery, ENS recovery, atomic batch, Type-4 transaction, Kintsugi, open source">
+<meta name="author" content="{$leafAuthor ?? 'Ophelios Studio'}">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#f9f7f3">
-<meta property="og:type" content="article">
-<meta property="og:title" content="{$title ?? ''} · {$leafName ?? ''}">
-<meta n:if="($pageDescription ?? '') !== ''" property="og:description" content="{$pageDescription}">
-<meta property="og:site_name" content="{$leafName ?? ''}">
-<meta n:if="($leafProductionUrl ?? '') !== ''" property="og:url" content="{$leafProductionUrl}{$requestPath ?? '/'}">
-<meta property="og:image" content="{$leafProductionUrl ?? ''}/assets/images/og-default.png">
+<meta name="theme-color" content="#f5f6f8">
+<meta property="og:type" content="{$ogType}">
+<meta property="og:title" content="{$metaTitle}">
+<meta property="og:description" content="{$metaDescription}">
+<meta property="og:site_name" content="{$siteName}">
+<meta property="og:locale" content="en_US">
+<meta n:if="($leafProductionUrl ?? '') !== ''" property="og:url" content="{$canonicalUrl}">
+<meta property="og:image" content="{$ogImage}">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kintsugi — Mend the wallet. Keep the gold. EIP-7702 wallet rescue, open source.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{$title ?? ''} · {$leafName ?? ''}">
-<meta n:if="($pageDescription ?? '') !== ''" name="twitter:description" content="{$pageDescription}">
-<meta name="twitter:image" content="{$leafProductionUrl ?? ''}/assets/images/og-default.png">
-<link n:if="($leafProductionUrl ?? '') !== ''" rel="canonical" href="{$leafProductionUrl}{$requestPath ?? '/'}">
+<meta name="twitter:title" content="{$metaTitle}">
+<meta name="twitter:description" content="{$metaDescription}">
+<meta name="twitter:image" content="{$ogImage}">
+<meta name="twitter:image:alt" content="Kintsugi — Mend the wallet. Keep the gold. EIP-7702 wallet rescue, open source.">
+<link n:if="($leafProductionUrl ?? '') !== ''" rel="canonical" href="{$canonicalUrl}">
 <link rel="icon" type="image/svg+xml" href="{$leafBaseUrl}/assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
