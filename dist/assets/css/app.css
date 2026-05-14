@@ -2945,9 +2945,9 @@ main.landing {
 .manifesto-tip-address {
     display: inline-flex;
     align-items: center;
-    gap: 0.55rem;
+    gap: 0.4rem;
     padding: 0.5rem 0.55rem 0.5rem 0.85rem;
-    background: oklch(0.16 0.004 250);
+    background: transparent;
     border: 1px solid oklch(0.62 0.14 70 / 0.3);
     border-radius: 0.55rem;
     max-width: 100%;
@@ -2975,21 +2975,20 @@ main.landing {
     height: 1.85rem;
     flex-shrink: 0;
     border-radius: 0.4rem;
-    border: 1px solid oklch(0.62 0.14 70 / 0.4);
+    border: none;
     background: transparent;
-    color: var(--seam-bright);
+    color: var(--seam);
     cursor: pointer;
-    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    transition: color 0.15s ease, background 0.15s ease;
+    padding: 0;
 }
 .manifesto-tip-copy:hover {
     color: var(--seam-bright);
-    border-color: var(--seam-bright);
     background: oklch(0.62 0.14 70 / 0.12);
 }
 .manifesto-tip-copy .copy-check { display: none; }
 .manifesto-tip-copy.copied {
     color: oklch(0.78 0.16 145);
-    border-color: oklch(0.62 0.16 145 / 0.55);
     background: oklch(0.62 0.16 145 / 0.10);
 }
 .manifesto-tip-copy.copied .copy-icon { display: none; }
