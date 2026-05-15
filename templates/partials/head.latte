@@ -67,6 +67,9 @@ tailwind.config = {
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 <link rel="stylesheet" href="{$leafBaseUrl}/assets/css/app.css">
+{if !defined('DEV_SERVER')}
+<script defer src="https://analytics.ophelios.com/script.js" data-website-id="aa4ab220-3573-459c-a3af-b5bbfb920b42"></script>
+{/if}
 {if defined('DEV_SERVER')}
 <script>
 (function() {
